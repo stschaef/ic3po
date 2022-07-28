@@ -23,7 +23,7 @@ foo/*
 .idea/
 xtras/
 requirements.txt
-pysmt/
+
 
 # But not these files
 !.gitignore
