@@ -3,6 +3,12 @@
 
 # IC3PO
 
+__NOTE__ I had much trouble getting IC3PO to work. I had several installation issues, but eventually fixed them. This is probably not all of them, but hopefully enough to get a working installation on another computer.
+
+- Install a Yices prebuilt [binary](https://github.com/SRI-CSL/yices2/releases) instead of building from source. The build script given in Aman's repo kept failing, so I gave up on it. I tried several fixes, but I think the crux of the issue was....
+
+- ...Apple Silicon macs are kind of annoying sometimes. It seems that homebrew does not install things where it does on Intel Macs. On top of that, I think it installed the wrong architecture for Yices.
+
 **IC3** for **P**r**o**ving **P**r**o**tocol **P**r**o**perties
 
 > Copyright (c) 2021  Aman Goel [(amangoel@umich.edu)](amangoel@umich.edu)  and  Karem Sakallah [(karem@umich.edu)](karem@umich.edu) , University of Michigan
