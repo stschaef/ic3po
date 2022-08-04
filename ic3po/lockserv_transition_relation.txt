@@ -1,0 +1,117 @@
+(
+    (
+        en_ext:recv_grant -> (
+            (
+                (forall V0 . (grant_msg(V0) <-> ((V0 = V__fml:n) ? False : __grant_msg(V0)))) 
+              & (forall V0 . (holds_lock(V0) <-> ((V0 = V__fml:n) ? True : __holds_lock(V0)))) 
+              & __grant_msg(V__fml:n)
+            ) 
+            & (forall 1:node . (__unlock_msg(1:node) <-> unlock_msg(1:node))) 
+            & (__held <-> held) 
+            & (forall 1:node . (__lock_msg(1:node) <-> lock_msg(1:node)))
+        )
+    ) & 
+    (
+        en_ext:unlock -> (
+            (
+                (forall V0 . (holds_lock(V0) <-> ((V0 = V__fml:n) ? False : __holds_lock(V0)))) 
+              & (forall V0 . (unlock_msg(V0) <-> ((V0 = V__fml:n) ? True : __unlock_msg(V0)))) 
+              & __holds_lock(V__fml:n)
+            ) 
+            & (forall 1:node . (__grant_msg(1:node) <-> grant_msg(1:node))) 
+            & (__held <-> held) 
+            & (forall 1:node . (__lock_msg(1:node) <-> lock_msg(1:node)))
+        )
+    ) & 
+    (
+        en_ext:recv_lock -> (
+            (
+                held 
+                & (forall V0 . (lock_msg(V0) <-> ((V0 = V__fml:sender) ? False : __lock_msg(V0)))) 
+                & (forall V0 . (grant_msg(V0) <-> ((V0 = V__fml:sender) ? True : __grant_msg(V0)))) 
+                & __lock_msg(V__fml:sender) 
+                & ~__held
+            ) 
+            & (forall 1:node . (__unlock_msg(1:node) <-> unlock_msg(1:node))) 
+            & (forall 1:node . (__holds_lock(1:node) <-> holds_lock(1:node)))
+        )
+    ) & 
+    (
+        en_ext:recv_unlock -> (
+            (
+                (forall V0 . (unlock_msg(V0) <-> ((V0 = V__fml:sender) ? False : __unlock_msg(V0)))) 
+                & ~held 
+                & __unlock_msg(V__fml:sender)
+            ) 
+            & (forall 1:node . (__grant_msg(1:node) <-> grant_msg(1:node))) 
+            & (forall 1:node . (__lock_msg(1:node) <-> lock_msg(1:node))) 
+            & (forall 1:node . (__holds_lock(1:node) <-> holds_lock(1:node)))
+        )
+    ) & 
+    (
+        en_ext:lock -> (
+            (forall V0 . (lock_msg(V0) <-> ((V0 = V__fml:n) ? True : __lock_msg(V0)))) 
+          & (forall 1:node . (__unlock_msg(1:node) <-> unlock_msg(1:node))) 
+          & (forall 1:node . (__grant_msg(1:node) <-> grant_msg(1:node))) 
+          & (__held <-> held) 
+          & (forall 1:node . (__holds_lock(1:node) <-> holds_lock(1:node)))
+        )
+    ) & 
+    (
+        en_noop -> (
+            (forall 1:node . (__unlock_msg(1:node) <-> unlock_msg(1:node))) 
+          & (forall 1:node . (__grant_msg(1:node) <-> grant_msg(1:node))) 
+          & (__held <-> held) 
+          & (forall 1:node . (__lock_msg(1:node) <-> lock_msg(1:node))) 
+          & (forall 1:node . (__holds_lock(1:node) <-> holds_lock(1:node)))
+        )
+    ) & 
+    (
+        en_ext:recv_grant | en_ext:unlock | en_ext:recv_lock | en_ext:recv_unlock | en_ext:lock | en_noop
+    ) & 
+    (
+        ~en_ext:recv_grant | ~en_ext:unlock
+    ) & 
+    (
+        ~en_ext:recv_grant | ~en_ext:recv_lock
+    ) & 
+    (
+        ~en_ext:recv_grant | ~en_ext:recv_unlock
+    ) & 
+    (
+        ~en_ext:recv_grant | ~en_ext:lock
+    ) & 
+    (
+        ~en_ext:recv_grant | ~en_noop
+    ) & 
+    (
+        ~en_ext:unlock | ~en_ext:recv_lock
+    ) & 
+    (
+        ~en_ext:unlock | ~en_ext:recv_unlock
+    ) & 
+    (
+        ~en_ext:unlock | ~en_ext:lock
+    ) & 
+    (
+        ~en_ext:unlock | ~en_noop
+    ) & 
+    (
+        ~en_ext:recv_lock | ~en_ext:recv_unlock
+    ) & 
+    (
+        ~en_ext:recv_lock | ~en_ext:lock
+    ) & 
+    (
+        ~en_ext:recv_lock | ~en_noop
+    ) & 
+    (
+        ~en_ext:recv_unlock | ~en_ext:lock
+    ) & 
+    (
+        ~en_ext:recv_unlock | ~en_noop
+    ) & 
+    (
+        ~en_ext:lock | ~en_noop
+    )
+)
