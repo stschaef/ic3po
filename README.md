@@ -9,6 +9,8 @@ __NOTE__ I had much trouble getting IC3PO to work. I had several installation is
 
 - ...Apple Silicon macs are kind of annoying sometimes. It seems that homebrew does not install things where it does on Intel Macs. On top of that, I think it installed the wrong architecture for Yices.
 
+- Also for whatever reason, `pip install $(pwd)/pysmt` failed and would change the source code when installing. I think this might be a cache issue, but even after clearing that, they stuff actually installed did not quite match source. I had to do `sudo cp -r /path/to/pysmt/ /path/to/dist-packages/where/pip/holds/the/copy/of/pysmt`.
+
 **IC3** for **P**r**o**ving **P**r**o**tocol **P**r**o**perties
 
 > Copyright (c) 2021  Aman Goel [(amangoel@umich.edu)](amangoel@umich.edu)  and  Karem Sakallah [(karem@umich.edu)](karem@umich.edu) , University of Michigan
