@@ -42,6 +42,22 @@ class FR(object):
         self.system = system
         self.reset()
         self.debug = False
+        self.ordered = None
+        self.quorums = None
+        self.qf = common.gopts.qf
+        self.cache_qf = dict()
+        self.cache_qu = dict()
+        self.eval_wires = False
+        self._prop_formula = TRUE()
+        self._prop_formula_orig = TRUE()
+        self._axiom_formula = TRUE()
+        self._init_formula = TRUE()
+        self._init_formula_orig = TRUE()
+        self._trel_formula = TRUE()
+        self.boost_ordered_en = False
+        self.boost_quorums_en = False
+        self.framesolver = []
+
     
     def init_solver(self):
         solver = Solver(name="bdd", logic=BOOL)
@@ -81,6 +97,213 @@ class FR(object):
             qf_formulae = flatten_cube(qf)
             return qf_formulae
         return formulae
+
+    def print_fullsorts(self, fullsorts):
+        if len(fullsorts) != 0:
+            print("(fullsorts)")
+            for enumsort, qvar in fullsorts:
+                print("\t%s -> %s" % (str(enumsort), pretty_print_set(qvar)))
+
+    def add_init_frame(self):
+        assert(len(self.frames) == 0)
+        cubes = set()
+        fs = self.new_solver()
+        cubes.add(Not(init_formula(self)))
+        formula = init_formula(self)
+        fs.add_assertion(formula)
+        self.frames.append(cubes)
+        self.framesolver.append(fs)
+        self.frame_summary()
+    
+    def add_frame(self):
+        print(time_str(), "\nAdding frame %d..." % (len(self.frames)))
+        fs = self.new_solver()
+        fs.add_assertion(prop_formula(self))
+        self.frames.append(set())
+        self.framesolver.append(fs)
+        if common.gopts.verbosity == 0:
+            return
+        print("\n", file=sys.stderr, end="")
+
+    def get_framesolver(self, fin):
+        i = fin
+        if (i == -1):
+            i = len(self.frames) - 1
+        
+        assert(i < len(self.framesolver))
+        return self.framesolver[i]
+
+    def propagate_eq(self, cubeSet, antecedent, ivars, qvars, fullsorts):
+        eqMap = dict()
+        tmpSet = set()
+#         incompleteSorts = set()
+        for c in cubeSet:
+            if c.node_type() == op.EQUALS:
+                lhs = c.arg(0)
+                rhs = c.arg(1)
+                if (not rhs.is_symbol()) or (lhs in qvars):
+                    lhs, rhs = rhs, lhs
+#                 print("lhs ", lhs)
+#                 print("rhs ", rhs)
+                if rhs.is_symbol and rhs in qvars:
+                    if (common.gopts.const > 1) or (not lhs.is_function_application()):
+                        rhst = rhs.symbol_type()
+                        if rhst.is_enum_type() and rhs not in eqMap:
+                            eqMap[rhs] = lhs
+                            qvars.discard(rhs)
+#                             print("add1 %s -> %s" % (rhs, lhs))
+#                             incompleteSorts.add(rhst)
+                            continue
+                        elif rhs in ivars and rhs not in eqMap:
+                            eqMap[rhs] = lhs
+                            qvars.discard(rhs)
+#                             print("add2 %s -> %s" % (rhs, lhs))
+                            continue
+                        
+            tmpSet.add(c)
+         
+        if len(eqMap) != 0:
+            changed = True
+            while changed:
+                changed = False
+                for l, r in eqMap.items():
+                    rNew = r.simple_substitute(eqMap)
+                    if (rNew != r):
+                        changed = True
+                    eqMap[l] = rNew
+            
+            print("(eq map)")
+            for l, r in eqMap.items():
+                print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
+            
+            cubeSetNew = set()
+            for c in tmpSet:
+                c_new = c.simple_substitute(eqMap)
+                cubeSetNew.add(c_new)
+                
+            antecedentNew = dict()
+            for enumsort, qvar in antecedent.items():
+                vNew = []
+                for i in qvar:
+                    i_new = i.simple_substitute(eqMap)
+#                     if (i_new != i):
+#                         cubeSetNew.add(i_new)
+#                     else:
+#                         vNew.append(i_new)
+                    vNew.append(i_new)
+                antecedentNew[enumsort] = vNew
+            
+            fullsortsNew = []
+            for fs in fullsorts:
+#                 if fs[0] not in incompleteSorts:
+#                     fullsortsNew.append(fs)
+                rhs = []
+                for v in fs[1]:
+                    if v in eqMap:
+                        v = eqMap[v]
+                    rhs.append(v)
+                fullsortsNew.append([fs[0], rhs])
+                
+            print("(cube eq)")
+            for c in cubeSetNew:
+                print("\t%s" % pretty_serialize(c))
+            
+            print("(qvars eq)")
+            for c in qvars:
+                print("\t%s" % pretty_serialize(c))
+            
+            print("(antecedent eq)")
+            for enumsort, qvar in antecedentNew.items():
+                print("\t%s" % enumsort)
+                for c in qvar:
+                    print("\t-> %s" % pretty_serialize(c))
+            
+            self.print_fullsorts(fullsortsNew)
+            
+            removedVars = set(eqMap.keys())
+            for c in cubeSetNew:
+                fv = c.get_free_variables()
+                fv_removed = fv.intersection(removedVars)
+                if len(fv_removed) != 0:
+                    print("Error: found bound variables as free in %s" % pretty_serialize(c))
+                    for c in fv_removed:
+                        print("\t%s" % pretty_serialize(c))
+                    assert(0)
+            
+            return eqMap, cubeSetNew, antecedentNew, fullsortsNew
+        else:
+            return eqMap, cubeSet, antecedent, fullsorts
+        
+    def propagate_eq_post(self, cube):
+        cubeEq = cube
+
+        qvars = set()
+        qvarsNew = set()
+        v = cube
+        if v.is_exists():
+            vq = v.quantifier_vars()
+            for i in vq:
+                qvars.add(i)
+                qvarsNew.add(i)
+            v = v.args()[0]
+        cubeSet = flatten_and(v)
+        
+        eqMap = dict()
+        tmpSet = set()
+        for c in cubeSet:
+            if c.node_type() == op.EQUALS:
+                lhs = c.arg(0)
+                rhs = c.arg(1)
+                if (not rhs.is_symbol()) or (lhs in qvars):
+                    lhs, rhs = rhs, lhs
+                if rhs.is_symbol and rhs in qvars:
+                    if rhs not in eqMap:
+                        eqMap[rhs] = lhs
+                        qvarsNew.discard(rhs)
+                        continue
+            tmpSet.add(c)
+            
+        if len(eqMap) != 0:
+            changed = True
+            while changed:
+                changed = False
+                for l, r in eqMap.items():
+                    rNew = r.simple_substitute(eqMap)
+                    if (rNew != r):
+                        changed = True
+                    eqMap[l] = rNew
+
+            print("(eq map: post)")
+            for l, r in eqMap.items():
+                print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
+            
+            cubeSetNew = set()
+            for c in tmpSet:
+                c_new = c.simple_substitute(eqMap)
+                cubeSetNew.add(c_new)
+                
+            print("(cube eq: post)")
+            for c in cubeSetNew:
+                print("\t%s" % pretty_serialize(c))
+            
+            print("(qvars eq: post)")
+            for c in qvarsNew:
+                print("\t%s" % pretty_serialize(c))
+            
+            removedVars = set(eqMap.keys())
+            for c in cubeSetNew:
+                fv = c.get_free_variables()
+                fv_removed = fv.intersection(removedVars)
+                if len(fv_removed) != 0:
+                    print("Error: found bound variables as free in %s" % pretty_serialize(c))
+                    for c in fv_removed:
+                        print("\t%s" % pretty_serialize(c))
+                    assert(0)
+            
+            cubeEq = And(cubeSetNew)
+            if len(qvarsNew) != 0:
+                cubeEq = Exists(qvarsNew, cubeEq)
+        return cubeEq
     
     def check_query(self, solver, formulae=None, timeout=None):
         print("Formulae #%d:" % len(formulae))
@@ -105,6 +328,50 @@ class FR(object):
             if (not quiet):
                 print("-> UNSAT")
             return False
+
+    def get_formula_qf(self, formula):
+        if self.qf >= 2:
+            if (len(self.system._fin2sort) == 0 
+#                 and len(self.system._sort2fin) == len(self.system._sorts)
+                ):
+                if formula in self.cache_qf:
+                    return self.cache_qf[formula]
+
+                qvars = formula.get_quantifier_variables()
+                if len(qvars) == 0:
+                    return formula
+                
+                noScalarVar = True
+                for v in qvars:
+                    if v.symbol_type().is_enum_type():
+                        noScalarVar = False
+                        break
+                if noScalarVar:
+                    return formula
+                
+#                 print("QE: %s" % formula.serialize())
+                
+                push_time()
+                q_formula = And(formula)
+                qf_formula = self.get_qf_form(q_formula)
+                self.update_time_stat("time-qf", pop_time())
+                
+#                 for f in flatten(qf_formula):
+#                     print("--- %s" % f.serialize())
+#                 assert(0)
+
+#                 print("Adding QF entry: ", end='')
+#                 pretty_print(formula)
+#                 pretty_print(qf_formula)
+        
+                self.cache_qf[formula] = qf_formula
+                self.cache_qu[qf_formula] = formula
+                return qf_formula
+#         else:
+#             formula_flat = self.system.replaceDefinitions(formula)
+#             self.cache_qu[formula_flat] = formula
+#             return formula_flat
+        return formula
     
     def get_bdd(self, node):
         bdd_expr = self.converter.convert(node)
@@ -302,7 +569,7 @@ class FR(object):
         global outF
         name = "%s/espresso_in" % (common.gopts.out)
         self.print_espresso(bdd, restricted, name)
-        cmd = "exec ./utils/espresso/espresso.linux"
+        cmd = "exec espresso"
         if mode == "exact":
             cmd += " -D exact -o kiss %s.pla" % name
             eprint("\t(running espresso in exact mode)")
@@ -609,7 +876,7 @@ class FR(object):
             count += 1
 
     def print_pla(self, bddI, bddT):
-        self.print_espresso(bddI, self.patoms, gopts.out+"/init")
+        self.print_espresso(bddI, self.patoms, common.gopts.out+"/init")
 #         bddT = self.axiom
 #         for action, actionBdds in self.actions.items():
 #             for actionBdd in actionBdds:
@@ -618,7 +885,7 @@ class FR(object):
         for k, v in self.natoms.items():
             allowed[k] = v
         self.dump_dot(bddT)
-        self.print_espresso(bddT, allowed, gopts.out+"/trel_formula")
+        self.print_espresso(bddT, allowed, common.gopts.out+"/trel_formula")
 #         allowed = self.patoms
 #         for lhs, rhs in self.natoms.items():
 #             if lhs not in allowed:
@@ -674,49 +941,49 @@ class FR(object):
         
         eprint(time_str(), "(building bdds)")
         bddI = self.formula2bdd(init_formula(self))
-#         pathCount = bddI.CountPathsToNonZero()
-#         print("Found %d paths in init" % pathCount)
-#         self.dump_dot(bddI)
-#         assert(0)
+        pathCount = bddI.CountPathsToNonZero()
+        print("Found %d paths in init" % pathCount)
+        self.dump_dot(bddI)
+        # assert(0)6
         
         self.build_actions()
         self.build_axioms()
                   
-#         bddT = self.formula2bdd(trel_formula(self))
-#         eprint(time_str(), "(building bdd for T done)")
-# #         self.dump_dot(bddT)
-# #         assert(0)
-#            
-#         if axiom_formula(self) != TRUE():
-#             bddA = self.formula2bdd(axiom_formula(self))
-# #             self.dump_dot(bddA)
-# #             assert(0)
-#             bddT = self.ddmanager.And(bddT, bddA)
-# #             pathCount = bddT.CountPathsToNonZero()
-# #             print("Found %d paths in trel /\ axioms" % pathCount)
-#   
-#         self.print_pla(bddI, bddT)
+        bddT = self.formula2bdd(trel_formula(self))
+        eprint(time_str(), "(building bdd for T done)")
+#         self.dump_dot(bddT)
 #         assert(0)
+           
+        if axiom_formula(self) != TRUE():
+            bddA = self.formula2bdd(axiom_formula(self))
+            self.dump_dot(bddA)
+            # assert(0)
+            bddT = self.ddmanager.And(bddT, bddA)
+            pathCount = bddT.CountPathsToNonZero()
+            print("Found %d paths in trel /\ axioms" % pathCount)
+  
+        self.print_pla(bddI, bddT)
+        # assert(0)
         
-#         bddP = self.formula2bdd(prop_formula(self))
-#         pathCount = bddP.CountPathsToNonZero()
-#         print("Found %d paths in prop" % pathCount)
+        bddP = self.formula2bdd(prop_formula(self))
+        pathCount = bddP.CountPathsToNonZero()
+        print("Found %d paths in prop" % pathCount)
         
         
-#         self.extract_pcubes(bddI, "Init")
-#         self.extract_pcubes(bddT, "Trel")
-#         self.extract_pcubes(bddA, "Axiom")
-#         self.extract_pcubes(bddP, "Property")
+        self.extract_pcubes(bddI, "Init")
+        self.extract_pcubes(bddT, "Trel")
+        self.extract_pcubes(bddA, "Axiom")
+        self.extract_pcubes(bddP, "Property")
 
-#         self.set_atoms()
-#         self.set_bddvars()
-#         self.set_p2nVars()
+        self.set_atoms()
+        self.set_bddvars()
+        self.set_p2nVars()
 
         self.bddP = self.formula2bdd(prop_formula(self))
         self.bddnotP = self.ddmanager.Not(self.bddP)
-#         self.dump_dot(self.bddP)
-#         self.execute_espresso(self.bddP, self.patoms, True)
-#         assert(0)
+        self.dump_dot(self.bddP)
+        self.execute_espresso(self.bddP, self.patoms, True)
+        # assert(0)
         
         self.set_abstract()
         
@@ -764,11 +1031,11 @@ class FR(object):
                 sources.append((dest, comment))
                 totalR = self.ddmanager.Or(totalR, dest)
 
-#         eprint("\t(found total #%d paths)" % totalPathCount)
-#         print("\t(found total #%d paths)" % totalPathCount)
+        eprint("\t(found total #%d paths)" % totalPathCount)
+        print("\t(found total #%d paths)" % totalPathCount)
         
-#         print("Reachable states:")
-#         self.ddmanager.PrintMinterm(totalR)
+        print("Reachable states:")
+        self.ddmanager.PrintMinterm(totalR)
 
         totalR = self.ddmanager.ExistAbstract(totalR, self.projPre)
         
@@ -824,11 +1091,10 @@ def forwardReach(fname):
     utils.start_time = time.time()
     system = TransitionSystem()
     p = FR(system)
-    
     read_problem(p, fname)
     print("\t(running: frpo)")
     
-    set_axiom_formula(p)
+    set_axiom_formula(p, False)
 
     if len(p.system.curr._infers) != 0:
         print()

@@ -1,0 +1,81 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "lockserv",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ic3po.py",
+            "console": "integratedTerminal",
+            "subProcess": true,
+            "args": [
+                "--mode",
+                "frpo",
+                "${workspaceFolder}/ivybench/ex/ivy/lockserv_automaton.ivy",
+                "<",
+                "${workspaceFolder}/mock.txt"
+            ],
+        },
+        {
+            "name": "fr",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ic3po/top.py",
+            "console": "integratedTerminal",
+            "subProcess": true,
+            "args": [
+                "-m",
+                "frpo",
+                "--min",
+                "1",
+                "--qf",
+                "3",
+                "-g",
+                "fef",
+                "-r",
+                "0",
+                "--seed",
+                "1",
+                "--subsume",
+                "1",
+                "--reuse",
+                "1",
+                "--opt",
+                "1",
+                "--const",
+                "1",
+                "--init",
+                "-1",
+                "--wires",
+                "1",
+                "--finv",
+                "0",
+                "--size",
+                "default",
+                "--rb",
+                "1",
+                "-v",
+                "1""-o",
+                "output/test",
+                "-n",
+                "test",
+                "--cti",
+                "0",
+                "output/test/test.vmt",
+                "<",
+                "${workspaceFolder}/mock.txt"
+            ],
+        },
+    ]
+}

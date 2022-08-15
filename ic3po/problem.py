@@ -101,7 +101,7 @@ def set_axiom_formula(self, unbounded):
         res = TRUE()
     else:
         res = And(axiomS)
-    res = self.get_formula_qf(res)
+    # res = self.get_formula_qf(res)
     self._axiom_formula = res
     if self.eval_wires:
         if len(self.system._sort2fin) == len(self.system._sorts):

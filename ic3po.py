@@ -175,8 +175,9 @@ def main():
 		   pass
 		s.wait()
 	retcode = s.poll()
-	if (retcode != 0):
-		raise Exception("ic3po error: return code %d" % retcode)
+	# if (retcode != 0):
+	# 	# raise Exception("ic3po error: return code %d" % retcode)
+	# 	exit(1)
 		
 if __name__ == '__main__':
 	main()
