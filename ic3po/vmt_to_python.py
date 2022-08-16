@@ -2,7 +2,13 @@ from vmt_parser import *
 
 class ProtocolInstance:
     class Node:
-        def __init__(self, variables, default_values):
+        def __init__(self, variables):
+            """
+            This class represents a node in the protocol instance.
+
+            :param variables: A list of variables that are defined in the source FOL as 
+            a list of 
+            """
             self.state = {var : default_values[var] for var in variables}
 
     def __init__(self, size, transition_relation, default_values):

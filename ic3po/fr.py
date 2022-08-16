@@ -40,10 +40,14 @@ def fprint(s):
 class FR(object):
     def __init__(self, system):
         self.system = system
+        self.stat = dict()
+        self.time_stat = dict()
+        self.query_stat = dict()
+        self.init_stats()
         self.reset()
         self.debug = False
-        self.ordered = None
-        self.quorums = None
+        self.ordered = "none"
+        self.quorums = "none"
         self.qf = common.gopts.qf
         self.cache_qf = dict()
         self.cache_qu = dict()
@@ -57,14 +61,17 @@ class FR(object):
         self.boost_ordered_en = False
         self.boost_quorums_en = False
         self.framesolver = []
-
     
+    def set_stat(self, name, value):
+        self.stat[name] = value
+
     def init_solver(self):
         solver = Solver(name="bdd", logic=BOOL)
         return solver
 
     def reset(self):
-        self.qesolver = QuantifierEliminator(name='z3')
+        # self.qesolver = QuantifierEliminator(name='z3')
+        # self.qesolver = QuantifierEliminator(name='z3')
         self._faxioms = []
         self._axiom_formula = TRUE()
         get_env().fsubstituter.freset()
@@ -81,10 +88,10 @@ class FR(object):
         return s
     
     def get_qf_form(self, f):
-        qf = self.qesolver.eliminate_quantifiers(f).simplify()
+        # qf = self.qesolver.eliminate_quantifiers(f).simplify()
 #         print("quantified: \n%s", f.serialize())
 #         print("quantifier-free: \n%s", qf.serialize())
-        return qf
+        return pysmt.shortcuts.qelim(f)
     
     def get_formulae(self, formula, qf=True):
         formulae = formula
@@ -329,6 +336,74 @@ class FR(object):
                 print("-> UNSAT")
             return False
 
+    def init_stats(self):
+        self.set_stat("scalls", 0)
+        self.set_stat("scalls-finite", 0)
+        self.set_stat("scalls-infinite", 0)
+        self.set_stat("scalls-finite-full", 0)
+        self.set_stat("cti", 0)
+        self.set_stat("cubes", 0)
+        self.set_stat("subsumed-calls", 0)
+        self.set_stat("subsumed-subset", 0)
+        self.set_stat("subsumed-varintersect-c", 0)
+        self.set_stat("subsumed-varintersect-e", 0)
+        self.set_stat("subsumed-query-sat", 0)
+        self.set_stat("subsumed-query-unsat", 0)
+        self.set_stat("subsumed-eq", 0)
+        self.set_stat("unsat-core", 0)
+        self.set_stat("sz-unsat-core-sum", 0)
+        self.set_stat("sz-unsat-min-sum", 0)
+        self.set_stat("sz-cube-sum", 0)
+        self.set_stat("antecedent-reduction-sum", 0)
+        self.set_stat("antecedent-total-sum", 0)
+        self.set_stat("antecedent-calls", 0)
+        self.set_stat("antecedent-calls-reduced", 0)
+        self.set_stat("antecedent-scalls", 0)
+        self.init_time_stats()
+
+    def init_time_stats(self):
+        self.set_time_stat("time-cti-bad-sat", 0)
+        self.set_time_stat("time-cti-bad-unsat", 0)
+        self.set_time_stat("time-cti-sat", 0)
+        self.set_time_stat("time-cti-unsat", 0)
+        self.set_time_stat("time-forward", 0)
+        self.set_time_stat("time-antecedent", 0)
+        self.set_time_stat("time-subsume", 0)
+        self.set_time_stat("time-subsume-query", 0)
+        self.set_time_stat("time-inv-check-finite", 0)
+        self.set_time_stat("time-inv-check-infinite", 0)
+        self.set_time_stat("time-inv-reuse", 0)
+        self.set_time_stat("time-minimize", 0)
+        self.set_time_stat("time-qf", 0)
+        self.init_query_stats()
+        
+    def init_query_stats(self):
+        self.set_query_stat("time-q-max-finite", 0)
+        self.set_query_stat("time-q-max-finite-core", 0)
+        self.set_query_stat("time-q-max-infinite", 0)
+        self.set_query_stat("time-q-max-infinite-core", 0)
+
+    def set_time_stat(self, name, value):
+        self.time_stat[name] = value
+
+    def set_query_stat(self, name, value):
+        self.query_stat[name] = value
+
+    def update_stat(self, name, value=1):
+        assert name in self.stat
+        self.stat[name] += value
+
+    def update_time_stat(self, name, value=1):
+        assert name in self.time_stat
+        self.time_stat[name] += value
+
+    def update_query_stat(self, name, value=1):
+        assert name in self.query_stat
+        if self.query_stat[name] < value:
+            self.query_stat[name] = value
+            return True
+        return False
+
     def get_formula_qf(self, formula):
         if self.qf >= 2:
             if (len(self.system._fin2sort) == 0 
@@ -352,8 +427,8 @@ class FR(object):
 #                 print("QE: %s" % formula.serialize())
                 
                 push_time()
-                q_formula = And(formula)
-                qf_formula = self.get_qf_form(q_formula)
+                # q_formula = And(formula)
+                qf_formula = self.get_qf_form(formula)
                 self.update_time_stat("time-qf", pop_time())
                 
 #                 for f in flatten(qf_formula):
@@ -971,9 +1046,9 @@ class FR(object):
         
         
         self.extract_pcubes(bddI, "Init")
-        self.extract_pcubes(bddT, "Trel")
-        self.extract_pcubes(bddA, "Axiom")
-        self.extract_pcubes(bddP, "Property")
+        # self.extract_pcubes(bddT, "Trel")
+        # self.extract_pcubes(bddA, "Axiom")
+        # self.extract_pcubes(bddP, "Property")
 
         self.set_atoms()
         self.set_bddvars()
@@ -1095,6 +1170,9 @@ def forwardReach(fname):
     print("\t(running: frpo)")
     
     set_axiom_formula(p, False)
+    set_prop_formula(p, False)
+    set_init_formula(p, False)
+    set_trel_formula(p, False)
 
     if len(p.system.curr._infers) != 0:
         print()
