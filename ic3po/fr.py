@@ -61,6 +61,7 @@ class FR(object):
         self.boost_ordered_en = False
         self.boost_quorums_en = False
         self.framesolver = []
+        self.exp = False
     
     def set_stat(self, name, value):
         self.stat[name] = value
@@ -100,7 +101,7 @@ class FR(object):
         if qf:
             push_time()
             q_formula = And(formulae)
-            qf = self.get_qf_form(q_formula)
+            qf = self.get_formula_qf(q_formula)
             qf_formulae = flatten_cube(qf)
             return qf_formulae
         return formulae
@@ -729,7 +730,7 @@ class FR(object):
     
     def extract_pcubes(self, bdd, prefix="Cube"):
         cubes = self.extract_cubes(bdd, self.patoms)
-        print("%s: #%d" % (prefix, len(cubes)))
+        print("\n %s: #%d \n" % (prefix, len(cubes)))
         if len(cubes) < 500:
             for cube, cubeMap in cubes:
                 print(cube)
@@ -1047,8 +1048,9 @@ class FR(object):
         
         self.extract_pcubes(bddI, "Init")
         # self.extract_pcubes(bddT, "Trel")
-        # self.extract_pcubes(bddA, "Axiom")
-        # self.extract_pcubes(bddP, "Property")
+        if axiom_formula(self) != TRUE():
+            self.extract_pcubes(bddA, "Axiom")
+        self.extract_pcubes(bddP, "Property")
 
         self.set_atoms()
         self.set_bddvars()
@@ -1106,8 +1108,8 @@ class FR(object):
                 sources.append((dest, comment))
                 totalR = self.ddmanager.Or(totalR, dest)
 
-        eprint("\t(found total #%d paths)" % totalPathCount)
-        print("\t(found total #%d paths)" % totalPathCount)
+        # eprint("\t(found total #%d paths)" % totalPathCount)
+        # print("\t(found total #%d paths)" % totalPathCount)
         
         print("Reachable states:")
         self.ddmanager.PrintMinterm(totalR)
@@ -1155,7 +1157,7 @@ class FR(object):
                 pretty_print(Not(cubeSym))
 #         print("Symmetric notR: #%d" % len(symCubes))
         for idx, cubeSym in enumerate(symCubes):
-            label = "frpo%d" % str(len(self.inferences)+1)
+            label = "frpo %s" % str(len(self.inferences)+1)
             clause = Not(cubeSym)
             self.inferences.append((label, clause))
         pretty_print_inv(self.inferences, "Forward inferences")
@@ -1201,7 +1203,7 @@ def forwardReach(fname):
         if cl not in p.system.orig._infers:
             p.system.orig._infers[cl] = label
             
-    for k, v in iteritems(p.system._fin2sort):
+    for k, v in p.system._fin2sort.iteritems():
         p.system._sort2fin[v] = k
     p.system._fin2sort.clear()
 

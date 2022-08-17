@@ -2130,6 +2130,7 @@ class PDR(object):
         self.qtype = "inv"
         if not quiet:
             print(time_str(), "-------------------------------------------------")
+            inv_set_orig = [(x[1], x[0]) for x in inv_set_orig]
             pretty_print_inv(inv_set_orig, "Invariant")
 
         nFailed = 0
