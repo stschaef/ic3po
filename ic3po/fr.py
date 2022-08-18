@@ -785,7 +785,7 @@ class FR(object):
         outF = open("out.dot", "w")
         for k, v in idx2atom.items():
             str_dot = str_dot.replace(k, v)
-        fprint(str_dot)
+        print(str_dot, file=outF)
     
     def dump_blif(self, bdd):
         add = self.ddmanager.BddToAdd(bdd)
@@ -1001,69 +1001,32 @@ class FR(object):
     def execute(self):
         """Forward Reachability using BDDs."""
         prop = prop_formula(self)
-        print("\nChecking property %s...\n" % prop)
+
         
         self.ddmanager = repycudd.DdManager()
         self.converter = BddConverter(environment=get_env(),
                                       ddmanager=self.ddmanager)
-#         self.ddmanager.AutodynDisable()
 
-        for k, v in self.system._enumsorts.items():
-            if str(k).startswith("epoch"):
-                self.converter.zero = v[0]
-                break
-        
-        self.initialize_atoms()
-        
-        eprint(time_str(), "(building bdds)")
-        bddI = self.formula2bdd(init_formula(self))
-        pathCount = bddI.CountPathsToNonZero()
-        print("Found %d paths in init" % pathCount)
-        self.dump_dot(bddI)
-        # assert(0)6
-        
+
         self.build_actions()
         self.build_axioms()
-                  
-        bddT = self.formula2bdd(trel_formula(self))
-        eprint(time_str(), "(building bdd for T done)")
-#         self.dump_dot(bddT)
-#         assert(0)
            
-        if axiom_formula(self) != TRUE():
-            bddA = self.formula2bdd(axiom_formula(self))
-            self.dump_dot(bddA)
-            # assert(0)
-            bddT = self.ddmanager.And(bddT, bddA)
-            pathCount = bddT.CountPathsToNonZero()
-            print("Found %d paths in trel /\ axioms" % pathCount)
-  
-        self.print_pla(bddI, bddT)
-        # assert(0)
-        
+        bddI = self.formula2bdd(init_formula(self))
+        bddT = self.formula2bdd(trel_formula(self))
+        bddA = self.formula2bdd(axiom_formula(self))
         bddP = self.formula2bdd(prop_formula(self))
-        pathCount = bddP.CountPathsToNonZero()
-        print("Found %d paths in prop" % pathCount)
-        
-        
-        self.extract_pcubes(bddI, "Init")
-        # self.extract_pcubes(bddT, "Trel")
-        if axiom_formula(self) != TRUE():
-            self.extract_pcubes(bddA, "Axiom")
-        self.extract_pcubes(bddP, "Property")
+        self.bddnotP = self.ddmanager.Not(bddP)
 
+        if axiom_formula(self) != TRUE():
+            self.dump_dot(bddA)
+            bddT = self.ddmanager.And(bddT, bddA)
+  
         self.set_atoms()
         self.set_bddvars()
         self.set_p2nVars()
-
-        self.bddP = self.formula2bdd(prop_formula(self))
-        self.bddnotP = self.ddmanager.Not(self.bddP)
-        self.dump_dot(self.bddP)
-        self.execute_espresso(self.bddP, self.patoms, True)
-        # assert(0)
-        
         self.set_abstract()
         
+        self.initialize_atoms()
         sources = list()
         initSrc = self.ddmanager.AndAbstract(bddI, self.axiom, self.projPre)
         totalR = initSrc
@@ -1071,7 +1034,9 @@ class FR(object):
         iteration = 0
         eprint("\t(running forward reachability)")
         while (len(sources) != 0):
-#             print("#sources = %d" % len(sources))
+            self.ddmanager.PrintMinterm(totalR)
+            
+            print("#sources = %d" % len(sources))
             src, comment = sources.pop()
             iteration += 1
             
@@ -1110,7 +1075,13 @@ class FR(object):
 
         # eprint("\t(found total #%d paths)" % totalPathCount)
         # print("\t(found total #%d paths)" % totalPathCount)
+
         
+        varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
+        for i, label in enumerate(varlabels):
+            print("%d %s" % (i, label))
+
+
         print("Reachable states:")
         self.ddmanager.PrintMinterm(totalR)
 
@@ -1128,7 +1099,7 @@ class FR(object):
             projCustom = self.converter.cube_from_var_list(proj_vars)
             totalR = self.ddmanager.ExistAbstract(totalR, projCustom)
         
-        self.dump_dot(totalR)
+        # self.dump_dot(totalR)
         
 #         self.experiment(totalR)
         
