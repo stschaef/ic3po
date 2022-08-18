@@ -995,10 +995,10 @@ class FR(object):
 #             bddC = self.ddmanager.ExistAbstract(bddC, self.projPre)
             self.dump_dot(bddC)
             assert(0)
-        else:
-            print("-- Finite check: safe --")
+        # else:
+        #     print("-- Finite check: safe --")
     
-    def execute(self):
+    def print_pla(self):
         """Forward Reachability using BDDs."""
         prop = prop_formula(self)
 
@@ -1032,19 +1032,30 @@ class FR(object):
         totalR = initSrc
         sources.append((initSrc, "init"))
         iteration = 0
-        eprint("\t(running forward reachability)")
+
+        print("DECLARE_STATES")
+        for state in self.system.curr._states:
+            for const in self.converter._bddEnumConsts:
+                print("%s(%s)" % (state, const))
+        print("BEGIN_VARLABELS")
+        varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
+        for i, label in enumerate(varlabels):
+            print("%d\t%s" % (i, label))
+        print("END_VARLABELS")
+
+        # print("\t(running forward reachability)")
         while (len(sources) != 0):
             self.ddmanager.PrintMinterm(totalR)
             
-            print("#sources = %d" % len(sources))
+            # print("#sources = %d" % len(sources))
             src, comment = sources.pop()
             iteration += 1
             
             if src == self.ddmanager.ReadLogicZero():
-                print("#%d Found no new states" % iteration)
+                # print("#%d Found no new states" % iteration)
                 continue
-            else:
-                print("#%d Found #%d new states: %s" % (iteration, len(sources)+1, comment))
+            # else:
+            #     print("#%d Found #%d new states: %s" % (iteration, len(sources)+1, comment))
             self.check_safe(src)
                 
 #                 src = self.ddmanager.And(src, self.axiom)
@@ -1076,63 +1087,57 @@ class FR(object):
         # eprint("\t(found total #%d paths)" % totalPathCount)
         # print("\t(found total #%d paths)" % totalPathCount)
 
-        
-        varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
-        for i, label in enumerate(varlabels):
-            print("%d %s" % (i, label))
+#         # print("Reachable states:")
+#         # self.ddmanager.PrintMinterm(totalR)
 
-
-        print("Reachable states:")
-        self.ddmanager.PrintMinterm(totalR)
-
-        totalR = self.ddmanager.ExistAbstract(totalR, self.projPre)
+#         totalR = self.ddmanager.ExistAbstract(totalR, self.projPre)
         
-        if self.converter.zero != None:
-            proj_vars = set(self.converter.var2node.keys())
-            proj_vars = proj_vars.difference(self.pvars)
-            for atom in self.gatoms.keys():
-                enumc = atom.get_enum_constants()
-                if self.converter.zero in enumc:
-                    var = self.converter.atom2var[atom]
-                    proj_vars.add(var)
-                    self.patoms.pop(atom)
-            projCustom = self.converter.cube_from_var_list(proj_vars)
-            totalR = self.ddmanager.ExistAbstract(totalR, projCustom)
+#         if self.converter.zero != None:
+#             proj_vars = set(self.converter.var2node.keys())
+#             proj_vars = proj_vars.difference(self.pvars)
+#             for atom in self.gatoms.keys():
+#                 enumc = atom.get_enum_constants()
+#                 if self.converter.zero in enumc:
+#                     var = self.converter.atom2var[atom]
+#                     proj_vars.add(var)
+#                     self.patoms.pop(atom)
+#             projCustom = self.converter.cube_from_var_list(proj_vars)
+#             totalR = self.ddmanager.ExistAbstract(totalR, projCustom)
         
-        # self.dump_dot(totalR)
+#         # self.dump_dot(totalR)
         
-#         self.experiment(totalR)
+# #         self.experiment(totalR)
         
-#         assert(0)
-        eprint("\t(forward reachability done)")
-        print("\t(forward reachability done)")
-        self.check_safe(totalR)
+# #         assert(0)
+#         # eprint("\t(forward reachability done)")
+#         # print("\t(forward reachability done)")
+#         self.check_safe(totalR)
         
-        notCubes_fast = self.execute_espresso(totalR, self.patoms, "fast")
-        notCubes = notCubes_fast
-#         notCubes_primes = self.execute_espresso(totalR, self.patoms, "primes")
-#         notCubes = notCubes_primes
-#         notCubes_exact = self.execute_espresso(totalR, self.patoms, "exact")
-#         notCubes = notCubes_exact
-        symCubes = set()
-        eprint("\t(invoking symmetry on #%d)" % len(notCubes))
-        print("\t(invoking symmetry on #%d)" % len(notCubes))
-        for cube, cubeMap, l in notCubes:
-            print("%s i.e. " % l, end='')
-            pretty_print(cube)
-            cubesOut = symmetry_cube(self, cube, 0, False)
-            assert(len(cubesOut) == 1)
-            for cubeSym, _ in cubesOut:
-                symCubes.add(cubeSym)
-                print("\t", end="")
-                pretty_print(Not(cubeSym))
-#         print("Symmetric notR: #%d" % len(symCubes))
-        for idx, cubeSym in enumerate(symCubes):
-            label = "frpo %s" % str(len(self.inferences)+1)
-            clause = Not(cubeSym)
-            self.inferences.append((label, clause))
-        pretty_print_inv(self.inferences, "Forward inferences")
-        return self.inferences
+#         notCubes_fast = self.execute_espresso(totalR, self.patoms, "fast")
+#         notCubes = notCubes_fast
+# #         notCubes_primes = self.execute_espresso(totalR, self.patoms, "primes")
+# #         notCubes = notCubes_primes
+# #         notCubes_exact = self.execute_espresso(totalR, self.patoms, "exact")
+# #         notCubes = notCubes_exact
+#         symCubes = set()
+#         eprint("\t(invoking symmetry on #%d)" % len(notCubes))
+#         print("\t(invoking symmetry on #%d)" % len(notCubes))
+#         for cube, cubeMap, l in notCubes:
+#             print("%s i.e. " % l, end='')
+#             pretty_print(cube)
+#             cubesOut = symmetry_cube(self, cube, 0, False)
+#             assert(len(cubesOut) == 1)
+#             for cubeSym, _ in cubesOut:
+#                 symCubes.add(cubeSym)
+#                 print("\t", end="")
+#                 pretty_print(Not(cubeSym))
+# #         print("Symmetric notR: #%d" % len(symCubes))
+#         for idx, cubeSym in enumerate(symCubes):
+#             label = "frpo %s" % str(len(self.inferences)+1)
+#             clause = Not(cubeSym)
+#             self.inferences.append((label, clause))
+#         pretty_print_inv(self.inferences, "Forward inferences")
+#         return self.inferences
     
 def forwardReach(fname):
     global start_time
@@ -1159,26 +1164,28 @@ def forwardReach(fname):
         print("All sorts should be finite for BDD-based forward reachability")
         assert(0)
 
-#     set_solver(p)
-    inferences = p.execute()
-    eprint("\t(adding %d forward inferences)" % len(inferences))
-    print("\t(adding %d forward inferences)" % len(inferences))
-    p.reset()
-    for tt in p.system._sort2fin.keys():
-        p.system.unbound_sort(tt)
-    p.system.infinitize()
-    inferences_inf = {}
-    for label, i in inferences:
-        inferences_inf[i.fsubstitute()] = label
-    for cl, label in inferences_inf.items():
-        if cl not in p.system.orig._infers:
-            p.system.orig._infers[cl] = label
-            
-    for k, v in p.system._fin2sort.iteritems():
-        p.system._sort2fin[v] = k
-    p.system._fin2sort.clear()
+    p.print_pla()
 
-    return p.system
+#     set_solver(p)
+    # inferences = p.execute()
+    # eprint("\t(adding %d forward inferences)" % len(inferences))
+    # print("\t(adding %d forward inferences)" % len(inferences))
+    # p.reset()
+    # for tt in p.system._sort2fin.keys():
+    #     p.system.unbound_sort(tt)
+    # p.system.infinitize()
+    # inferences_inf = {}
+    # for label, i in inferences:
+    #     inferences_inf[i.fsubstitute()] = label
+    # for cl, label in inferences_inf.items():
+    #     if cl not in p.system.orig._infers:
+    #         p.system.orig._infers[cl] = label
+            
+    # for k, v in p.system._fin2sort.iteritems():
+    #     p.system._sort2fin[v] = k
+    # p.system._fin2sort.clear()
+
+    # return p.system
     
 if __name__ == "__main__":  
     args = sys.argv

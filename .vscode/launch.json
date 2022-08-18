@@ -126,7 +126,9 @@
                 "0",
                 "output/test/test.vmt",
                 "<",
-                "${workspaceFolder}/mock.txt"
+                "${workspaceFolder}/mock.txt",
+                ">",
+                "${workspaceFolder}/lockserv.txt"
             ],
         },
     ]
