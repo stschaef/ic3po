@@ -91,6 +91,7 @@ class StratificationOracle():
         self.print_arcs(self.skolem_map)
     
     def print_arcs(self, sk_map):
+        return
         print("\nArcs:")
         for k, v in sk_map.items():
             print("\t%s ->" % k, end='')

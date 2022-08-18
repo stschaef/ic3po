@@ -221,8 +221,8 @@ class System():
 #         return axiom_vars
     
     def add_trel(self):
-        eprint("\t(found #%d actions)" % len(self._actions))
-        print("\t(found #%d actions)" % len(self._actions))
+        # eprint("\t(found #%d actions)" % len(self._actions))
+        # print("\t(found #%d actions)" % len(self._actions))
         if len(self._actions) == 0:
             eprint("\t(error: no action found)")
             print("\t(error: no action found)")
@@ -260,10 +260,10 @@ class System():
                         if True or (str(n) != "choosable"):
                             action_all.append(noop[n])
                             missing_nex.append(n)
-            if len(missing_nex) != 0:
-                print("adding #%d noops to action %s" % (len(missing_nex), f[1]))
-                for n in missing_nex:
-                    print("\tnoop(%s)" % n)
+            # if len(missing_nex) != 0:
+                # print("adding #%d noops to action %s" % (len(missing_nex), f[1]))
+                # for n in missing_nex:
+                #     print("\tnoop(%s)" % n)
             action = And(action_all)
             if qvars != None:
                 action = Exists(qvars, action)
@@ -300,8 +300,8 @@ class System():
         self.add_action(noop_all, noop_name)
         
     def add_trel_new(self):
-        eprint("\t(found #%d actions)" % len(self._actions))
-        print("\t(found #%d actions)" % len(self._actions))
+        # eprint("\t(found #%d actions)" % len(self._actions))
+        # print("\t(found #%d actions)" % len(self._actions))
         if len(self._actions) == 0:
             eprint("\t(error: no action found)")
             print("\t(error: no action found)")
@@ -339,10 +339,10 @@ class System():
                         if True or (str(n) != "choosable"):
                             action_all.append(noop[n])
                             missing_nex.append(n)
-            if len(missing_nex) != 0:
-                print("adding #%d noops to action %s" % (len(missing_nex), f[1]))
-                for n in missing_nex:
-                    print("\tnoop(%s)" % n)
+            # if len(missing_nex) != 0:
+            #     print("adding #%d noops to action %s" % (len(missing_nex), f[1]))
+            #     for n in missing_nex:
+            #         print("\tnoop(%s)" % n)
             action = And(action_all)
             if qvars != None:
                 action = Exists(qvars, action)
@@ -366,6 +366,7 @@ class System():
         self._trel = And(tcond)
         
     def __str__(self):
+        return ""
         res = []
         res.append("-----------------------------------------------------------------")
         res.append("\nInit #")
@@ -939,8 +940,8 @@ class TransitionSystem(SmtLibParser):
             
             self._sort2fin[inf] = enumsort
             self._enum2inf[enumsort] = inf
-            print("(enumsort) %s <-> %s" % (inf, enumsort))
-            print("\t%s <-> %s" % (pretty_print_set(enumqvar), pretty_print_set(enumvals)))
+            # print("(enumsort) %s <-> %s" % (inf, enumsort))
+            # print("\t%s <-> %s" % (pretty_print_set(enumqvar), pretty_print_set(enumvals)))
             
 #             print(enumsort.is_enum_type())
 #             e = []
@@ -1008,7 +1009,7 @@ class TransitionSystem(SmtLibParser):
         return f
     
     def stratify(self):
-        print("\nstratifying state variables:")
+        # print("\nstratifying state variables:")
         for f in self.orig._states:
             ft = f.symbol_type()
             if ft.is_function_type():
@@ -1017,39 +1018,39 @@ class TransitionSystem(SmtLibParser):
                     for paramt in ft.param_types:
                         self.strat.update_stratify_function(paramt, rt)
                 
-        print("\nstratifying axioms:")
+        # print("\nstratifying axioms:")
         for v in self.orig._axiom:
             f = self.replaceDefinitions(v)
 #             print("%s" % pretty_serialize(f))
             self.strat.update_stratify(f)
         for v in self.orig._actions:
-            print("\nstratifying action %s:" % v[1])
+            # print("\nstratifying action %s:" % v[1])
             f = self.replaceDefinitions(v[0])
 #             print("%s" % pretty_serialize(f))
             self.strat.update_stratify(f)
-        print("\nstratifying property:")
+        # print("\nstratifying property:")
         for v in self.orig._prop:
             f = self.replaceDefinitions(v)
 #             print("%s" % pretty_serialize(f))
-            print("    pos:")
+            # print("    pos:")
             self.strat.update_stratify(f)
-            print("    neg:")
+            # print("    neg:")
             self.strat.update_stratify(Not(f))
 
         if not self.strat.has_exists:
             print("\t(no exists detected)")
-            eprint("\t(no exists detected)")
-        print("\t(epr: %s)" % self.is_epr())
-        eprint("\t(epr: %s)" % self.is_epr())
+        #     eprint("\t(no exists detected)")
+        # print("\t(epr: %s)" % self.is_epr())
+        # eprint("\t(epr: %s)" % self.is_epr())
 
-        print("\nstratifying helpers:")
+        # print("\nstratifying helpers:")
         for v in self.orig._helpers.keys():
             f = self.replaceDefinitions(v)
 #             print("%s" % pretty_serialize(f))
             self.strat.update_stratify(f)
         
         self.strat.print_all_arcs()
-        print("-----------------------------------------------------------------")
+        # print("-----------------------------------------------------------------")
         
         if self.gen == "auto":
             self.gen = "prefer_epr"
@@ -1057,29 +1058,29 @@ class TransitionSystem(SmtLibParser):
                 self.gen = "epr_strict"
             elif self.is_epr():
                 self.gen = "epr_strict"
-        print("\t(gen: %s)" % self.gen)
-        eprint("\t(gen: %s)" % self.gen)
-        print("-----------------------------------------------------------------")
+        # print("\t(gen: %s)" % self.gen)
+        # eprint("\t(gen: %s)" % self.gen)
+        # print("-----------------------------------------------------------------")
     
     def stratify_invariant(self, inv_set_l):
-        print("\nstratifying inductive invariant:")
+        # print("\nstratifying inductive invariant:")
         for label, v in inv_set_l:
             f = self.replaceDefinitions(v)
 #             print("%s" % pretty_serialize(f))
-            print("  %s:" % label)
-            print("    pos:")
+            # print("  %s:" % label)
+            # print("    pos:")
             self.strat.update_stratify(f)
-            print("    neg:")
+            # print("    neg:")
             self.strat.update_stratify(Not(f))
 
-        if not self.strat.has_exists:
-            print("\t(with inv: no exists detected)")
-            eprint("\t(with inv: no exists detected)")
-        print("\t(with inv: epr: %s)" % self.is_epr())
-        eprint("\t(with inv: epr: %s)" % self.is_epr())
+        # if not self.strat.has_exists:
+        #     print("\t(with inv: no exists detected)")
+        #     eprint("\t(with inv: no exists detected)")
+        # print("\t(with inv: epr: %s)" % self.is_epr())
+        # eprint("\t(with inv: epr: %s)" % self.is_epr())
 
         self.strat.print_all_arcs()
-        print("-----------------------------------------------------------------")
+        # print("-----------------------------------------------------------------")
         
     def syntax_infer(self):
         print("\nPerforming syntax-guided inference:")
@@ -1124,11 +1125,11 @@ class TransitionSystem(SmtLibParser):
     
     def preprocess_definitions(self):
         if len(self.orig._definitions) != 0:
-            eprint("\t(found #%d definitions)" % len(self.orig._definitions))
+            # eprint("\t(found #%d definitions)" % len(self.orig._definitions))
             
-            print("Definitions #%s" % len(self.orig._definitions))
-            for k, v in self.orig._definitions.items():
-                print("\t%s := %s\n\t\twith variables %s" % (str(k), str(v), v.get_free_variables()))
+            # print("Definitions #%s" % len(self.orig._definitions))
+            # for k, v in self.orig._definitions.items():
+            #     print("\t%s := %s\n\t\twith variables %s" % (str(k), str(v), v.get_free_variables()))
             
             for k, v in self.orig._definitions.items():
                 rel = None
@@ -1193,12 +1194,12 @@ class TransitionSystem(SmtLibParser):
                     self._dependency_height[str(x)] = 0
             for lhs in sorted(self._dependency_height.keys(), key=lambda v: (self._dependency_height[v])):
                 rhs = self._dependency_height[lhs]
-                print("\tdep_height[%s] = %d" % (lhs, rhs))
+                # print("\tdep_height[%s] = %d" % (lhs, rhs))
     
     def postprocess_definitions(self):
         return
         if len(self.orig._definitions) != 0:
-            print("\nConverting definitions to axioms")
+            # print("\nConverting definitions to axioms")
             for k, v in self.orig._definitions.items():
                 self.orig.add_axiom(v)
     
@@ -1209,11 +1210,11 @@ class TransitionSystem(SmtLibParser):
             for i, x in enumerate(v):
                 self.set_enum_height(x, i + 100*idx)
 #                 self.set_enum_height(x, i)
-                print("\tdep_height[%s] = %d" % (pretty_print_str(x), self._enum_height[x]))
+                # print("\tdep_height[%s] = %d" % (pretty_print_str(x), self._enum_height[x]))
             idx += 1
     
     def print_modified(self):
-        print("(modified) #%d" % len(self.modified))
+        # print("(modified) #%d" % len(self.modified))
         for v in self.modified:
             print("\t%s" % pretty_print_str(v))
     
@@ -1276,7 +1277,7 @@ class TransitionSystem(SmtLibParser):
             for a, lst in amap.items():
                 if a == "sort":
                     for v in lst:
-                        sz = v
+                        sz = raw_input("|" + str(f.symbol_type()) + "|=?\t")
                         if (common.gopts.init >= 0):
                             sz = str(common.gopts.init)
                         self.add_sort(f.symbol_type(), sz)
@@ -1317,27 +1318,27 @@ class TransitionSystem(SmtLibParser):
                 self.add_sort(s, sz)
 
         if len(self.orig._helpers) != 0:
-            eprint("\t(found #%d user-provided helpers)" % len(self.orig._helpers))
-            print("\t(found #%d user-provided helpers)" % len(self.orig._helpers))
-#             assert(0)
+#             eprint("\t(found #%d user-provided helpers)" % len(self.orig._helpers))
+#             print("\t(found #%d user-provided helpers)" % len(self.orig._helpers))
+# #             assert(0)
 
-#             print("\nConverting helpers to axioms")
-#             print("Helpers #%s" % len(self.orig._helpers))
-#             for k, v in self.orig._helpers.items():
-#                 print("\t%s := %s\n\t\twith variables %s" % (str(v), str(k), k.get_free_variables()))
-#                 self.orig.add_axiom(k)
-#                 knext = k.simple_substitute(self.orig._pre2nex)
-#                 self.orig.add_axiom(knext)
-#             self.orig._helpers.clear()
+# #             print("\nConverting helpers to axioms")
+# #             print("Helpers #%s" % len(self.orig._helpers))
+# #             for k, v in self.orig._helpers.items():
+# #                 print("\t%s := %s\n\t\twith variables %s" % (str(v), str(k), k.get_free_variables()))
+# #                 self.orig.add_axiom(k)
+# #                 knext = k.simple_substitute(self.orig._pre2nex)
+# #                 self.orig.add_axiom(knext)
+# #             self.orig._helpers.clear()
             
-            print("\nConverting helpers to inferences")
-            print("Helpers #%s" % len(self.orig._helpers))
+#             print("\nConverting helpers to inferences")
+#             print("Helpers #%s" % len(self.orig._helpers))
             for k, v in self.orig._helpers.items():
-                print("\t%s := %s\n\t\twith variables %s" % (str(v), str(k), k.get_free_variables()))
+                # print("\t%s := %s\n\t\twith variables %s" % (str(v), str(k), k.get_free_variables()))
                 self.orig._infers[k] = v
             self.orig._helpers.clear()
         
-        print("-----------------------------------------------------------------")
+        # print("-----------------------------------------------------------------")
             
         symbols = script.get_declared_symbols()
         for sym in symbols:
@@ -1363,10 +1364,10 @@ class TransitionSystem(SmtLibParser):
         
         self.set_sort_dependency()
         
-        print(self.orig)
+        # print(self.orig)
         self.set_finite_curr()
         self.set_curr()
-        eprint("\t(input is %sin epr)" % ("" if self.strat.is_epr() else "not "))
+        # eprint("\t(input is %sin epr)" % ("" if self.strat.is_epr() else "not "))
 #         assert(0)
     
     def set_finite_curr(self):

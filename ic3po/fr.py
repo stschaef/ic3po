@@ -107,10 +107,11 @@ class FR(object):
         return formulae
 
     def print_fullsorts(self, fullsorts):
-        if len(fullsorts) != 0:
-            print("(fullsorts)")
-            for enumsort, qvar in fullsorts:
-                print("\t%s -> %s" % (str(enumsort), pretty_print_set(qvar)))
+        pass;
+        # if len(fullsorts) != 0:
+        #     print("(fullsorts)")
+        #     for enumsort, qvar in fullsorts:
+        #         print("\t%s -> %s" % (str(enumsort), pretty_print_set(qvar)))
 
     def add_init_frame(self):
         assert(len(self.frames) == 0)
@@ -124,14 +125,14 @@ class FR(object):
         self.frame_summary()
     
     def add_frame(self):
-        print(time_str(), "\nAdding frame %d..." % (len(self.frames)))
+        # print(time_str(), "\nAdding frame %d..." % (len(self.frames)))
         fs = self.new_solver()
         fs.add_assertion(prop_formula(self))
         self.frames.append(set())
         self.framesolver.append(fs)
         if common.gopts.verbosity == 0:
             return
-        print("\n", file=sys.stderr, end="")
+        # print("\n", file=sys.stderr, end="")
 
     def get_framesolver(self, fin):
         i = fin
@@ -180,9 +181,9 @@ class FR(object):
                         changed = True
                     eqMap[l] = rNew
             
-            print("(eq map)")
-            for l, r in eqMap.items():
-                print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
+            # print("(eq map)")
+            # for l, r in eqMap.items():
+            #     print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
             
             cubeSetNew = set()
             for c in tmpSet:
@@ -212,19 +213,19 @@ class FR(object):
                     rhs.append(v)
                 fullsortsNew.append([fs[0], rhs])
                 
-            print("(cube eq)")
-            for c in cubeSetNew:
-                print("\t%s" % pretty_serialize(c))
+            # print("(cube eq)")
+            # for c in cubeSetNew:
+            #     print("\t%s" % pretty_serialize(c))
             
-            print("(qvars eq)")
-            for c in qvars:
-                print("\t%s" % pretty_serialize(c))
+            # print("(qvars eq)")
+            # for c in qvars:
+            #     print("\t%s" % pretty_serialize(c))
             
-            print("(antecedent eq)")
-            for enumsort, qvar in antecedentNew.items():
-                print("\t%s" % enumsort)
-                for c in qvar:
-                    print("\t-> %s" % pretty_serialize(c))
+            # print("(antecedent eq)")
+            # for enumsort, qvar in antecedentNew.items():
+            #     print("\t%s" % enumsort)
+            #     for c in qvar:
+            #         print("\t-> %s" % pretty_serialize(c))
             
             self.print_fullsorts(fullsortsNew)
             
@@ -233,9 +234,9 @@ class FR(object):
                 fv = c.get_free_variables()
                 fv_removed = fv.intersection(removedVars)
                 if len(fv_removed) != 0:
-                    print("Error: found bound variables as free in %s" % pretty_serialize(c))
-                    for c in fv_removed:
-                        print("\t%s" % pretty_serialize(c))
+                    # print("Error: found bound variables as free in %s" % pretty_serialize(c))
+                    # for c in fv_removed:
+                    #     print("\t%s" % pretty_serialize(c))
                     assert(0)
             
             return eqMap, cubeSetNew, antecedentNew, fullsortsNew
@@ -281,31 +282,31 @@ class FR(object):
                         changed = True
                     eqMap[l] = rNew
 
-            print("(eq map: post)")
-            for l, r in eqMap.items():
-                print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
+            # print("(eq map: post)")
+            # for l, r in eqMap.items():
+            #     print("\t%s -> %s" % (pretty_serialize(l), pretty_serialize(r)))
             
             cubeSetNew = set()
             for c in tmpSet:
                 c_new = c.simple_substitute(eqMap)
                 cubeSetNew.add(c_new)
                 
-            print("(cube eq: post)")
-            for c in cubeSetNew:
-                print("\t%s" % pretty_serialize(c))
+            # print("(cube eq: post)")
+            # for c in cubeSetNew:
+            #     print("\t%s" % pretty_serialize(c))
             
-            print("(qvars eq: post)")
-            for c in qvarsNew:
-                print("\t%s" % pretty_serialize(c))
+            # print("(qvars eq: post)")
+            # for c in qvarsNew:
+            #     print("\t%s" % pretty_serialize(c))
             
             removedVars = set(eqMap.keys())
             for c in cubeSetNew:
                 fv = c.get_free_variables()
                 fv_removed = fv.intersection(removedVars)
                 if len(fv_removed) != 0:
-                    print("Error: found bound variables as free in %s" % pretty_serialize(c))
-                    for c in fv_removed:
-                        print("\t%s" % pretty_serialize(c))
+                    # print("Error: found bound variables as free in %s" % pretty_serialize(c))
+                    # for c in fv_removed:
+                    #     print("\t%s" % pretty_serialize(c))
                     assert(0)
             
             cubeEq = And(cubeSetNew)
@@ -314,10 +315,10 @@ class FR(object):
         return cubeEq
     
     def check_query(self, solver, formulae=None, timeout=None):
-        print("Formulae #%d:" % len(formulae))
-        for f in formulae:
-            print("\t%s" % f.serialize())
-        print()
+        # print("Formulae #%d:" % len(formulae))
+        # for f in formulae:
+        #     print("\t%s" % f.serialize())
+        # print()
         
         res = solver.solve() if formulae == None else solver.solve(formulae)
         return res
@@ -532,7 +533,7 @@ class FR(object):
 #             if len(nvars) == 0:
                 bddp = self.get_bdd(p)
                 self.patoms[p] = bddp
-                print("adding pre: %s with bdd %s" % (p, bddp.NodeReadIndex()))
+                # print("adding pre: %s with bdd %s" % (p, bddp.NodeReadIndex()))
                 n = pre2nex(self, p)
                 bddn = bddp
                 if n != p:
@@ -552,8 +553,8 @@ class FR(object):
     def set_bddvars(self):
         self.pvars = set()
         self.nvars = set()
-        eprint("\t(#%d variables)" % self.converter.numvars)
-        print("\t(#%d variables)" % self.converter.numvars)
+        # eprint("\t(#%d variables)" % self.converter.numvars)
+        # print("\t(#%d variables)" % self.converter.numvars)
         for p in self.patoms:
             self.pvars.add(self.converter.atom2var[p])
 #             bdd = self.patoms[p]
@@ -866,9 +867,9 @@ class FR(object):
         states = sorted(states_ordered.items(), key=lambda v: v, reverse=True)
 #         print(states)
         for nf, f in states:
-            print("processing %s" % pretty_serialize(f))
+            # print("processing %s" % pretty_serialize(f))
             if self.converter.zero != None and str(f).startswith("zero"):
-                print("skipping %s" % pretty_serialize(f))
+                # print("skipping %s" % pretty_serialize(f))
                 continue
             ft = f.symbol_type()
             fi = []
@@ -887,7 +888,7 @@ class FR(object):
                 var = self.converter.atom2var[atom]
                 self.pvars.add(var)
 #                 self.add_bddSupport(bdd, self.pvars)
-                print("adding pre: %s <-> %s := %d" % (pretty_serialize(atom), var, bdd.NodeReadIndex()))
+                # print("adding pre: %s <-> %s := %d" % (pretty_serialize(atom), var, bdd.NodeReadIndex()))
                 
                 if atom == natom:
                     self.gatoms[atom] = bdd
@@ -899,8 +900,8 @@ class FR(object):
 #                 print("adding nex: %s <-> %s := %d" % (natom, var, bdd.NodeReadIndex()))
                 
 #                 self.add_bddSupport(bdd, self.nvars)
-        eprint("\t(#%d atoms with #%d variables)" % (len(self.atoms), self.converter.numvars))
-        print("\t(#%d atoms with #%d variables)" % (len(self.atoms), self.converter.numvars))
+        # eprint("\t(#%d atoms with #%d variables)" % (len(self.atoms), self.converter.numvars))
+        # print("\t(#%d atoms with #%d variables)" % (len(self.atoms), self.converter.numvars))
 #         print(self.atoms)
 #         print(self.patoms)
 #         print(self.natoms)
@@ -921,7 +922,8 @@ class FR(object):
                 print("%d has no var" % (i))
     
     def check_typeok(self):
-        print("#typeok = %d" % len(self.converter.typeconst))
+        pass;
+        # print("#typeok = %d" % len(self.converter.typeconst))
 #         self.print_atoms()
 #         for idx, t in enumerate(self.converter.typeconst):
 #             if idx == 2:
@@ -992,6 +994,7 @@ class FR(object):
         bddC = self.ddmanager.And(bdd, self.bddnotP)
         if bddC != self.ddmanager.ReadLogicZero():
             print("-- Finite check: violated --")
+            # self.ddmanager.PrintMinterm(bddC)
 #             bddC = self.ddmanager.ExistAbstract(bddC, self.projPre)
             self.dump_dot(bddC)
             assert(0)
@@ -1018,7 +1021,7 @@ class FR(object):
         self.bddnotP = self.ddmanager.Not(bddP)
 
         if axiom_formula(self) != TRUE():
-            self.dump_dot(bddA)
+            # self.dump_dot(bddA)
             bddT = self.ddmanager.And(bddT, bddA)
   
         self.set_atoms()
@@ -1033,10 +1036,10 @@ class FR(object):
         sources.append((initSrc, "init"))
         iteration = 0
 
-        print("DECLARE_STATES")
-        for state in self.system.curr._states:
-            for const in self.converter._bddEnumConsts:
-                print("%s(%s)" % (state, const))
+        # print("DECLARE_STATES")
+        # for state in self.system.curr._states:
+        #     for const in self.converter._bddEnumConsts:
+        #         print("%s(%s)" % (state, const))
         print("BEGIN_VARLABELS")
         varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
         for i, label in enumerate(varlabels):

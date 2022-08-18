@@ -325,6 +325,7 @@ class SyntaxInference():
             print("\t%s: %s" % (v, k.serialize()))
         
     def print_action(self):
+        return
         self.print_action_inputs()
         self.print_action_defs()
         self.print_prefix()

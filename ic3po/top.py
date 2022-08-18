@@ -78,25 +78,25 @@ def main():
     
     known, common.gopts = getopts(header)
     
-    statsName = "%s/%s.results" % (common.gopts.out, common.gopts.name)
-    common.gopts.statsF = open(statsName, "w")
+    # statsName = "%s/%s.results" % (common.gopts.out, common.gopts.name)
+    # common.gopts.statsF = open(statsName, "w")
 #     print(short_header)
 #     eprint(short_header)
     
-    print("\t(mode: %s)" % common.gopts.mode)
-    eprint("\t(mode: %s)" % common.gopts.mode)
+    # print("\t(mode: %s)" % common.gopts.mode)
+    # eprint("\t(mode: %s)" % common.gopts.mode)
 
-    print("\t(reuse: %s)" % common.gopts.reuse)
-    eprint("\t(reuse: %s)" % common.gopts.reuse)
+    # print("\t(reuse: %s)" % common.gopts.reuse)
+    # eprint("\t(reuse: %s)" % common.gopts.reuse)
     
-    print("\t(opt: %s)" % common.gopts.opt)
-    eprint("\t(opt: %s)" % common.gopts.opt)
+    # print("\t(opt: %s)" % common.gopts.opt)
+    # eprint("\t(opt: %s)" % common.gopts.opt)
     
-    print("\t(const: %s)" % common.gopts.const)
-    eprint("\t(const: %s)" % common.gopts.const)
+    # print("\t(const: %s)" % common.gopts.const)
+    # eprint("\t(const: %s)" % common.gopts.const)
     
-    print("\t(wires: %s)" % common.gopts.wires)
-    eprint("\t(wires: %s)" % common.gopts.wires)
+    # print("\t(wires: %s)" % common.gopts.wires)
+    # eprint("\t(wires: %s)" % common.gopts.wires)
     
     if common.gopts.init != DEFAULT_INITSZ:
         eprint("\t(init size: %s)" % common.gopts.init)
@@ -108,12 +108,12 @@ def main():
     else:
         backwardReach(common.gopts.file, None)
 
-    common.gopts.statsF.write("wall-time-sec:\t%.2f\n" % (elapsed_time()))
+    # common.gopts.statsF.write("wall-time-sec:\t%.2f\n" % (elapsed_time()))
     
-    maxMem = (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) / (1024.0)
-    common.gopts.statsF.write("memory-mb:\t%.2f\n" % (maxMem))
+    # maxMem = (resource.getrusage(resource.RUSAGE_SELF).ru_maxrss) / (1024.0)
+    # common.gopts.statsF.write("memory-mb:\t%.2f\n" % (maxMem))
 
-    common.gopts.statsF.close()
+    # common.gopts.statsF.close()
     
 if __name__ == "__main__":  
     main()

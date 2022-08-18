@@ -1,7 +1,7 @@
-with open("lockserv.txt", "r") as f:
-    content = f.read().split("DECLARE_STATES")[1]
-    variables, content = content.split("BEGIN_VARLABELS")
-    variables = variables.strip().split("\n")
+import sys
+
+with open(sys.argv[1], "r") as f:
+    content = f.read().split("BEGIN_VARLABELS")[1]
     _labels, _pla = content.strip().split("END_VARLABELS")
     _labels = _labels.strip().split("\n")
     labels = {}
@@ -37,12 +37,17 @@ with open("lockserv.txt", "r") as f:
         # print(s)
         R.add(s)
 
+print(f".i {len(used_labels)}")
+print(f".o 1")
+label_str = ".ilb"
 # print("\nPLA")
-for i, a in enumerate(sorted(used_labels)):
-    print(i, a[1])
+for a in sorted(used_labels):
+    label_str += f" {a[1]}"
+print(label_str)
+print(".ob out")
 # print("\nR")
 for line in R:
-    print(line)
+    print(line + " 1")
 
 
 
