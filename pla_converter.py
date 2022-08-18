@@ -1,7 +1,14 @@
 import sys
 
 with open(sys.argv[1], "r") as f:
-    content = f.read().split("BEGIN_VARLABELS")[1]
+    content = f.read()
+    if len(content.split("\n")) < 4:
+        print("Error generating raw data\naborting PLA generation")
+        exit()
+    content = content.split("BEGIN_VARLABELS")[1]
+    if content.split("\n")[-2].strip() == "-- Finite check: violated --":
+        print("Finite check: violated\naborting PLA generation")
+        exit()
     _labels, _pla = content.strip().split("END_VARLABELS")
     _labels = _labels.strip().split("\n")
     labels = {}

@@ -1,9 +1,5 @@
 #!/bin/bash
-for f in pla/*; do
-    rm ${f}
-done
-
-# 1 sort 
+ 
 onesort=(
     "ivybench/ex/vmt/lockserv_automaton.vmt"
     "ivybench/ex/vmt/ring_not_dead.vmt"
@@ -57,12 +53,75 @@ foursort=(
     "ivybench/mypyv/vmt/client_server_db_ae.vmt"
 )
 
-
-
-# for f in ivybench/*/vmt/*.vmt; do
-#     echo $f
-# done
-
-# for f in "${onesort[@]}"; do
-#     echo $f
-# done
+for f in "${onesort[@]}"; do
+    echo -e "\n"
+    echo $f
+    for i in {1..20}; do 
+        filename=$(basename $f .vmt)
+        mkdir -p pla/raw/${filename}
+        echo $i | timeout 5m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+        if [ $? -eq 124 ]; then 
+            echo "the command timed out"
+            continue 2
+        fi
+        mkdir -p pla/processed/${filename}
+        python3 pla_converter.py pla/raw/${filename}/${filename}_${i}.txt >| pla/processed/${filename}/${filename}_${i}.pla
+    done
+done
+for f in "${twosort[@]}"; do
+    echo -e "\n"
+    echo $f
+    for i in {1..15}; do 
+        for j in {1..15}; do
+            filename=$(basename $f .vmt)
+            mkdir -p pla/raw/${filename}
+            (echo $i; echo $j) | timeout 5m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+            if [ $? -eq 124 ]; then 
+                echo "the command timed out"
+                continue 3
+            fi
+            mkdir -p pla/processed/${filename}
+            python3 pla_converter.py pla/raw/${filename}/${filename}_${i}.txt >| pla/processed/${filename}/${filename}_${i}.pla
+        done
+    done
+done
+for f in "${threesort[@]}"; do
+    echo -e "\n"
+    echo $f
+    for i in {1..15}; do 
+        for j in {1..15}; do
+            for k in {1..15}; do
+                filename=$(basename $f .vmt)
+                mkdir -p pla/raw/${filename}
+                (echo $i; echo $j; echo $k) | timeout 5m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+                if [ $? -eq 124 ]; then 
+                    echo "the command timed out"
+                    continue 4
+                fi
+                mkdir -p pla/processed/${filename}
+                python3 pla_converter.py pla/raw/${filename}/${filename}_${i}.txt >| pla/processed/${filename}/${filename}_${i}.pla
+            done
+        done
+    done
+done
+for f in "${foursort[@]}"; do
+    echo -e "\n"
+    echo $f
+    for i in {1..15}; do 
+        for j in {1..15}; do
+            for k in {1..15}; do
+                for l in {1..15}; do
+                    filename=$(basename $f .vmt)
+                    mkdir -p pla/raw/${filename}
+                    (echo $i; echo $j; echo $k; echo $l) | timeout 5m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+                    if [ $? -eq 124 ]; then 
+                        echo "the command timed out"
+                        continue 5
+                    fi
+                    mkdir -p pla/processed/${filename}
+                    python3 pla_converter.py pla/raw/${filename}/${filename}_${i}.txt >| pla/processed/${filename}/${filename}_${i}.pla
+                done
+            done
+        done
+    done
+done
