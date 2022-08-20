@@ -5,7 +5,6 @@
 utils/test.vmt
 output/
 output/*
-*.pla
 *.smt2
 *.ys
 utils/solvers/*

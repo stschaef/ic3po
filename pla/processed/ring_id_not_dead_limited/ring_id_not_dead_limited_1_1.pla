@@ -1,0 +1,7 @@
+.i 6
+.o 1
+.ilb __sent:e0(`node:e0:0`) __pending:e0(`id:e0:0`, `node:e0:0`) __m_pending:e0(`id:e0:0`, `node:e0:0`) __ts0_b:e0 __ts0__ts0_a_a:e0 __leader:e0(`node:e0:0`)
+.ob out
+11---0 1
+1----1 1
+00---0 1

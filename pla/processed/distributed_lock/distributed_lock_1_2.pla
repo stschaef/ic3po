@@ -1,0 +1,5 @@
+.i 7
+.o 1
+.ilb __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`) __held:e0(`node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
+.ob out
+000000- 1
