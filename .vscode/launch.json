@@ -41,7 +41,7 @@
             ],
         },
         {
-            "name": "lock server",
+            "name": "ring not dead",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/ic3po/top.py",
@@ -50,7 +50,7 @@
             "args": [
                 "-m",
                 "frpo",
-                "${workspaceFolder}/ivybench/i4/vmt/lock_server.vmt",
+                "${workspaceFolder}/ivybench/ex/vmt/ring_not_dead.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],
