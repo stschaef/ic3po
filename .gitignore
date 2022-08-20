@@ -23,7 +23,7 @@ foo/*
 .idea/
 xtras/
 requirements.txt
-
+pla/raw/
 
 # But not these files
 !.gitignore
