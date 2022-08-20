@@ -1,0 +1,8 @@
+.i 4
+.o 1
+.ilb __committed:e0(`resource_manager:e0:0`) __prepared:e0(`resource_manager:e0:0`) __working:e0(`resource_manager:e0:0`) __aborted:e0(`resource_manager:e0:0`)
+.ob out
+1000 1
+0010 1
+0001 1
+0100 1

@@ -1,0 +1,11 @@
+.i 10
+.o 1
+.ilb __voted:e0(`node:e0:0`) __leader:e0(`node:e0:0`) __vote_msg:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __decided:e0(`node:e0:0`, `value:e0:3`) __decided:e0(`node:e0:0`, `value:e0:2`) __decided:e0(`node:e0:0`, `value:e0:1`) __decided:e0(`node:e0:0`, `value:e0:0`) __fml:nondet:e0
+.ob out
+111-10010- 1
+111-10100- 1
+111-11000- 1
+101-00000- 1
+000-00000- 1
+1-1-10000- 1
+111-10001- 1

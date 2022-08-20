@@ -1,0 +1,8 @@
+.i 12
+.o 1
+.ilb __vote:e0(`node:e0:1`, `value:e0:3`) __vote:e0(`node:e0:1`, `value:e0:2`) __vote:e0(`node:e0:1`, `value:e0:1`) __vote:e0(`node:e0:1`, `value:e0:0`) __vote:e0(`node:e0:0`, `value:e0:3`) __vote:e0(`node:e0:0`, `value:e0:2`) __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) __decision:e0(`value:e0:3`) __decision:e0(`value:e0:2`) __decision:e0(`value:e0:1`) __decision:e0(`value:e0:0`)
+.ob out
+--------0001 1
+---------000 1
+--------0100 1
+--------0010 1

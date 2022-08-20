@@ -1,0 +1,12 @@
+.i 17
+.o 1
+.ilb __abort_tx:e0(`transaction:e0:1`) __abort_tx:e0(`transaction:e0:0`) __write_tx:e0(`transaction:e0:1`, `key:e0:0`) __commit_tx:e0(`transaction:e0:1`) __write_tx:e0(`transaction:e0:0`, `key:e0:0`) __commit_tx:e0(`transaction:e0:0`) __read_tx:e0(`transaction:e0:1`, `key:e0:0`) __read_tx:e0(`transaction:e0:0`, `key:e0:0`) __depends_tx:e0(`transaction:e0:0`, `key:e0:0`, `transaction:e0:0`) __depends_tx:e0(`transaction:e0:0`, `key:e0:0`, `transaction:e0:1`) __depends_tx:e0(`transaction:e0:1`, `key:e0:0`, `transaction:e0:0`) __depends_tx:e0(`transaction:e0:1`, `key:e0:0`, `transaction:e0:1`) __precommit_tx:e0(`transaction:e0:0`, `node:e0:0`) __precommit_tx:e0(`transaction:e0:1`, `node:e0:0`) __ts0_a_b:e0 __ts0_a_a:e0 __ts0_a:e0
+.ob out
+00011101100011--- 1
+00110111010111--- 1
+00111110000111--- 1
+00011111101011--- 1
+00001101100010--- 1
+00111101100011--- 1
+00110110000111--- 1
+00110010000101--- 1

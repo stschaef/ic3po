@@ -1,0 +1,8 @@
+.i 4
+.o 1
+.ilb __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __msg:e0(`node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `time:e0:0`)
+.ob out
+1100 1
+0100 1
+0000 1
+1000 1

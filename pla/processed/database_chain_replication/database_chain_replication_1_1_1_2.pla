@@ -1,0 +1,5 @@
+.i 12
+.o 1
+.ilb __abort_tx:e0(`transaction:e0:0`) __write_tx:e0(`transaction:e0:0`, `key:e0:0`) __write_tx:e0(`transaction:e0:0`, `key:e0:1`) __commit_tx:e0(`transaction:e0:0`) __read_tx:e0(`transaction:e0:0`, `key:e0:0`) __read_tx:e0(`transaction:e0:0`, `key:e0:1`) __depends_tx:e0(`transaction:e0:0`, `key:e0:0`, `transaction:e0:0`) __depends_tx:e0(`transaction:e0:0`, `key:e0:1`, `transaction:e0:0`) __precommit_tx:e0(`transaction:e0:0`, `node:e0:0`) __ts0_a_b:e0 __ts0_a_a:e0 __ts0_a:e0
+.ob out
+011111111--- 1

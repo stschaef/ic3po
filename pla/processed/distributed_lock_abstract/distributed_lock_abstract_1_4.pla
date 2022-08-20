@@ -1,0 +1,20 @@
+.i 17
+.o 1
+.ilb __transfer_msg:e0(`epoch:e0:0`, `node:e0:3`) __transfer_msg:e0(`epoch:e0:0`, `node:e0:2`) __transfer_msg:e0(`epoch:e0:0`, `node:e0:1`) __transfer_msg:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:1`) __gt:e0(`epoch:e0:0`, `node:e0:2`) __gt:e0(`epoch:e0:0`, `node:e0:3`) __ts0_a:e0 __locked:e0(`epoch:e0:0`, `node:e0:3`) __locked:e0(`epoch:e0:0`, `node:e0:2`) __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:3`) __held:e0(`node:e0:2`) __held:e0(`node:e0:1`) __held:e0(`node:e0:0`)
+.ob out
+00000000-00000111 1
+00000000-00000001 1
+00000000-00000011 1
+00000000-00001011 1
+00000000-00001001 1
+00000000-00001000 1
+00000000-00000100 1
+00000000-00001110 1
+00000000-00000101 1
+00000000-00000000 1
+00000000-00000110 1
+00000000-00001111 1
+00000000-00001100 1
+00000000-00000010 1
+00000000-00001101 1
+00000000-00001010 1

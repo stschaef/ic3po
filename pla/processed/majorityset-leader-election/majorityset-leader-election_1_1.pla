@@ -1,0 +1,6 @@
+.i 3
+.o 1
+.ilb __leader:e0(`node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`)
+.ob out
+0-1 1
+000 1

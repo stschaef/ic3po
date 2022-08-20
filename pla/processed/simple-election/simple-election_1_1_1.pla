@@ -1,0 +1,7 @@
+.i 3
+.o 1
+.ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:0`)
+.ob out
+-00 1
+110 1
+111 1

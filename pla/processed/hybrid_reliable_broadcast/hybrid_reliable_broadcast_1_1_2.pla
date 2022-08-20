@@ -1,0 +1,7 @@
+.i 5
+.o 1
+.ilb __rcv_msg:e0(`node:e0:0`, `node:e0:0`) __accept:e0(`node:e0:0`) __sent_msg:e0(`node:e0:0`, `node:e0:0`) __fml:nondet:e0 __sent_msg_proj:e0(`node:e0:0`)
+.ob out
+111-1 1
+001-1 1
+000-0 1

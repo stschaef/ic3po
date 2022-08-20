@@ -1,0 +1,12 @@
+.i 13
+.o 1
+.ilb __transfer_msg:e0(`epoch:e0:0`, `node:e0:2`) __transfer_msg:e0(`epoch:e0:0`, `node:e0:1`) __transfer_msg:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:1`) __gt:e0(`epoch:e0:0`, `node:e0:2`) __ts0_a:e0 __locked:e0(`epoch:e0:0`, `node:e0:2`) __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:2`) __held:e0(`node:e0:1`) __held:e0(`node:e0:0`)
+.ob out
+000000-000000 1
+000000-000101 1
+000000-000010 1
+000000-000001 1
+000000-000110 1
+000000-000011 1
+000000-000100 1
+000000-000111 1

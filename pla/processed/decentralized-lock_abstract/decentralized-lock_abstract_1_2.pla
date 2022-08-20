@@ -1,0 +1,8 @@
+.i 8
+.o 1
+.ilb __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)
+.ob out
+00100000 1
+00010000 1
+00110000 1
+00000000 1

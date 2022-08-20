@@ -1,0 +1,6 @@
+.i 2
+.o 1
+.ilb __chosen:e0(`value:e0:1`) __chosen:e0(`value:e0:0`)
+.ob out
+-0 1
+01 1

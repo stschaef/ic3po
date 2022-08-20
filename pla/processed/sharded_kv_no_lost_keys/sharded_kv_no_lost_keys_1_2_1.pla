@@ -1,0 +1,8 @@
+.i 6
+.o 1
+.ilb __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __table:e0(`node:e0:0`, `key:e0:1`, `value:e0:0`) __transfer_msg:e0(`node:e0:0`, `key:e0:1`, `value:e0:0`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __owner:e0(`node:e0:0`, `key:e0:1`) __owner:e0(`node:e0:0`, `key:e0:0`)
+.ob out
+-01001 1
+0-0110 1
+--0011 1
+001100 1

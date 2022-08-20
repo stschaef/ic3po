@@ -1,0 +1,11 @@
+.i 9
+.o 1
+.ilb __lock_msg:e0(`node:e0:1`) __lock_msg:e0(`node:e0:0`) __held:e0 __unlock_msg:e0(`node:e0:1`) __unlock_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:1`) __holds_lock:e0(`node:e0:1`) __holds_lock:e0(`node:e0:0`)
+.ob out
+--1001000 1
+--1000100 1
+--0000000 1
+--1000001 1
+--1010000 1
+--1000010 1
+--1100000 1

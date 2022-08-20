@@ -1,0 +1,15 @@
+.i 15
+.o 1
+.ilb __start:e0(`proposer:e0:4`) __start:e0(`proposer:e0:3`) __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:4`) __promise:e0(`acceptor:e0:0`, `proposer:e0:3`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:4`) __leader:e0(`proposer:e0:3`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
+.ob out
+---1-0001000000 1
+1----1000000000 1
+1----1000010000 1
+--1--0010000000 1
+---1-0001000010 1
+----10000100001 1
+-----0000000000 1
+-1---0100000000 1
+----10000100000 1
+-1---0100001000 1
+--1--0010000100 1

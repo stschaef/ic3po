@@ -1,0 +1,8 @@
+.i 4
+.o 1
+.ilb __chosen:e0(`value:e0:3`) __chosen:e0(`value:e0:2`) __chosen:e0(`value:e0:1`) __chosen:e0(`value:e0:0`)
+.ob out
+-000 1
+0010 1
+0001 1
+0100 1

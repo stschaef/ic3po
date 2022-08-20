@@ -1,0 +1,10 @@
+.i 5
+.o 1
+.ilb __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:0`) __decided:e0(`value:e0:1`) __decided:e0(`value:e0:0`)
+.ob out
+101-0 1
+-11-0 1
+000-0 1
+10101 1
+-1101 1
+00001 1

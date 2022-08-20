@@ -1,0 +1,5 @@
+.i 8
+.o 1
+.ilb __a:e0(`node:e0:0`) __p:e0(`node:e0:0`, `node:e0:0`) __in_s1:e0(`node:e0:0`) __s2:e0(`node:e0:0`, `node:e0:0`) __in_s2:e0(`node:e0:0`) __s1:e0(`node:e0:0`, `node:e0:0`) __error:e0(`node:e0:0`) __reach:e0(`node:e0:0`)
+.ob out
+10100001 1

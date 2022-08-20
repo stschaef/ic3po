@@ -1,0 +1,16 @@
+.i 9
+.o 1
+.ilb __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
+.ob out
+---000010 1
+--1001-00 1
+---000001 1
+-1-010010 1
+---000-00 1
+1--100-00 1
+1--100001 1
+--1001010 1
+-1-010-00 1
+--1001001 1
+-1-010001 1
+1--100010 1

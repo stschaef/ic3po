@@ -1,0 +1,8 @@
+.i 5
+.o 1
+.ilb __server_holds_lock:e0 __lock_msg:e0(`node:e0:0`) __unlock_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:0`) __holds_lock:e0(`node:e0:0`)
+.ob out
+1-000 1
+0-001 1
+0-100 1
+0-010 1

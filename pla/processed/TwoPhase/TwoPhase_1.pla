@@ -1,0 +1,13 @@
+.i 11
+.o 1
+.ilb __tm_prepared:e0(`resource_manager:e0:0`) __tm_init:e0 __tm_committed:e0 __tm_aborted:e0 __msg_abort:e0 __msg_prepared:e0(`resource_manager:e0:0`) __msg_commit:e0 __aborted:e0(`resource_manager:e0:0`) __committed:e0(`resource_manager:e0:0`) __prepared:e0(`resource_manager:e0:0`) __working:e0(`resource_manager:e0:0`)
+.ob out
+01000000001 1
+-0011100010 1
+-1000100010 1
+01000001000 1
+00011001000 1
+10100110100 1
+-0011101000 1
+00011000001 1
+10100110010 1

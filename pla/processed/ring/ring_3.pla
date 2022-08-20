@@ -1,0 +1,7 @@
+.i 23
+.o 1
+.ilb __leader:e0(`node:e0:2`) __leader:e0(`node:e0:1`) __leader:e0(`node:e0:0`) __pending:e0(`node:e0:2`, `node:e0:2`) __pending:e0(`node:e0:1`, `node:e0:2`) __pending:e0(`node:e0:0`, `node:e0:2`) __pending:e0(`node:e0:2`, `node:e0:1`) __pending:e0(`node:e0:1`, `node:e0:1`) __pending:e0(`node:e0:0`, `node:e0:1`) __pending:e0(`node:e0:2`, `node:e0:0`) __pending:e0(`node:e0:1`, `node:e0:0`) __pending:e0(`node:e0:0`, `node:e0:0`) __m_pending:e0(`node:e0:2`, `node:e0:2`) __m_pending:e0(`node:e0:2`, `node:e0:1`) __m_pending:e0(`node:e0:2`, `node:e0:0`) __m_pending:e0(`node:e0:1`, `node:e0:2`) __m_pending:e0(`node:e0:1`, `node:e0:1`) __m_pending:e0(`node:e0:1`, `node:e0:0`) __m_pending:e0(`node:e0:0`, `node:e0:2`) __m_pending:e0(`node:e0:0`, `node:e0:1`) __m_pending:e0(`node:e0:0`, `node:e0:0`) __ts0_b:e0 __ts0__ts0_a_a:e0
+.ob out
+00--------------------- 1
+-00-------------------- 1
+0-0-------------------- 1
