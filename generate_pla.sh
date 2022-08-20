@@ -56,10 +56,10 @@ foursort=(
 for f in "${onesort[@]}"; do
     echo -e "\n"
     echo $f
-    for i in {1..20}; do 
+    for i in {4..5}; do 
         filename=$(basename $f .vmt)
         mkdir -p pla/raw/${filename}
-        echo $i | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+        echo $i | timeout 20m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
         if [ $? -ne 0 ]; then 
             echo "no good output"
             continue 2
@@ -68,60 +68,60 @@ for f in "${onesort[@]}"; do
         python3 pla_converter.py pla/raw/${filename}/${filename}_${i}.txt >| pla/processed/${filename}/${filename}_${i}.pla
     done
 done
-for f in "${twosort[@]}"; do
-    echo -e "\n"
-    echo $f
-    for i in {1..15}; do 
-        for j in {1..15}; do
-            filename=$(basename $f .vmt)
-            mkdir -p pla/raw/${filename}
-            (echo $i; echo $j) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}.txt
-            if [ $? -ne 0 ]; then 
-                echo "no good output"
-                continue 3
-            fi
-            mkdir -p pla/processed/${filename}
-            python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}.txt >| pla/processed/${filename}/${filename}_${i}_${j}.pla
-        done
-    done
-done
-for f in "${threesort[@]}"; do
-    echo -e "\n"
-    echo $f
-    for i in {1..15}; do 
-        for j in {1..15}; do
-            for k in {1..15}; do
-                filename=$(basename $f .vmt)
-                mkdir -p pla/raw/${filename}
-                (echo $i; echo $j; echo $k) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}_${k}.txt
-                if [ $? -ne 0 ]; then 
-                    echo "no good output"
-                    continue 4
-                fi
-                mkdir -p pla/processed/${filename}
-                python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}_${k}.txt >| pla/processed/${filename}/${filename}_${i}_${j}_${k}.pla
-            done
-        done
-    done
-done
-for f in "${foursort[@]}"; do
-    echo -e "\n"
-    echo $f
-    for i in {1..15}; do 
-        for j in {1..15}; do
-            for k in {1..15}; do
-                for l in {1..15}; do
-                    filename=$(basename $f .vmt)
-                    mkdir -p pla/raw/${filename}
-                    (echo $i; echo $j; echo $k; echo $l) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}_${k}_${l}.txt
-                    if [ $? -ne 0 ]; then 
-                        echo "no good output"
-                        continue 5
-                    fi
-                    mkdir -p pla/processed/${filename}
-                    python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}_${k}_${l}.txt >| pla/processed/${filename}/${filename}_${i}_${j}_${k}_${l}.pla
-                done
-            done
-        done
-    done
-done
+# for f in "${twosort[@]}"; do
+#     echo -e "\n"
+#     echo $f
+#     for i in {1..15}; do 
+#         for j in {1..15}; do
+#             filename=$(basename $f .vmt)
+#             mkdir -p pla/raw/${filename}
+#             (echo $i; echo $j) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}.txt
+#             if [ $? -ne 0 ]; then 
+#                 echo "no good output"
+#                 continue 3
+#             fi
+#             mkdir -p pla/processed/${filename}
+#             python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}.txt >| pla/processed/${filename}/${filename}_${i}_${j}.pla
+#         done
+#     done
+# done
+# for f in "${threesort[@]}"; do
+#     echo -e "\n"
+#     echo $f
+#     for i in {1..15}; do 
+#         for j in {1..15}; do
+#             for k in {1..15}; do
+#                 filename=$(basename $f .vmt)
+#                 mkdir -p pla/raw/${filename}
+#                 (echo $i; echo $j; echo $k) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}_${k}.txt
+#                 if [ $? -ne 0 ]; then 
+#                     echo "no good output"
+#                     continue 4
+#                 fi
+#                 mkdir -p pla/processed/${filename}
+#                 python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}_${k}.txt >| pla/processed/${filename}/${filename}_${i}_${j}_${k}.pla
+#             done
+#         done
+#     done
+# done
+# for f in "${foursort[@]}"; do
+#     echo -e "\n"
+#     echo $f
+#     for i in {1..15}; do 
+#         for j in {1..15}; do
+#             for k in {1..15}; do
+#                 for l in {1..15}; do
+#                     filename=$(basename $f .vmt)
+#                     mkdir -p pla/raw/${filename}
+#                     (echo $i; echo $j; echo $k; echo $l) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}_${k}_${l}.txt
+#                     if [ $? -ne 0 ]; then 
+#                         echo "no good output"
+#                         continue 5
+#                     fi
+#                     mkdir -p pla/processed/${filename}
+#                     python3 pla_converter.py pla/raw/${filename}/${filename}_${i}_${j}_${k}_${l}.txt >| pla/processed/${filename}/${filename}_${i}_${j}_${k}_${l}.pla
+#                 done
+#             done
+#         done
+#     done
+# done

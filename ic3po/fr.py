@@ -992,24 +992,28 @@ class FR(object):
     
     def check_safe(self, bdd):
         bddC = self.ddmanager.And(bdd, self.bddnotP)
-        if bddC != self.ddmanager.ReadLogicZero():
-            print("-- Finite check: violated --")
-            # self.ddmanager.PrintMinterm(bddC)
-#             bddC = self.ddmanager.ExistAbstract(bddC, self.projPre)
-            self.dump_dot(bddC)
-            assert(0)
+        return bddC == self.ddmanager.ReadLogicZero()
+
+#             print("-- Finite check: violated --")
+#             # self.ddmanager.PrintMinterm(bddC)
+# #             bddC = self.ddmanager.ExistAbstract(bddC, self.projPre)
+#             self.dump_dot(bddC)
+#             assert(0)
         # else:
         #     print("-- Finite check: safe --")
+
+    def print_bdd(self, bdd):
+        print("----------------------- BDD -----------------------")
+        self.ddmanager.PrintMinterm(bdd)
+        print("----------------------- END BDD -----------------------")
     
     def print_pla(self):
         """Forward Reachability using BDDs."""
         prop = prop_formula(self)
 
-        
         self.ddmanager = repycudd.DdManager()
         self.converter = BddConverter(environment=get_env(),
                                       ddmanager=self.ddmanager)
-
 
         self.build_actions()
         self.build_axioms()
@@ -1021,7 +1025,6 @@ class FR(object):
         self.bddnotP = self.ddmanager.Not(bddP)
 
         if axiom_formula(self) != TRUE():
-            # self.dump_dot(bddA)
             bddT = self.ddmanager.And(bddT, bddA)
   
         self.set_atoms()
@@ -1036,20 +1039,24 @@ class FR(object):
         sources.append((initSrc, "init"))
         iteration = 0
 
-        # print("DECLARE_STATES")
-        # for state in self.system.curr._states:
-        #     for const in self.converter._bddEnumConsts:
-        #         print("%s(%s)" % (state, const))
         print("BEGIN_VARLABELS")
         varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
         for i, label in enumerate(varlabels):
             print("%d\t%s" % (i, label))
         print("END_VARLABELS")
 
+        equality_constraints = TRUE()
+        # ensure that distinguished constants are assigned 
+        for equality_predicate_dict in self.converter._bddVarEqEnum.values():
+            constraint = FALSE()
+            for equality_predicate in equality_predicate_dict.values():
+                constraint = Or(constraint, equality_predicate)
+            equality_constraints = And(equality_constraints, constraint)
+        bddEq = self.formula2bdd(equality_constraints)
+        
+
         # print("\t(running forward reachability)")
         while (len(sources) != 0):
-            self.ddmanager.PrintMinterm(totalR)
-            
             # print("#sources = %d" % len(sources))
             src, comment = sources.pop()
             iteration += 1
@@ -1059,8 +1066,6 @@ class FR(object):
                 continue
             # else:
             #     print("#%d Found #%d new states: %s" % (iteration, len(sources)+1, comment))
-            self.check_safe(src)
-                
 #                 src = self.ddmanager.And(src, self.axiom)
             notTotalR = self.ddmanager.Not(totalR)
             
@@ -1069,14 +1074,18 @@ class FR(object):
                 nex = self.ddmanager.Zero()
                 done = False
                 for actionBdd in actionBdds:
-                    image = self.ddmanager.AndAbstract(src, actionBdd, self.projNex)
+                    image = self.ddmanager.And(src, bddEq)
+                    image = self.ddmanager.AndAbstract(image, actionBdd, self.projNex)
                     if image == self.ddmanager.ReadLogicZero(): continue
                     image = self.ddmanager.SwapVariables(image, self.preV, self.nexV, self.N)
                     image = self.ddmanager.AndAbstract(image, self.axiom, self.projPre)
+                    image = self.ddmanager.And(image, bddP)
                     if image == self.ddmanager.ReadLogicZero(): continue
                     image = self.ddmanager.And(image, notTotalR)
                     if image == self.ddmanager.ReadLogicZero(): continue
                     nex = self.ddmanager.Or(nex, image)
+                    # print(action)
+                    # self.ddmanager.PrintMinterm(nex)
                     done = True
 #                     print("found a state in %s" % action)
 #                         break
@@ -1087,11 +1096,13 @@ class FR(object):
                 sources.append((dest, comment))
                 totalR = self.ddmanager.Or(totalR, dest)
 
+        
+        self.ddmanager.PrintMinterm(totalR)
+
         # eprint("\t(found total #%d paths)" % totalPathCount)
         # print("\t(found total #%d paths)" % totalPathCount)
 
 #         # print("Reachable states:")
-#         # self.ddmanager.PrintMinterm(totalR)
 
 #         totalR = self.ddmanager.ExistAbstract(totalR, self.projPre)
         

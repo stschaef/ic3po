@@ -350,7 +350,7 @@ class System():
             self._actions[idx][0] = action
             self._actions[idx][2] = en
             
-            cond = Implies(en, action)
+            cond = EqualsOrIff(en, action)
             tcond.append(cond)
             enOr.append(en)
         

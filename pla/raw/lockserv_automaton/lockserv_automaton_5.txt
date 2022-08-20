@@ -1,0 +1,149 @@
+@     0s  Reading from file ivybench/ex/vmt/lockserv_automaton.vmt
+|node|=?		(running: frpo)
+@     0s  (building bdds for ext:recv_grant)
+adding varbool: held:e0 := held:e0 <-> 10
+adding varbool: __held:e0 := __held:e0 <-> 11
+@     0s  (building bdds for ext:unlock)
+@     0s  (building bdds for ext:recv_lock)
+@     0s  (building bdds for ext:recv_unlock)
+@     0s  (building bdds for ext:lock)
+adding varbool: en_noop:e0 := en_noop:e0 <-> 52
+adding varbool: en_ext:lock:e0 := en_ext:lock:e0 <-> 53
+adding varbool: en_ext:recv_unlock:e0 := en_ext:recv_unlock:e0 <-> 54
+adding varbool: en_ext:recv_lock:e0 := en_ext:recv_lock:e0 <-> 55
+adding varbool: en_ext:unlock:e0 := en_ext:unlock:e0 <-> 56
+adding varbool: en_ext:recv_grant:e0 := en_ext:recv_grant:e0 <-> 57
+0 -> lock_msg(n4)
+1 -> __lock_msg(n4)
+2 -> lock_msg(n3)
+3 -> __lock_msg(n3)
+4 -> lock_msg(n2)
+5 -> __lock_msg(n2)
+6 -> lock_msg(n1)
+7 -> __lock_msg(n1)
+8 -> lock_msg(n0)
+9 -> __lock_msg(n0)
+10 -> held:e0
+11 -> __held:e0
+12 -> unlock_msg(n4)
+13 -> __unlock_msg(n4)
+14 -> unlock_msg(n3)
+15 -> __unlock_msg(n3)
+16 -> unlock_msg(n2)
+17 -> __unlock_msg(n2)
+18 -> unlock_msg(n1)
+19 -> __unlock_msg(n1)
+20 -> unlock_msg(n0)
+21 -> __unlock_msg(n0)
+22 -> (V__fml:n = n0)
+23 -> (V__fml:n = n1)
+24 -> (V__fml:n = n2)
+25 -> (V__fml:n = n3)
+26 -> (V__fml:n = n4)
+27 -> __grant_msg(n0)
+28 -> __grant_msg(n1)
+29 -> __grant_msg(n2)
+30 -> __grant_msg(n3)
+31 -> __grant_msg(n4)
+32 -> __holds_lock(n4)
+33 -> holds_lock(n4)
+34 -> __holds_lock(n3)
+35 -> holds_lock(n3)
+36 -> __holds_lock(n2)
+37 -> holds_lock(n2)
+38 -> __holds_lock(n1)
+39 -> holds_lock(n1)
+40 -> __holds_lock(n0)
+41 -> holds_lock(n0)
+42 -> grant_msg(n4)
+43 -> grant_msg(n3)
+44 -> grant_msg(n2)
+45 -> grant_msg(n1)
+46 -> grant_msg(n0)
+47 -> (V__fml:sender = n0)
+48 -> (V__fml:sender = n1)
+49 -> (V__fml:sender = n2)
+50 -> (V__fml:sender = n3)
+51 -> (V__fml:sender = n4)
+52 -> en_noop:e0
+53 -> en_ext:lock:e0
+54 -> en_ext:recv_unlock:e0
+55 -> en_ext:recv_lock:e0
+56 -> en_ext:unlock:e0
+57 -> en_ext:recv_grant:e0
+BEGIN_VARLABELS
+0	lock_msg:e0(`node:e0:4`)
+1	__lock_msg:e0(`node:e0:4`)
+2	lock_msg:e0(`node:e0:3`)
+3	__lock_msg:e0(`node:e0:3`)
+4	lock_msg:e0(`node:e0:2`)
+5	__lock_msg:e0(`node:e0:2`)
+6	lock_msg:e0(`node:e0:1`)
+7	__lock_msg:e0(`node:e0:1`)
+8	lock_msg:e0(`node:e0:0`)
+9	__lock_msg:e0(`node:e0:0`)
+10	held:e0
+11	__held:e0
+12	unlock_msg:e0(`node:e0:4`)
+13	__unlock_msg:e0(`node:e0:4`)
+14	unlock_msg:e0(`node:e0:3`)
+15	__unlock_msg:e0(`node:e0:3`)
+16	unlock_msg:e0(`node:e0:2`)
+17	__unlock_msg:e0(`node:e0:2`)
+18	unlock_msg:e0(`node:e0:1`)
+19	__unlock_msg:e0(`node:e0:1`)
+20	unlock_msg:e0(`node:e0:0`)
+21	__unlock_msg:e0(`node:e0:0`)
+22	(V__fml:n:e0 = `node:e0:0`)
+23	(V__fml:n:e0 = `node:e0:1`)
+24	(V__fml:n:e0 = `node:e0:2`)
+25	(V__fml:n:e0 = `node:e0:3`)
+26	(V__fml:n:e0 = `node:e0:4`)
+27	__grant_msg:e0(`node:e0:0`)
+28	__grant_msg:e0(`node:e0:1`)
+29	__grant_msg:e0(`node:e0:2`)
+30	__grant_msg:e0(`node:e0:3`)
+31	__grant_msg:e0(`node:e0:4`)
+32	__holds_lock:e0(`node:e0:4`)
+33	holds_lock:e0(`node:e0:4`)
+34	__holds_lock:e0(`node:e0:3`)
+35	holds_lock:e0(`node:e0:3`)
+36	__holds_lock:e0(`node:e0:2`)
+37	holds_lock:e0(`node:e0:2`)
+38	__holds_lock:e0(`node:e0:1`)
+39	holds_lock:e0(`node:e0:1`)
+40	__holds_lock:e0(`node:e0:0`)
+41	holds_lock:e0(`node:e0:0`)
+42	grant_msg:e0(`node:e0:4`)
+43	grant_msg:e0(`node:e0:3`)
+44	grant_msg:e0(`node:e0:2`)
+45	grant_msg:e0(`node:e0:1`)
+46	grant_msg:e0(`node:e0:0`)
+47	(V__fml:sender:e0 = `node:e0:0`)
+48	(V__fml:sender:e0 = `node:e0:1`)
+49	(V__fml:sender:e0 = `node:e0:2`)
+50	(V__fml:sender:e0 = `node:e0:3`)
+51	(V__fml:sender:e0 = `node:e0:4`)
+52	en_noop:e0
+53	en_ext:lock:e0
+54	en_ext:recv_unlock:e0
+55	en_ext:recv_lock:e0
+56	en_ext:unlock:e0
+57	en_ext:recv_grant:e0
+END_VARLABELS
+-----------0-0-0-0-0-0-----000000-0-0-0-0-----------------  1
+-----------1-1-0-0-0-0-----000000-0-0-0-0-----------------  1
+-----------1-0-1-0-0-0-----000000-0-0-0-0-----------------  1
+-----------1-0-0-1-0-0-----000000-0-0-0-0-----------------  1
+-----------1-0-0-0-1-0-----000000-0-0-0-0-----------------  1
+-----------1-0-0-0-0-1-----000000-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----100000-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----010000-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----001000-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----000100-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----000010-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----000001-0-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----000000-1-0-0-0-----------------  1
+-----------1-0-0-0-0-0-----000000-0-1-0-0-----------------  1
+-----------1-0-0-0-0-0-----000000-0-0-1-0-----------------  1
+-----------1-0-0-0-0-0-----000000-0-0-0-1-----------------  1
