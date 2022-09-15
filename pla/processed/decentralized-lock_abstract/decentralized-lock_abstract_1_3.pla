@@ -1,12 +1,13 @@
-.i 15
+{0: 'gt:e0(`time:e0:0`, `node:e0:2`)', 1: '__gt:e0(`time:e0:0`, `node:e0:2`)', 2: 'gt:e0(`time:e0:0`, `node:e0:1`)', 3: '__gt:e0(`time:e0:0`, `node:e0:1`)', 4: 'gt:e0(`time:e0:0`, `node:e0:0`)', 5: '__gt:e0(`time:e0:0`, `node:e0:0`)', 6: '(V__fml:x:e0 = `node:e0:0`)', 7: '(V__fml:x:e0 = `node:e0:1`)', 8: '(V__fml:x:e0 = `node:e0:2`)', 9: '(V__fml:t:e0 = `time:e0:0`)', 10: '__has_lock:e0(`node:e0:0`)', 11: '__has_lock:e0(`node:e0:1`)', 12: '__has_lock:e0(`node:e0:2`)', 13: '__msg:e0(`node:e0:2`, `node:e0:2`, `time:e0:0`)', 14: '(V__fml:y:e0 = `node:e0:0`)', 15: '(V__fml:y:e0 = `node:e0:1`)', 16: '(V__fml:y:e0 = `node:e0:2`)', 17: 'msg:e0(`node:e0:2`, `node:e0:2`, `time:e0:0`)', 18: '__msg:e0(`node:e0:2`, `node:e0:1`, `time:e0:0`)', 19: 'msg:e0(`node:e0:2`, `node:e0:1`, `time:e0:0`)', 20: '__msg:e0(`node:e0:2`, `node:e0:0`, `time:e0:0`)', 21: 'msg:e0(`node:e0:2`, `node:e0:0`, `time:e0:0`)', 22: '__msg:e0(`node:e0:1`, `node:e0:2`, `time:e0:0`)', 23: 'msg:e0(`node:e0:1`, `node:e0:2`, `time:e0:0`)', 24: '__msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`)', 25: 'msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`)', 26: '__msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`)', 27: 'msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`)', 28: '__msg:e0(`node:e0:0`, `node:e0:2`, `time:e0:0`)', 29: 'msg:e0(`node:e0:0`, `node:e0:2`, `time:e0:0`)', 30: '__msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`)', 31: 'msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`)', 32: '__msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 33: 'msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 34: 'has_lock:e0(`node:e0:2`)', 35: 'has_lock:e0(`node:e0:1`)', 36: 'has_lock:e0(`node:e0:0`)', 37: 'le:e0(`time:e0:0`, `time:e0:0`)', 38: '(zero:e0 = `time:e0:0`)', 39: '(first:e0 = `node:e0:0`)', 40: '(first:e0 = `node:e0:1`)', 41: '(first:e0 = `node:e0:2`)', 42: 'en_noop:e0', 43: 'en_ext:take_lock:e0', 44: 'en_ext:release_lock:e0'}
+.i 16
 .o 1
-.ilb __gt:e0(`time:e0:0`, `node:e0:2`) __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __has_lock:e0(`node:e0:2`) __msg:e0(`node:e0:2`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)
+.ilb __gt:e0(`time:e0:0`, `node:e0:2`) __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __has_lock:e0(`node:e0:2`) __msg:e0(`node:e0:2`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`) le:e0(`time:e0:0`, `time:e0:0`)
 .ob out
-000000000000000 1
-000100000000000 1
-000001000000000 1
-000110000000000 1
-000010000000000 1
-000011000000000 1
-000111000000000 1
-000101000000000 1
+0000100000000001 1
+0000000000000001 1
+0001000000000001 1
+0001010000000001 1
+0001100000000001 1
+0000010000000001 1
+0001110000000001 1
+0000110000000001 1

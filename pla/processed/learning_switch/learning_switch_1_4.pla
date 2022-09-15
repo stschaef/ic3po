@@ -1,0 +1,5 @@
+.i 8
+.o 1
+.ilb __route_tc:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __route_dom:e0(`node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:3`, `node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:2`, `node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:1`, `node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:0`, `node:e0:0`, `node:e0:0`) __ts0_a_a:e0 __ts0_a:e0
+.ob out
+10------ 1

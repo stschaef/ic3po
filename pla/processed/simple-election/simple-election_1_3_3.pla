@@ -1,16 +1,12 @@
-.i 9
+{0: 'start:e0(`proposer:e0:2`)', 1: '__start:e0(`proposer:e0:2`)', 2: 'start:e0(`proposer:e0:1`)', 3: '__start:e0(`proposer:e0:1`)', 4: 'start:e0(`proposer:e0:0`)', 5: '__start:e0(`proposer:e0:0`)', 6: 'promise:e0(`acceptor:e0:0`, `proposer:e0:2`)', 7: '__promise:e0(`acceptor:e0:0`, `proposer:e0:2`)', 8: 'promise:e0(`acceptor:e0:0`, `proposer:e0:1`)', 9: '__promise:e0(`acceptor:e0:0`, `proposer:e0:1`)', 10: 'promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 11: '__promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 12: '(V__fml:p:e0 = `proposer:e0:0`)', 13: '(V__fml:p:e0 = `proposer:e0:1`)', 14: '(V__fml:p:e0 = `proposer:e0:2`)', 15: '(V__fml:q:e0 = `quorum:e0:0`)', 16: '(V__fml:q:e0 = `quorum:e0:1`)', 17: '(V__fml:q:e0 = `quorum:e0:2`)', 18: 'member:e0(`acceptor:e0:0`, `quorum:e0:0`)', 19: 'member:e0(`acceptor:e0:0`, `quorum:e0:1`)', 20: 'member:e0(`acceptor:e0:0`, `quorum:e0:2`)', 21: '__leader:e0(`proposer:e0:2`)', 22: 'leader:e0(`proposer:e0:2`)', 23: '__leader:e0(`proposer:e0:1`)', 24: 'leader:e0(`proposer:e0:1`)', 25: '__leader:e0(`proposer:e0:0`)', 26: 'leader:e0(`proposer:e0:0`)', 27: '(V__fml:a:e0 = `acceptor:e0:0`)', 28: 'en_noop:e0', 29: 'en_ext:send_1a:e0', 30: 'en_ext:send_1b:e0', 31: 'en_ext:decide:e0'}
+.i 12
 .o 1
-.ilb __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
+.ilb __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
----000010 1
---1001-00 1
----000001 1
--1-010010 1
----000-00 1
-1--100-00 1
-1--100001 1
---1001010 1
--1-010-00 1
---1001001 1
--1-010001 1
-1--100010 1
+-1-010111000 1
+-1-010111010 1
+--1001111001 1
+--1001111000 1
+1--100111000 1
+---000111000 1
+1--100111100 1

@@ -1,8 +1,9 @@
+{0: 'lock_msg:e0(`node:e0:0`)', 1: '__lock_msg:e0(`node:e0:0`)', 2: 'held:e0', 3: '__held:e0', 4: 'unlock_msg:e0(`node:e0:0`)', 5: '__unlock_msg:e0(`node:e0:0`)', 6: '(V__fml:n:e0 = `node:e0:0`)', 7: '__grant_msg:e0(`node:e0:0`)', 8: '__holds_lock:e0(`node:e0:0`)', 9: 'holds_lock:e0(`node:e0:0`)', 10: 'grant_msg:e0(`node:e0:0`)', 11: '(V__fml:sender:e0 = `node:e0:0`)', 12: 'en_noop:e0', 13: 'en_ext:lock:e0', 14: 'en_ext:recv_unlock:e0', 15: 'en_ext:recv_lock:e0', 16: 'en_ext:unlock:e0', 17: 'en_ext:recv_grant:e0'}
 .i 5
 .o 1
 .ilb __lock_msg:e0(`node:e0:0`) __held:e0 __unlock_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:0`) __holds_lock:e0(`node:e0:0`)
 .ob out
--1010 1
--0000 1
--1001 1
 -1100 1
+-0000 1
+-1010 1
+-1001 1

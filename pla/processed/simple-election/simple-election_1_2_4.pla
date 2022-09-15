@@ -1,24 +1,14 @@
-.i 12
+{0: 'start:e0(`proposer:e0:3`)', 1: '__start:e0(`proposer:e0:3`)', 2: 'start:e0(`proposer:e0:2`)', 3: '__start:e0(`proposer:e0:2`)', 4: 'start:e0(`proposer:e0:1`)', 5: '__start:e0(`proposer:e0:1`)', 6: 'start:e0(`proposer:e0:0`)', 7: '__start:e0(`proposer:e0:0`)', 8: 'promise:e0(`acceptor:e0:0`, `proposer:e0:3`)', 9: '__promise:e0(`acceptor:e0:0`, `proposer:e0:3`)', 10: 'promise:e0(`acceptor:e0:0`, `proposer:e0:2`)', 11: '__promise:e0(`acceptor:e0:0`, `proposer:e0:2`)', 12: 'promise:e0(`acceptor:e0:0`, `proposer:e0:1`)', 13: '__promise:e0(`acceptor:e0:0`, `proposer:e0:1`)', 14: 'promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 15: '__promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 16: '(V__fml:p:e0 = `proposer:e0:0`)', 17: '(V__fml:p:e0 = `proposer:e0:1`)', 18: '(V__fml:p:e0 = `proposer:e0:2`)', 19: '(V__fml:p:e0 = `proposer:e0:3`)', 20: '(V__fml:q:e0 = `quorum:e0:0`)', 21: '(V__fml:q:e0 = `quorum:e0:1`)', 22: 'member:e0(`acceptor:e0:0`, `quorum:e0:0`)', 23: 'member:e0(`acceptor:e0:0`, `quorum:e0:1`)', 24: '__leader:e0(`proposer:e0:3`)', 25: 'leader:e0(`proposer:e0:3`)', 26: '__leader:e0(`proposer:e0:2`)', 27: 'leader:e0(`proposer:e0:2`)', 28: '__leader:e0(`proposer:e0:1`)', 29: 'leader:e0(`proposer:e0:1`)', 30: '__leader:e0(`proposer:e0:0`)', 31: 'leader:e0(`proposer:e0:0`)', 32: '(V__fml:a:e0 = `acceptor:e0:0`)', 33: 'en_noop:e0', 34: 'en_ext:send_1a:e0', 35: 'en_ext:send_1b:e0', 36: 'en_ext:decide:e0'}
+.i 14
 .o 1
-.ilb __start:e0(`proposer:e0:3`) __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:3`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:3`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
+.ilb __start:e0(`proposer:e0:3`) __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:3`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) __leader:e0(`proposer:e0:3`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
----100010001 1
---1-00100001 1
----100010100 1
--1--01000001 1
-----00000010 1
-1---10000001 1
--1--0100-000 1
-----0000-000 1
--1--01000100 1
--1--01000010 1
---1-0010-000 1
-----00000001 1
-1---10000100 1
-1---10000010 1
-----00000100 1
----10001-000 1
----100010010 1
-1---1000-000 1
---1-00100100 1
---1-00100010 1
+-1--0100110000 1
+--1-0010110000 1
+-1--0100110100 1
+--1-0010110010 1
+1---1000110000 1
+---10001110001 1
+----0000110000 1
+1---1000111000 1
+---10001110000 1

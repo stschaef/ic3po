@@ -29,7 +29,7 @@ with open(sys.argv[1], "r") as f:
     #     print(idx, label)
 
     used_labels = set()
-
+    print(labels)
 
     R = set()
     for line in pla:
@@ -37,7 +37,10 @@ with open(sys.argv[1], "r") as f:
         s = ""
         for i in range(len(labels.keys())):
             label = labels[i]
-            if label[:2] == "__":
+            if ("__" + label) in labels.values() or label[:3] == "en_" or label[0] == "(":
+                continue
+            else:
+            # if label[:2] == "__":
                 # print(i, label, line[i])
                 used_labels.add((i, label))
                 s += line[i]

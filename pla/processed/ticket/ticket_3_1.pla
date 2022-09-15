@@ -1,0 +1,13 @@
+.i 6
+.o 1
+.ilb __m:e0(`thread:e0:0`, `ticket:e0:2`) __m:e0(`thread:e0:0`, `ticket:e0:1`) __m:e0(`thread:e0:0`, `ticket:e0:0`) __pc1:e0(`thread:e0:0`) __pc2:e0(`thread:e0:0`) __pc3:e0(`thread:e0:0`)
+.ob out
+100010 1
+001010 1
+100001 1
+001100 1
+010100 1
+010001 1
+001001 1
+100100 1
+010010 1

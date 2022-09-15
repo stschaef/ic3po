@@ -1,7 +1,24 @@
-.i 4
+{0: 'start:e0(`proposer:e0:0`)', 1: '__start:e0(`proposer:e0:0`)', 2: 'promise:e0(`acceptor:e0:1`, `proposer:e0:0`)', 3: '__promise:e0(`acceptor:e0:1`, `proposer:e0:0`)', 4: 'promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 5: '__promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 6: '(V__fml:p:e0 = `proposer:e0:0`)', 7: '(V__fml:q:e0 = `quorum:e0:0`)', 8: '(V__fml:q:e0 = `quorum:e0:1`)', 9: '(V__fml:q:e0 = `quorum:e0:2`)', 10: 'member:e0(`acceptor:e0:1`, `quorum:e0:0`)', 11: 'member:e0(`acceptor:e0:1`, `quorum:e0:1`)', 12: 'member:e0(`acceptor:e0:1`, `quorum:e0:2`)', 13: 'member:e0(`acceptor:e0:0`, `quorum:e0:0`)', 14: 'member:e0(`acceptor:e0:0`, `quorum:e0:1`)', 15: 'member:e0(`acceptor:e0:0`, `quorum:e0:2`)', 16: '__leader:e0(`proposer:e0:0`)', 17: 'leader:e0(`proposer:e0:0`)', 18: '(V__fml:a:e0 = `acceptor:e0:0`)', 19: '(V__fml:a:e0 = `acceptor:e0:1`)', 20: 'en_noop:e0', 21: 'en_ext:send_1a:e0', 22: 'en_ext:send_1b:e0', 23: 'en_ext:decide:e0'}
+.i 10
 .o 1
-.ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:1`, `proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:0`)
+.ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:1`, `proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:1`, `quorum:e0:0`) member:e0(`acceptor:e0:1`, `quorum:e0:1`) member:e0(`acceptor:e0:1`, `quorum:e0:2`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) __leader:e0(`proposer:e0:0`)
 .ob out
-110- 1
--00- 1
-1-1- 1
+1-1---1110 1
+110---1110 1
+110111-010 1
+1-1--01111 1
+1-1111--00 1
+1-1111-010 1
+1-1-011111 1
+1-10111111 1
+-00111--00 1
+110111--00 1
+-00111-010 1
+11-111-011 1
+1-11110110 1
+11-111--01 1
+11-1110111 1
+-00---1110 1
+1111111111 1
+-001110110 1
+1101110110 1

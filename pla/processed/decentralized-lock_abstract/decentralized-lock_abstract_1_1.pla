@@ -1,6 +1,7 @@
-.i 3
+{0: 'gt:e0(`time:e0:0`, `node:e0:0`)', 1: '__gt:e0(`time:e0:0`, `node:e0:0`)', 2: '(V__fml:x:e0 = `node:e0:0`)', 3: '(V__fml:t:e0 = `time:e0:0`)', 4: '__has_lock:e0(`node:e0:0`)', 5: '__msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 6: '(V__fml:y:e0 = `node:e0:0`)', 7: 'msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 8: 'has_lock:e0(`node:e0:0`)', 9: 'le:e0(`time:e0:0`, `time:e0:0`)', 10: '(zero:e0 = `time:e0:0`)', 11: '(first:e0 = `node:e0:0`)', 12: 'en_noop:e0', 13: 'en_ext:take_lock:e0', 14: 'en_ext:release_lock:e0'}
+.i 4
 .o 1
-.ilb __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)
+.ilb __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`) le:e0(`time:e0:0`, `time:e0:0`)
 .ob out
-000 1
-010 1
+0001 1
+0101 1

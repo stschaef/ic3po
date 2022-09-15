@@ -41,7 +41,7 @@
             ],
         },
         {
-            "name": "ring not dead",
+            "name": "ring",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/ic3po/top.py",
@@ -50,7 +50,22 @@
             "args": [
                 "-m",
                 "frpo",
-                "${workspaceFolder}/ivybench/ex/vmt/ring_not_dead.vmt",
+                "${workspaceFolder}/ivybench/ex/vmt/ring.vmt",
+                "<",
+                "${workspaceFolder}/mock.txt"
+            ],
+        },
+        {
+            "name": "firewall",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ic3po/top.py",
+            "console": "integratedTerminal",
+            "subProcess": true,
+            "args": [
+                "-m",
+                "frpo",
+                "${workspaceFolder}/ivybench/mypyv/vmt/firewall.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],

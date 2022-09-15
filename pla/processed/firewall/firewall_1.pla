@@ -1,5 +1,6 @@
-.i 2
+{0: '(V__fml:dst:e0 = `node:e0:0`)', 1: 'internal:e0(`node:e0:0`)', 2: '(V__fml:src:e0 = `node:e0:0`)', 3: '__allowed_in:e0(`node:e0:0`)', 4: 'allowed_in:e0(`node:e0:0`)', 5: '__sent:e0(`node:e0:0`, `node:e0:0`)', 6: 'sent:e0(`node:e0:0`, `node:e0:0`)', 7: 'en_noop:e0', 8: 'en_ext:send_to_internal:e0', 9: 'en_ext:send_from_internal:e0'}
+.i 3
 .o 1
-.ilb __allowed_in:e0(`node:e0:0`) __sent:e0(`node:e0:0`, `node:e0:0`)
+.ilb internal:e0(`node:e0:0`) __allowed_in:e0(`node:e0:0`) __sent:e0(`node:e0:0`, `node:e0:0`)
 .ob out
-00 1
+-00 1

@@ -1,14 +1,10 @@
-.i 6
+{0: '(V__fml:dst:e0 = `node:e0:0`)', 1: '(V__fml:dst:e0 = `node:e0:1`)', 2: 'internal:e0(`node:e0:0`)', 3: 'internal:e0(`node:e0:1`)', 4: '(V__fml:src:e0 = `node:e0:0`)', 5: '(V__fml:src:e0 = `node:e0:1`)', 6: '__allowed_in:e0(`node:e0:1`)', 7: 'allowed_in:e0(`node:e0:1`)', 8: '__allowed_in:e0(`node:e0:0`)', 9: 'allowed_in:e0(`node:e0:0`)', 10: '__sent:e0(`node:e0:1`, `node:e0:1`)', 11: 'sent:e0(`node:e0:1`, `node:e0:1`)', 12: '__sent:e0(`node:e0:1`, `node:e0:0`)', 13: 'sent:e0(`node:e0:1`, `node:e0:0`)', 14: '__sent:e0(`node:e0:0`, `node:e0:1`)', 15: 'sent:e0(`node:e0:0`, `node:e0:1`)', 16: '__sent:e0(`node:e0:0`, `node:e0:0`)', 17: 'sent:e0(`node:e0:0`, `node:e0:0`)', 18: 'en_noop:e0', 19: 'en_ext:send_to_internal:e0', 20: 'en_ext:send_from_internal:e0'}
+.i 8
 .o 1
-.ilb __allowed_in:e0(`node:e0:1`) __allowed_in:e0(`node:e0:0`) __sent:e0(`node:e0:1`, `node:e0:1`) __sent:e0(`node:e0:1`, `node:e0:0`) __sent:e0(`node:e0:0`, `node:e0:1`) __sent:e0(`node:e0:0`, `node:e0:0`)
+.ilb internal:e0(`node:e0:0`) internal:e0(`node:e0:1`) __allowed_in:e0(`node:e0:1`) __allowed_in:e0(`node:e0:0`) __sent:e0(`node:e0:1`, `node:e0:1`) __sent:e0(`node:e0:1`, `node:e0:0`) __sent:e0(`node:e0:0`, `node:e0:1`) __sent:e0(`node:e0:0`, `node:e0:0`)
 .ob out
-110111 1
-111100 1
-000000 1
-100110 1
-010100 1
-010110 1
-111110 1
-100010 1
-110011 1
-111111 1
+01010100 1
+10100110 1
+10100010 1
+01010110 1
+--000000 1

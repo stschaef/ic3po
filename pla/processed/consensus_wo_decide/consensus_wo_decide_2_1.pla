@@ -1,0 +1,7 @@
+.i 6
+.o 1
+.ilb __leader:e0(`node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __voted:e0(`node:e0:0`) __fml:nondet:e0 __vote_msg:e0(`node:e0:0`, `node:e0:0`)
+.ob out
+00-0-0 1
+-1-1-1 1
+00-1-1 1

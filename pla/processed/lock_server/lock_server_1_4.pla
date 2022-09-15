@@ -1,0 +1,9 @@
+.i 5
+.o 1
+.ilb __link:e0(`client:e0:0`, `server:e0:0`) __link:e0(`client:e0:1`, `server:e0:0`) __link:e0(`client:e0:2`, `server:e0:0`) __link:e0(`client:e0:3`, `server:e0:0`) __semaphore:e0(`server:e0:0`)
+.ob out
+00010 1
+01000 1
+00001 1
+10000 1
+00100 1
