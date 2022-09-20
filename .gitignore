@@ -23,6 +23,10 @@ foo/*
 xtras/
 requirements.txt
 pla/raw/
+repycudd/
+*.o
+*.so
+yices2/
 
 # But not these files
 !.gitignore
