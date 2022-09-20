@@ -1,0 +1,5 @@
+.i 28
+.o 1
+.ilb __m:e0(`thread:e0:6`, `ticket:e0:0`) __m:e0(`thread:e0:5`, `ticket:e0:0`) __m:e0(`thread:e0:4`, `ticket:e0:0`) __m:e0(`thread:e0:3`, `ticket:e0:0`) __m:e0(`thread:e0:2`, `ticket:e0:0`) __m:e0(`thread:e0:1`, `ticket:e0:0`) __m:e0(`thread:e0:0`, `ticket:e0:0`) __pc1:e0(`thread:e0:6`) __pc1:e0(`thread:e0:5`) __pc1:e0(`thread:e0:4`) __pc1:e0(`thread:e0:3`) __pc1:e0(`thread:e0:2`) __pc1:e0(`thread:e0:1`) __pc1:e0(`thread:e0:0`) __pc2:e0(`thread:e0:0`) __pc2:e0(`thread:e0:1`) __pc2:e0(`thread:e0:2`) __pc2:e0(`thread:e0:3`) __pc2:e0(`thread:e0:4`) __pc2:e0(`thread:e0:5`) __pc2:e0(`thread:e0:6`) __pc3:e0(`thread:e0:6`) __pc3:e0(`thread:e0:5`) __pc3:e0(`thread:e0:4`) __pc3:e0(`thread:e0:3`) __pc3:e0(`thread:e0:2`) __pc3:e0(`thread:e0:1`) __pc3:e0(`thread:e0:0`)
+.ob out
+1111111111111100000000000000 1

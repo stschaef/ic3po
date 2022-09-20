@@ -1,7 +1,29 @@
-.i 4
+{0: 'start:e0(`proposer:e0:0`)', 1: '__start:e0(`proposer:e0:0`)', 2: 'promise:e0(`acceptor:e0:1`, `proposer:e0:0`)', 3: '__promise:e0(`acceptor:e0:1`, `proposer:e0:0`)', 4: 'promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 5: '__promise:e0(`acceptor:e0:0`, `proposer:e0:0`)', 6: '(V__fml:p:e0 = `proposer:e0:0`)', 7: '(V__fml:q:e0 = `quorum:e0:0`)', 8: '(V__fml:q:e0 = `quorum:e0:1`)', 9: '(V__fml:q:e0 = `quorum:e0:2`)', 10: '(V__fml:q:e0 = `quorum:e0:3`)', 11: 'member:e0(`acceptor:e0:1`, `quorum:e0:0`)', 12: 'member:e0(`acceptor:e0:1`, `quorum:e0:1`)', 13: 'member:e0(`acceptor:e0:1`, `quorum:e0:2`)', 14: 'member:e0(`acceptor:e0:1`, `quorum:e0:3`)', 15: 'member:e0(`acceptor:e0:0`, `quorum:e0:0`)', 16: 'member:e0(`acceptor:e0:0`, `quorum:e0:1`)', 17: 'member:e0(`acceptor:e0:0`, `quorum:e0:2`)', 18: 'member:e0(`acceptor:e0:0`, `quorum:e0:3`)', 19: '__leader:e0(`proposer:e0:0`)', 20: 'leader:e0(`proposer:e0:0`)', 21: '(V__fml:a:e0 = `acceptor:e0:0`)', 22: '(V__fml:a:e0 = `acceptor:e0:1`)', 23: 'en_noop:e0', 24: 'en_ext:send_1a:e0', 25: 'en_ext:send_1b:e0', 26: 'en_ext:decide:e0'}
+.i 12
 .o 1
-.ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:1`, `proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) __leader:e0(`proposer:e0:0`)
+.ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:1`, `proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:1`, `quorum:e0:0`) member:e0(`acceptor:e0:1`, `quorum:e0:1`) member:e0(`acceptor:e0:1`, `quorum:e0:2`) member:e0(`acceptor:e0:1`, `quorum:e0:3`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) member:e0(`acceptor:e0:0`, `quorum:e0:3`) __leader:e0(`proposer:e0:0`)
 .ob out
--00- 1
-110- 1
-1-1- 1
+1-1--0111111 1
+1-1---011111 1
+-001111---00 1
+11-1111---01 1
+1-1----11110 1
+1101111-0110 1
+-00----11110 1
+1-1111101110 1
+110----11110 1
+-001111--010 1
+11-1111--011 1
+110111101110 1
+11-111101111 1
+11-1111-0111 1
+1-11111-0110 1
+1101111--010 1
+1-1011111111 1
+1101111---00 1
+-00111101110 1
+1-11111--010 1
+-001111-0110 1
+1-1-01111111 1
+1-11111---00 1
+111111111111 1

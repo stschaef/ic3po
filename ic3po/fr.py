@@ -1050,7 +1050,13 @@ class FR(object):
         for equality_predicate_dict in self.converter._bddVarEqEnum.values():
             constraint = FALSE()
             for equality_predicate in equality_predicate_dict.values():
-                constraint = Or(constraint, equality_predicate)
+                assignment = TRUE()
+                for equality_predicate_2 in equality_predicate_dict.values():
+                        if equality_predicate == equality_predicate_2:
+                            continue
+                        assignment = And(assignment, Not(equality_predicate_2))
+                assignment = And(assignment, equality_predicate)
+                constraint = Or(constraint, assignment)
             equality_constraints = And(equality_constraints, constraint)
         bddEq = self.formula2bdd(equality_constraints)
         
@@ -1071,11 +1077,14 @@ class FR(object):
             
             destinations = []
             for action, actionBdds in self.actions.items():
+                # print(action)
                 nex = self.ddmanager.Zero()
                 done = False
                 for actionBdd in actionBdds:
+                    image = src
                     image = self.ddmanager.And(src, bddEq)
                     image = self.ddmanager.AndAbstract(image, actionBdd, self.projNex)
+                    image = self.ddmanager.And(image, bddA)
                     if image == self.ddmanager.ReadLogicZero(): continue
                     image = self.ddmanager.SwapVariables(image, self.preV, self.nexV, self.N)
                     image = self.ddmanager.AndAbstract(image, self.axiom, self.projPre)

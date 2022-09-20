@@ -1,9 +1,9 @@
 #!/bin/bash
  
 onesort=(
-    # "ivybench/ex/vmt/lockserv_automaton.vmt"
-    # "ivybench/ex/vmt/ring_not_dead.vmt"
-    # "ivybench/ex/vmt/ring.vmt"
+    "ivybench/ex/vmt/lockserv_automaton.vmt"
+    "ivybench/ex/vmt/ring_not_dead.vmt"
+    "ivybench/ex/vmt/ring.vmt"
     "ivybench/ex/vmt/simple-decentralized-lock.vmt"
     "ivybench/i4/vmt/chord_ring_maintenance.vmt"
     "ivybench/i4/vmt/two_phase_commit.vmt"
@@ -57,10 +57,10 @@ if [ $1 -eq 1 ]; then
     for f in "${onesort[@]}"; do
         echo -e "\n"
         echo $f
-        for i in $(seq 7 $2); do 
+        for i in $(seq 1 $2); do 
             filename=$(basename $f .vmt)
             mkdir -p pla/raw/${filename}
-            echo $i | timeout 20m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
+            echo $i | timeout 3m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}.txt
             if [ $? -ne 0 ]; then 
                 echo "no good output"
                 continue 2

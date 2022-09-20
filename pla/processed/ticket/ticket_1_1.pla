@@ -1,0 +1,5 @@
+.i 4
+.o 1
+.ilb __m:e0(`thread:e0:0`, `ticket:e0:0`) __pc1:e0(`thread:e0:0`) __pc2:e0(`thread:e0:0`) __pc3:e0(`thread:e0:0`)
+.ob out
+1100 1

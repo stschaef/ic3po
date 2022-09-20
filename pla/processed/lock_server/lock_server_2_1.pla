@@ -1,0 +1,8 @@
+.i 4
+.o 1
+.ilb __link:e0(`client:e0:0`, `server:e0:0`) __link:e0(`client:e0:0`, `server:e0:1`) __semaphore:e0(`server:e0:1`) __semaphore:e0(`server:e0:0`)
+.ob out
+0011 1
+0101 1
+1100 1
+1010 1

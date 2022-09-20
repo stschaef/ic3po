@@ -1,8 +1,9 @@
-.i 8
+{0: 'gt:e0(`time:e0:0`, `node:e0:1`)', 1: '__gt:e0(`time:e0:0`, `node:e0:1`)', 2: 'gt:e0(`time:e0:0`, `node:e0:0`)', 3: '__gt:e0(`time:e0:0`, `node:e0:0`)', 4: '(V__fml:x:e0 = `node:e0:0`)', 5: '(V__fml:x:e0 = `node:e0:1`)', 6: '(V__fml:t:e0 = `time:e0:0`)', 7: '__has_lock:e0(`node:e0:0`)', 8: '__has_lock:e0(`node:e0:1`)', 9: '__msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`)', 10: '(V__fml:y:e0 = `node:e0:0`)', 11: '(V__fml:y:e0 = `node:e0:1`)', 12: 'msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`)', 13: '__msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`)', 14: 'msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`)', 15: '__msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`)', 16: 'msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`)', 17: '__msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 18: 'msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 19: 'has_lock:e0(`node:e0:1`)', 20: 'has_lock:e0(`node:e0:0`)', 21: 'le:e0(`time:e0:0`, `time:e0:0`)', 22: '(zero:e0 = `time:e0:0`)', 23: '(first:e0 = `node:e0:0`)', 24: '(first:e0 = `node:e0:1`)', 25: 'en_noop:e0', 26: 'en_ext:take_lock:e0', 27: 'en_ext:release_lock:e0'}
+.i 9
 .o 1
-.ilb __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)
+.ilb __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`) le:e0(`time:e0:0`, `time:e0:0`)
 .ob out
-00100000 1
-00010000 1
-00110000 1
-00000000 1
+000100001 1
+000000001 1
+001000001 1
+001100001 1

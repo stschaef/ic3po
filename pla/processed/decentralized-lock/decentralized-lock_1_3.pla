@@ -1,12 +1,13 @@
-.i 6
+{0: '(epoch:e0(`node:e0:2`) = `time:e0:0`)', 1: '(__epoch:e0(`node:e0:2`) = `time:e0:0`)', 2: '(epoch:e0(`node:e0:1`) = `time:e0:0`)', 3: '(__epoch:e0(`node:e0:1`) = `time:e0:0`)', 4: '(epoch:e0(`node:e0:0`) = `time:e0:0`)', 5: '(__epoch:e0(`node:e0:0`) = `time:e0:0`)', 6: '(V__fml:x:e0 = `node:e0:0`)', 7: '(V__fml:x:e0 = `node:e0:1`)', 8: '(V__fml:x:e0 = `node:e0:2`)', 9: '(V__fml:t:e0 = `time:e0:0`)', 10: '(__epoch:e0(V__fml:x:e0) = `time:e0:0`)', 11: 'le:e0(`time:e0:0`, `time:e0:0`)', 12: '__has_lock:e0(`node:e0:0`)', 13: '__has_lock:e0(`node:e0:1`)', 14: '__has_lock:e0(`node:e0:2`)', 15: '__msg:e0(`node:e0:2`, `time:e0:0`)', 16: '(V__fml:y:e0 = `node:e0:0`)', 17: '(V__fml:y:e0 = `node:e0:1`)', 18: '(V__fml:y:e0 = `node:e0:2`)', 19: 'msg:e0(`node:e0:2`, `time:e0:0`)', 20: '__msg:e0(`node:e0:1`, `time:e0:0`)', 21: 'msg:e0(`node:e0:1`, `time:e0:0`)', 22: '__msg:e0(`node:e0:0`, `time:e0:0`)', 23: 'msg:e0(`node:e0:0`, `time:e0:0`)', 24: 'has_lock:e0(`node:e0:2`)', 25: 'has_lock:e0(`node:e0:1`)', 26: 'has_lock:e0(`node:e0:0`)', 27: '(__epoch:e0(V__fml:y:e0) = `time:e0:0`)', 28: '(zero:e0 = `time:e0:0`)', 29: '(first:e0 = `node:e0:0`)', 30: '(first:e0 = `node:e0:1`)', 31: '(first:e0 = `node:e0:2`)', 32: 'en_noop:e0', 33: 'en_ext:take_lock:e0', 34: 'en_ext:release_lock:e0'}
+.i 7
 .o 1
-.ilb __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __has_lock:e0(`node:e0:2`) __msg:e0(`node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `time:e0:0`)
+.ilb le:e0(`time:e0:0`, `time:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __has_lock:e0(`node:e0:2`) __msg:e0(`node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `time:e0:0`)
 .ob out
-110000 1
-000000 1
-010000 1
-011000 1
-001000 1
-100000 1
-111000 1
-101000 1
+1100000 1
+1000000 1
+1110000 1
+1010000 1
+1001000 1
+1011000 1
+1101000 1
+1111000 1
