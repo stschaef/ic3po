@@ -1,7 +1,8 @@
+{0: '(V__fml:src:e0 = `node:e0:0`)', 1: '__has_lock:e0(`node:e0:0`)', 2: 'has_lock:e0(`node:e0:0`)', 3: '__message:e0(`node:e0:0`, `node:e0:0`)', 4: '(V__fml:dst:e0 = `node:e0:0`)', 5: 'message:e0(`node:e0:0`, `node:e0:0`)', 6: '(start_node:e0 = `node:e0:0`)', 7: 'en_noop:e0', 8: 'en_ext:recv:e0', 9: 'en_ext:send:e0'}
 .i 2
 .o 1
 .ilb __has_lock:e0(`node:e0:0`) __message:e0(`node:e0:0`, `node:e0:0`)
 .ob out
-01 1
-00 1
 10 1
+00 1
+01 1

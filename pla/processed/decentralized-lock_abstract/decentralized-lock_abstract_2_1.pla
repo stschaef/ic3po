@@ -1,12 +1,13 @@
-.i 5
+{0: 'gt:e0(`time:e0:1`, `node:e0:0`)', 1: '__gt:e0(`time:e0:1`, `node:e0:0`)', 2: 'gt:e0(`time:e0:0`, `node:e0:0`)', 3: '__gt:e0(`time:e0:0`, `node:e0:0`)', 4: '(V__fml:x:e0 = `node:e0:0`)', 5: '(V__fml:t:e0 = `time:e0:0`)', 6: '(V__fml:t:e0 = `time:e0:1`)', 7: '__has_lock:e0(`node:e0:0`)', 8: '__msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:1`)', 9: '(V__fml:y:e0 = `node:e0:0`)', 10: 'msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:1`)', 11: '__msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 12: 'msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)', 13: 'has_lock:e0(`node:e0:0`)', 14: 'le:e0(`time:e0:1`, `time:e0:0`)', 15: 'le:e0(`time:e0:1`, `time:e0:1`)', 16: 'le:e0(`time:e0:0`, `time:e0:0`)', 17: 'le:e0(`time:e0:0`, `time:e0:1`)', 18: '(zero:e0 = `time:e0:0`)', 19: '(zero:e0 = `time:e0:1`)', 20: '(first:e0 = `node:e0:0`)', 21: 'en_noop:e0', 22: 'en_ext:take_lock:e0', 23: 'en_ext:release_lock:e0'}
+.i 9
 .o 1
-.ilb __gt:e0(`time:e0:1`, `node:e0:0`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:1`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`)
+.ilb __gt:e0(`time:e0:1`, `node:e0:0`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:1`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`) le:e0(`time:e0:1`, `time:e0:0`) le:e0(`time:e0:1`, `time:e0:1`) le:e0(`time:e0:0`, `time:e0:0`) le:e0(`time:e0:0`, `time:e0:1`)
 .ob out
-10010 1
-01100 1
-00101 1
-01000 1
-10100 1
-10000 1
-01001 1
-00110 1
+101000111 1
+011001110 1
+010011110 1
+001100111 1
+100000111 1
+001011110 1
+010001110 1
+100100111 1
