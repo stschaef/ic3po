@@ -1,8 +1,9 @@
-.i 7
+{0: '(ep:e0(`node:e0:1`) = `epoch:e0:0`)', 1: '(__ep:e0(`node:e0:1`) = `epoch:e0:0`)', 2: '(ep:e0(`node:e0:0`) = `epoch:e0:0`)', 3: '(__ep:e0(`node:e0:0`) = `epoch:e0:0`)', 4: 'locked:e0(`epoch:e0:0`, `node:e0:1`)', 5: '__locked:e0(`epoch:e0:0`, `node:e0:1`)', 6: 'locked:e0(`epoch:e0:0`, `node:e0:0`)', 7: '__locked:e0(`epoch:e0:0`, `node:e0:0`)', 8: '(V__fml:n1:e0 = `node:e0:0`)', 9: '(V__fml:n1:e0 = `node:e0:1`)', 10: '(V__fml:e:e0 = `epoch:e0:0`)', 11: '(__ep:e0(V__fml:n1:e0) = `epoch:e0:0`)', 12: 'le:e0(`epoch:e0:0`, `epoch:e0:0`)', 13: '__held:e0(`node:e0:0`)', 14: '__held:e0(`node:e0:1`)', 15: 'held:e0(`node:e0:1`)', 16: 'held:e0(`node:e0:0`)', 17: '__transfer:e0(`epoch:e0:0`, `node:e0:1`)', 18: '(V__fml:n2:e0 = `node:e0:0`)', 19: '(V__fml:n2:e0 = `node:e0:1`)', 20: 'transfer:e0(`epoch:e0:0`, `node:e0:1`)', 21: '__transfer:e0(`epoch:e0:0`, `node:e0:0`)', 22: 'transfer:e0(`epoch:e0:0`, `node:e0:0`)', 23: '(V__fml:n:e0 = `node:e0:0`)', 24: '(V__fml:n:e0 = `node:e0:1`)', 25: '(__ep:e0(V__fml:n:e0) = `epoch:e0:0`)', 26: '__ts0_a:e0', 27: '(zero:e0 = `epoch:e0:0`)', 28: '(first:e0 = `node:e0:0`)', 29: '(first:e0 = `node:e0:1`)', 30: 'en_noop:e0', 31: 'en_ext:accept:e0', 32: 'en_ext:grant:e0'}
+.i 8
 .o 1
-.ilb __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`) __held:e0(`node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
+.ilb __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:0`) le:e0(`epoch:e0:0`, `epoch:e0:0`) __held:e0(`node:e0:0`) __held:e0(`node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
 .ob out
-001000- 1
-001100- 1
-000000- 1
-000100- 1
+0011000- 1
+0010100- 1
+0010000- 1
+0011100- 1

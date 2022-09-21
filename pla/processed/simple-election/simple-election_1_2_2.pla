@@ -4,7 +4,7 @@
 .ilb __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
 --001100 1
--1011100 1
 1-101100 1
--1011101 1
+-1011100 1
 1-101110 1
+-1011101 1

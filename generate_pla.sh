@@ -122,10 +122,10 @@ elif [ $1 -eq 4 ]; then
     for f in "${foursort[@]}"; do
         echo -e "\n"
         echo $f
-        for i in $(seq 1 $2); do 
-            for j in $(seq 1 $3); do
-                for k in $(seq 1 $4); do
-                    for l in $(seq 1 $5); do
+        for i in $(seq 2 $2); do 
+            for j in $(seq 2 $3); do
+                for k in $(seq 2 $4); do
+                    for l in $(seq 2 $5); do
                         filename=$(basename $f .vmt)
                         mkdir -p pla/raw/${filename}
                         (echo $i; echo $j; echo $k; echo $l) | timeout 2m python ic3po/top.py -m frpo $f >| pla/raw/${filename}/${filename}_${i}_${j}_${k}_${l}.txt

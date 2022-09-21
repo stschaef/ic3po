@@ -3,11 +3,11 @@
 .o 1
 .ilb __gt:e0(`time:e0:0`, `node:e0:2`) __gt:e0(`time:e0:0`, `node:e0:1`) __gt:e0(`time:e0:0`, `node:e0:0`) __has_lock:e0(`node:e0:0`) __has_lock:e0(`node:e0:1`) __has_lock:e0(`node:e0:2`) __msg:e0(`node:e0:2`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:2`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:1`, `node:e0:0`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:2`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:1`, `time:e0:0`) __msg:e0(`node:e0:0`, `node:e0:0`, `time:e0:0`) le:e0(`time:e0:0`, `time:e0:0`)
 .ob out
-0000100000000001 1
-0000000000000001 1
+0000110000000001 1
+0001110000000001 1
 0001000000000001 1
+0000000000000001 1
 0001010000000001 1
 0001100000000001 1
 0000010000000001 1
-0001110000000001 1
-0000110000000001 1
+0000100000000001 1

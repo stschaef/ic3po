@@ -1,6 +1,36 @@
-.i 15
+{0: 'leader:e0(`node:e0:2`)', 1: '__leader:e0(`node:e0:2`)', 2: 'leader:e0(`node:e0:1`)', 3: '__leader:e0(`node:e0:1`)', 4: 'leader:e0(`node:e0:0`)', 5: '__leader:e0(`node:e0:0`)', 6: 'vote:e0(`node:e0:2`, `node:e0:2`)', 7: '__vote:e0(`node:e0:2`, `node:e0:2`)', 8: 'vote:e0(`node:e0:2`, `node:e0:1`)', 9: '__vote:e0(`node:e0:2`, `node:e0:1`)', 10: 'vote:e0(`node:e0:2`, `node:e0:0`)', 11: '__vote:e0(`node:e0:2`, `node:e0:0`)', 12: 'vote:e0(`node:e0:1`, `node:e0:2`)', 13: '__vote:e0(`node:e0:1`, `node:e0:2`)', 14: 'vote:e0(`node:e0:1`, `node:e0:1`)', 15: '__vote:e0(`node:e0:1`, `node:e0:1`)', 16: 'vote:e0(`node:e0:1`, `node:e0:0`)', 17: '__vote:e0(`node:e0:1`, `node:e0:0`)', 18: 'vote:e0(`node:e0:0`, `node:e0:2`)', 19: '__vote:e0(`node:e0:0`, `node:e0:2`)', 20: 'vote:e0(`node:e0:0`, `node:e0:1`)', 21: '__vote:e0(`node:e0:0`, `node:e0:1`)', 22: 'vote:e0(`node:e0:0`, `node:e0:0`)', 23: '__vote:e0(`node:e0:0`, `node:e0:0`)', 24: '(V__fml:s2:e0 = `nodeset:e0:0`)', 25: 'majority:e0(`nodeset:e0:0`)', 26: '(V__new_fml:s1:e0 = `nodeset:e0:0`)', 27: '(V__new_fml:n:e0 = `node:e0:0`)', 28: '(V__new_fml:n:e0 = `node:e0:1`)', 29: '(V__new_fml:n:e0 = `node:e0:2`)', 30: 'member:e0(`node:e0:2`, `nodeset:e0:0`)', 31: 'member:e0(`node:e0:1`, `nodeset:e0:0`)', 32: 'member:e0(`node:e0:0`, `nodeset:e0:0`)', 33: '(V__fml:vs:e0 = `nodeset:e0:0`)', 34: '(V__fml:voter:e0 = `node:e0:0`)', 35: '(V__fml:voter:e0 = `node:e0:1`)', 36: '(V__fml:voter:e0 = `node:e0:2`)', 37: '(V__fml:n:e0 = `node:e0:0`)', 38: '(V__fml:n:e0 = `node:e0:1`)', 39: '(V__fml:n:e0 = `node:e0:2`)', 40: '__voters:e0(`node:e0:0`, `nodeset:e0:0`)', 41: '__voters:e0(`node:e0:1`, `nodeset:e0:0`)', 42: '__voters:e0(`node:e0:2`, `nodeset:e0:0`)', 43: '(V__new_fml:vs:e0 = `nodeset:e0:0`)', 44: 'voters:e0(`node:e0:2`, `nodeset:e0:0`)', 45: 'voters:e0(`node:e0:1`, `nodeset:e0:0`)', 46: 'voters:e0(`node:e0:0`, `nodeset:e0:0`)', 47: '(V__fml:s1:e0 = `nodeset:e0:0`)', 48: '(V__fml:n1:e0 = `node:e0:0`)', 49: '(V__fml:n1:e0 = `node:e0:1`)', 50: '(V__fml:n1:e0 = `node:e0:2`)', 51: '(V__fml:n2:e0 = `node:e0:0`)', 52: '(V__fml:n2:e0 = `node:e0:1`)', 53: '(V__fml:n2:e0 = `node:e0:2`)', 54: '(emptyset:e0 = `nodeset:e0:0`)', 55: 'en_noop:e0', 56: 'en_ext:voting:e0', 57: 'en_ext:become_leader:e0', 58: 'en_ns.add:e0', 59: 'en_ext:receive_vote:e0'}
+.i 19
 .o 1
-.ilb __leader:e0(`node:e0:2`) __leader:e0(`node:e0:1`) __leader:e0(`node:e0:0`) __vote:e0(`node:e0:2`, `node:e0:2`) __vote:e0(`node:e0:2`, `node:e0:1`) __vote:e0(`node:e0:2`, `node:e0:0`) __vote:e0(`node:e0:1`, `node:e0:2`) __vote:e0(`node:e0:1`, `node:e0:1`) __vote:e0(`node:e0:1`, `node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:2`) __vote:e0(`node:e0:0`, `node:e0:1`) __vote:e0(`node:e0:0`, `node:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:1`, `nodeset:e0:0`) __voters:e0(`node:e0:2`, `nodeset:e0:0`)
+.ilb __leader:e0(`node:e0:2`) __leader:e0(`node:e0:1`) __leader:e0(`node:e0:0`) __vote:e0(`node:e0:2`, `node:e0:2`) __vote:e0(`node:e0:2`, `node:e0:1`) __vote:e0(`node:e0:2`, `node:e0:0`) __vote:e0(`node:e0:1`, `node:e0:2`) __vote:e0(`node:e0:1`, `node:e0:1`) __vote:e0(`node:e0:1`, `node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:2`) __vote:e0(`node:e0:0`, `node:e0:1`) __vote:e0(`node:e0:0`, `node:e0:0`) majority:e0(`nodeset:e0:0`) member:e0(`node:e0:2`, `nodeset:e0:0`) member:e0(`node:e0:1`, `nodeset:e0:0`) member:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:1`, `nodeset:e0:0`) __voters:e0(`node:e0:2`, `nodeset:e0:0`)
 .ob out
-000000000000000 1
-000---------111 1
+000001-00-000000111 1
+000000000000--10000 1
+0000100100010000111 1
+000001001-000000111 1
+000-00-000100000111 1
+000000000000---1000 1
+000010010-000000111 1
+000001-000100000111 1
+0000100010010000111 1
+000010-000100000111 1
+000010001-000000111 1
+000-00001-000000111 1
+0000010100100000111 1
+000-00010-000000111 1
+0000010100010000111 1
+0000010010010000111 1
+000-000100100000111 1
+0000010010100000111 1
+0000100010100000111 1
+000-00-000010000111 1
+0000000000000000000 1
+000010-000010000111 1
+000001010-000000111 1
+000001-000010000111 1
+000000000000-100000 1
+0000100100100000111 1
+000010-00-000000111 1
+000-000100010000111 1
+000-000010010000111 1
+000-000010100000111 1
+000-00-00-000000111 1

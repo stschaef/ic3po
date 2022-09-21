@@ -1,10 +1,11 @@
-.i 5
+{0: '(next_ticket:e0 = `ticket:e0:0`)', 1: '(next_ticket:e0 = `ticket:e0:1`)', 2: '(__next_ticket:e0 = `ticket:e0:0`)', 3: '(__next_ticket:e0 = `ticket:e0:1`)', 4: 'm:e0(`thread:e0:0`, `ticket:e0:1`)', 5: '__m:e0(`thread:e0:0`, `ticket:e0:1`)', 6: 'm:e0(`thread:e0:0`, `ticket:e0:0`)', 7: '__m:e0(`thread:e0:0`, `ticket:e0:0`)', 8: '(service:e0 = `ticket:e0:0`)', 9: '(service:e0 = `ticket:e0:1`)', 10: '(__service:e0 = `ticket:e0:0`)', 11: '(__service:e0 = `ticket:e0:1`)', 12: 'pc1:e0(`thread:e0:0`)', 13: '__pc1:e0(`thread:e0:0`)', 14: '(V__fml:k:e0 = `ticket:e0:0`)', 15: '(V__fml:k:e0 = `ticket:e0:1`)', 16: 'le:e0(`ticket:e0:0`, `ticket:e0:0`)', 17: 'le:e0(`ticket:e0:0`, `ticket:e0:1`)', 18: 'le:e0(`ticket:e0:1`, `ticket:e0:0`)', 19: 'le:e0(`ticket:e0:1`, `ticket:e0:1`)', 20: '(V__fml:t:e0 = `thread:e0:0`)', 21: '__pc2:e0(`thread:e0:0`)', 22: '__pc3:e0(`thread:e0:0`)', 23: 'pc3:e0(`thread:e0:0`)', 24: 'pc2:e0(`thread:e0:0`)', 25: '(V__fml:y:e0 = `ticket:e0:0`)', 26: '(V__fml:y:e0 = `ticket:e0:1`)', 27: '(zero:e0 = `ticket:e0:0`)', 28: '(zero:e0 = `ticket:e0:1`)', 29: 'en_noop:e0', 30: 'en_ext:step31:e0', 31: 'en_ext:step12:e0', 32: 'en_ext:step23:e0'}
+.i 9
 .o 1
-.ilb __m:e0(`thread:e0:0`, `ticket:e0:1`) __m:e0(`thread:e0:0`, `ticket:e0:0`) __pc1:e0(`thread:e0:0`) __pc2:e0(`thread:e0:0`) __pc3:e0(`thread:e0:0`)
+.ilb __m:e0(`thread:e0:0`, `ticket:e0:1`) __m:e0(`thread:e0:0`, `ticket:e0:0`) __pc1:e0(`thread:e0:0`) le:e0(`ticket:e0:0`, `ticket:e0:0`) le:e0(`ticket:e0:0`, `ticket:e0:1`) le:e0(`ticket:e0:1`, `ticket:e0:0`) le:e0(`ticket:e0:1`, `ticket:e0:1`) __pc2:e0(`thread:e0:0`) __pc3:e0(`thread:e0:0`)
 .ob out
-10100 1
-01100 1
-01001 1
-10010 1
-10001 1
-01010 1
+011110100 1
+010110101 1
+101101100 1
+010110110 1
+100101101 1
+100101110 1

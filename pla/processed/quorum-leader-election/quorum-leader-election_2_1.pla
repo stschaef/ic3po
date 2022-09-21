@@ -1,6 +1,10 @@
-.i 2
+{0: 'voted:e0(`node:e0:0`, `node:e0:0`)', 1: '__voted:e0(`node:e0:0`, `node:e0:0`)', 2: '(V__fml:n:e0 = `node:e0:0`)', 3: '(V__fml:s:e0 = `nset:e0:0`)', 4: '(V__fml:s:e0 = `nset:e0:1`)', 5: 'member:e0(`node:e0:0`, `nset:e0:0`)', 6: 'member:e0(`node:e0:0`, `nset:e0:1`)', 7: 'majority:e0(`nset:e0:0`)', 8: 'majority:e0(`nset:e0:1`)', 9: '(quorum:e0 = `nset:e0:0`)', 10: '(quorum:e0 = `nset:e0:1`)', 11: '__isleader:e0(`node:e0:0`)', 12: 'isleader:e0(`node:e0:0`)', 13: '(__quorum:e0 = `nset:e0:0`)', 14: '(__quorum:e0 = `nset:e0:1`)', 15: '(V__fml:v:e0 = `node:e0:0`)', 16: 'en_noop:e0', 17: 'en_ext:vote:e0', 18: 'en_ext:become_leader:e0'}
+.i 6
 .o 1
-.ilb __voted:e0(`node:e0:0`, `node:e0:0`) __isleader:e0(`node:e0:0`)
+.ilb __voted:e0(`node:e0:0`, `node:e0:0`) member:e0(`node:e0:0`, `nset:e0:0`) member:e0(`node:e0:0`, `nset:e0:1`) majority:e0(`nset:e0:0`) majority:e0(`nset:e0:1`) __isleader:e0(`node:e0:0`)
 .ob out
-11 1
--0 1
+1111-1 1
+-11-10 1
+111-11 1
+---000 1
+-11100 1

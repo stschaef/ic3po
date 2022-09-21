@@ -1,12 +1,13 @@
-.i 6
+{0: '(ep:e0(`node:e0:0`) = `epoch:e0:0`)', 1: '(ep:e0(`node:e0:0`) = `epoch:e0:1`)', 2: '(__ep:e0(`node:e0:0`) = `epoch:e0:0`)', 3: '(__ep:e0(`node:e0:0`) = `epoch:e0:1`)', 4: 'locked:e0(`epoch:e0:1`, `node:e0:0`)', 5: '__locked:e0(`epoch:e0:1`, `node:e0:0`)', 6: 'locked:e0(`epoch:e0:0`, `node:e0:0`)', 7: '__locked:e0(`epoch:e0:0`, `node:e0:0`)', 8: '(V__fml:n1:e0 = `node:e0:0`)', 9: '(V__fml:e:e0 = `epoch:e0:0`)', 10: '(V__fml:e:e0 = `epoch:e0:1`)', 11: '(__ep:e0(V__fml:n1:e0) = `epoch:e0:0`)', 12: 'le:e0(`epoch:e0:0`, `epoch:e0:0`)', 13: '(__ep:e0(V__fml:n1:e0) = `epoch:e0:1`)', 14: 'le:e0(`epoch:e0:0`, `epoch:e0:1`)', 15: 'le:e0(`epoch:e0:1`, `epoch:e0:0`)', 16: 'le:e0(`epoch:e0:1`, `epoch:e0:1`)', 17: '__held:e0(`node:e0:0`)', 18: 'held:e0(`node:e0:0`)', 19: '__transfer:e0(`epoch:e0:1`, `node:e0:0`)', 20: '(V__fml:n2:e0 = `node:e0:0`)', 21: 'transfer:e0(`epoch:e0:1`, `node:e0:0`)', 22: '__transfer:e0(`epoch:e0:0`, `node:e0:0`)', 23: 'transfer:e0(`epoch:e0:0`, `node:e0:0`)', 24: '(V__fml:n:e0 = `node:e0:0`)', 25: '(__ep:e0(V__fml:n:e0) = `epoch:e0:0`)', 26: '(__ep:e0(V__fml:n:e0) = `epoch:e0:1`)', 27: '__ts0_a:e0', 28: '(zero:e0 = `epoch:e0:0`)', 29: '(zero:e0 = `epoch:e0:1`)', 30: '(firste:e0 = `epoch:e0:0`)', 31: '(firste:e0 = `epoch:e0:1`)', 32: '(first:e0 = `node:e0:0`)', 33: 'en_noop:e0', 34: 'en_ext:accept:e0', 35: 'en_ext:grant:e0'}
+.i 10
 .o 1
-.ilb __locked:e0(`epoch:e0:1`, `node:e0:0`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`) __transfer:e0(`epoch:e0:1`, `node:e0:0`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
+.ilb __locked:e0(`epoch:e0:1`, `node:e0:0`) __locked:e0(`epoch:e0:0`, `node:e0:0`) le:e0(`epoch:e0:0`, `epoch:e0:0`) le:e0(`epoch:e0:0`, `epoch:e0:1`) le:e0(`epoch:e0:1`, `epoch:e0:0`) le:e0(`epoch:e0:1`, `epoch:e0:1`) __held:e0(`node:e0:0`) __transfer:e0(`epoch:e0:1`, `node:e0:0`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
 .ob out
--0011- 1
-00100- 1
-00000- 1
-011-1- 1
-10111- 1
-0-0-1- 1
-10110- 1
--0010- 1
+001011000- 1
+0-1011001- 1
+001011100- 1
+-01101010- 1
+001101100- 1
+001101000- 1
+011011101- 1
+101101110- 1

@@ -1,13 +1,14 @@
+{0: '(V__fml:v:e0 = `value:e0:0`)', 1: '(V__fml:v:e0 = `value:e0:1`)', 2: '(V__fml:v:e0 = `value:e0:2`)', 3: '(V__fml:v:e0 = `value:e0:3`)', 4: '(V__fml:k:e0 = `key:e0:0`)', 5: '(V__fml:n:e0 = `node:e0:0`)', 6: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 7: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 8: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 9: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`)', 10: '__owner:e0(`node:e0:0`, `key:e0:0`)', 11: 'owner:e0(`node:e0:0`, `key:e0:0`)', 12: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`)', 13: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`)', 14: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 15: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 16: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 17: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 18: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 19: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 20: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`)', 21: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 22: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 23: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 24: '(V__fml:n_old:e0 = `node:e0:0`)', 25: '(V__fml:n_new:e0 = `node:e0:0`)', 26: 'en_noop:e0', 27: 'en_ext:put:e0', 28: 'en_ext:reshard:e0', 29: 'en_ext:recv_transfer_msg:e0'}
 .i 9
 .o 1
 .ilb __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`) __owner:e0(`node:e0:0`, `key:e0:0`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:3`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)
 .ob out
-000010001 1
-000100000 1
-000010010 1
-010000000 1
-000010000 1
--00000000 1
 000011000 1
-001000000 1
+000010001 1
+000010010 1
 000010100 1
+001000000 1
+000100000 1
+000010000 1
+010000000 1
+-00000000 1

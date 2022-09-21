@@ -1,11 +1,12 @@
+{0: '(V__fml:v:e0 = `value:e0:0`)', 1: '(V__fml:v:e0 = `value:e0:1`)', 2: '(V__fml:v:e0 = `value:e0:2`)', 3: '(V__fml:k:e0 = `key:e0:0`)', 4: '(V__fml:n:e0 = `node:e0:0`)', 5: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 6: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 7: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 8: '__owner:e0(`node:e0:0`, `key:e0:0`)', 9: 'owner:e0(`node:e0:0`, `key:e0:0`)', 10: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 11: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 12: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 13: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 14: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 15: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 16: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`)', 17: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`)', 18: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 19: '(V__fml:n_old:e0 = `node:e0:0`)', 20: '(V__fml:n_new:e0 = `node:e0:0`)', 21: 'en_noop:e0', 22: 'en_ext:put:e0', 23: 'en_ext:reshard:e0', 24: 'en_ext:recv_transfer_msg:e0'}
 .i 7
 .o 1
 .ilb __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`) __owner:e0(`node:e0:0`, `key:e0:0`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:2`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:1`) __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)
 .ob out
+0010000 1
+0100000 1
 -000000 1
+0001010 1
 0001001 1
 0001100 1
 0001000 1
-0010000 1
-0100000 1
-0001010 1

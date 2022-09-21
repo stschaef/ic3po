@@ -1,5 +1,7 @@
-.i 4
+{0: 'leader:e0(`node:e0:0`)', 1: '__leader:e0(`node:e0:0`)', 2: '(V__fml:n1:e0 = `node:e0:0`)', 3: '(V__fml:n:e0 = `node:e0:0`)', 4: 'ring.btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 5: '__pending:e0(`id:e0:1`, `node:e0:0`)', 6: '(idn:e0(`node:e0:0`) = `id:e0:0`)', 7: '(idn:e0(`node:e0:0`) = `id:e0:1`)', 8: '(idn:e0(V__fml:n:e0) = `id:e0:1`)', 9: 'pending:e0(`id:e0:1`, `node:e0:0`)', 10: '__pending:e0(`id:e0:0`, `node:e0:0`)', 11: '(idn:e0(V__fml:n:e0) = `id:e0:0`)', 12: 'pending:e0(`id:e0:0`, `node:e0:0`)', 13: '(V__fml:m:e0 = `id:e0:0`)', 14: '(V__fml:m:e0 = `id:e0:1`)', 15: 'le:e0(`id:e0:0`, `id:e0:0`)', 16: 'le:e0(`id:e0:0`, `id:e0:1`)', 17: 'le:e0(`id:e0:1`, `id:e0:0`)', 18: 'le:e0(`id:e0:1`, `id:e0:1`)', 19: '__ts0_a:e0', 20: 'en_noop:e0', 21: 'en_ext:become_leader:e0', 22: 'en_ext:receive:e0', 23: 'en_ext:send:e0'}
+.i 9
 .o 1
-.ilb __leader:e0(`node:e0:0`) __pending:e0(`id:e0:1`, `node:e0:0`) __pending:e0(`id:e0:0`, `node:e0:0`) __ts0_a:e0
+.ilb __leader:e0(`node:e0:0`) ring.btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __pending:e0(`id:e0:1`, `node:e0:0`) __pending:e0(`id:e0:0`, `node:e0:0`) le:e0(`id:e0:0`, `id:e0:0`) le:e0(`id:e0:0`, `id:e0:1`) le:e0(`id:e0:1`, `id:e0:0`) le:e0(`id:e0:1`, `id:e0:1`) __ts0_a:e0
 .ob out
-000- 1
+00001101- 1
+00001011- 1

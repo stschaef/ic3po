@@ -3,6 +3,6 @@
 .o 1
 .ilb __has_lock:e0(`node:e0:0`) __message:e0(`node:e0:0`, `node:e0:0`)
 .ob out
+01 1
 10 1
 00 1
-01 1

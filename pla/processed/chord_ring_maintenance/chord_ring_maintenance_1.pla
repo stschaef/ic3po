@@ -1,5 +1,6 @@
-.i 8
+{0: 'a:e0(`node:e0:0`)', 1: '__a:e0(`node:e0:0`)', 2: 'p:e0(`node:e0:0`, `node:e0:0`)', 3: '__p:e0(`node:e0:0`, `node:e0:0`)', 4: 'in_s1:e0(`node:e0:0`)', 5: '__in_s1:e0(`node:e0:0`)', 6: 's2:e0(`node:e0:0`, `node:e0:0`)', 7: '__s2:e0(`node:e0:0`, `node:e0:0`)', 8: 'in_s2:e0(`node:e0:0`)', 9: '__in_s2:e0(`node:e0:0`)', 10: 's1:e0(`node:e0:0`, `node:e0:0`)', 11: '__s1:e0(`node:e0:0`, `node:e0:0`)', 12: 'error:e0(`node:e0:0`)', 13: '__error:e0(`node:e0:0`)', 14: '(V__fml:z:e0 = `node:e0:0`)', 15: '__reach:e0(`node:e0:0`)', 16: '(V__fml:x:e0 = `node:e0:0`)', 17: '(V__fml:y:e0 = `node:e0:0`)', 18: '(org:e0 = `node:e0:0`)', 19: 'reach:e0(`node:e0:0`)', 20: 'ring.btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 21: '(other:e0 = `node:e0:0`)', 22: 'en_noop:e0', 23: 'en_ext:reach_org:e0', 24: 'en_ext:stabilize:e0', 25: 'en_ext:fail:e0', 26: 'en_ext:notify:e0', 27: 'en_ext:join:e0', 28: 'en_ext:test:e0', 29: 'en_ext:inherit:e0', 30: 'en_ext:remove:e0', 31: 'en_ext:remove_org:e0'}
+.i 9
 .o 1
-.ilb __a:e0(`node:e0:0`) __p:e0(`node:e0:0`, `node:e0:0`) __in_s1:e0(`node:e0:0`) __s2:e0(`node:e0:0`, `node:e0:0`) __in_s2:e0(`node:e0:0`) __s1:e0(`node:e0:0`, `node:e0:0`) __error:e0(`node:e0:0`) __reach:e0(`node:e0:0`)
+.ilb __a:e0(`node:e0:0`) __p:e0(`node:e0:0`, `node:e0:0`) __in_s1:e0(`node:e0:0`) __s2:e0(`node:e0:0`, `node:e0:0`) __in_s2:e0(`node:e0:0`) __s1:e0(`node:e0:0`, `node:e0:0`) __error:e0(`node:e0:0`) __reach:e0(`node:e0:0`) ring.btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)
 .ob out
-10100001 1
+101000010 1

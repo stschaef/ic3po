@@ -1,8 +1,9 @@
+{0: '__committed:e0(`resource_manager:e0:0`)', 1: '(V__fml:rm:e0 = `resource_manager:e0:0`)', 2: '__prepared:e0(`resource_manager:e0:0`)', 3: '__working:e0(`resource_manager:e0:0`)', 4: '__aborted:e0(`resource_manager:e0:0`)', 5: 'aborted:e0(`resource_manager:e0:0`)', 6: 'committed:e0(`resource_manager:e0:0`)', 7: 'prepared:e0(`resource_manager:e0:0`)', 8: 'working:e0(`resource_manager:e0:0`)', 9: 'en_noop:e0', 10: 'en_ext:decide_commit:e0', 11: 'en_ext:prepare:e0', 12: 'en_ext:decide_abort:e0'}
 .i 4
 .o 1
 .ilb __committed:e0(`resource_manager:e0:0`) __prepared:e0(`resource_manager:e0:0`) __working:e0(`resource_manager:e0:0`) __aborted:e0(`resource_manager:e0:0`)
 .ob out
-1000 1
 0010 1
-0001 1
+1000 1
 0100 1
+0001 1

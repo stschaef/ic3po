@@ -1,6 +1,7 @@
-.i 4
+{0: '(ep:e0(`node:e0:0`) = `epoch:e0:0`)', 1: '(__ep:e0(`node:e0:0`) = `epoch:e0:0`)', 2: 'locked:e0(`epoch:e0:0`, `node:e0:0`)', 3: '__locked:e0(`epoch:e0:0`, `node:e0:0`)', 4: '(V__fml:n1:e0 = `node:e0:0`)', 5: '(V__fml:e:e0 = `epoch:e0:0`)', 6: '(__ep:e0(V__fml:n1:e0) = `epoch:e0:0`)', 7: 'le:e0(`epoch:e0:0`, `epoch:e0:0`)', 8: '__held:e0(`node:e0:0`)', 9: 'held:e0(`node:e0:0`)', 10: '__transfer:e0(`epoch:e0:0`, `node:e0:0`)', 11: '(V__fml:n2:e0 = `node:e0:0`)', 12: 'transfer:e0(`epoch:e0:0`, `node:e0:0`)', 13: '(V__fml:n:e0 = `node:e0:0`)', 14: '(__ep:e0(V__fml:n:e0) = `epoch:e0:0`)', 15: '__ts0_a:e0', 16: '(zero:e0 = `epoch:e0:0`)', 17: '(first:e0 = `node:e0:0`)', 18: 'en_noop:e0', 19: 'en_ext:accept:e0', 20: 'en_ext:grant:e0'}
+.i 5
 .o 1
-.ilb __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
+.ilb __locked:e0(`epoch:e0:0`, `node:e0:0`) le:e0(`epoch:e0:0`, `epoch:e0:0`) __held:e0(`node:e0:0`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0
 .ob out
-000- 1
-010- 1
+0110- 1
+0100- 1

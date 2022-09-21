@@ -1,13 +1,14 @@
-.i 9
+{0: 'vote:e0(`node:e0:0`, `value:e0:3`)', 1: '__vote:e0(`node:e0:0`, `value:e0:3`)', 2: 'vote:e0(`node:e0:0`, `value:e0:2`)', 3: '__vote:e0(`node:e0:0`, `value:e0:2`)', 4: 'vote:e0(`node:e0:0`, `value:e0:1`)', 5: '__vote:e0(`node:e0:0`, `value:e0:1`)', 6: 'vote:e0(`node:e0:0`, `value:e0:0`)', 7: '__vote:e0(`node:e0:0`, `value:e0:0`)', 8: 'voted:e0(`node:e0:0`)', 9: '__voted:e0(`node:e0:0`)', 10: '(V__fml:v:e0 = `value:e0:0`)', 11: '(V__fml:v:e0 = `value:e0:1`)', 12: '(V__fml:v:e0 = `value:e0:2`)', 13: '(V__fml:v:e0 = `value:e0:3`)', 14: '(V__fml:q:e0 = `quorum:e0:0`)', 15: '(V__fml:q:e0 = `quorum:e0:1`)', 16: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 17: 'member:e0(`node:e0:0`, `quorum:e0:1`)', 18: '(voting_quorum:e0 = `quorum:e0:0`)', 19: '(voting_quorum:e0 = `quorum:e0:1`)', 20: '__decided:e0(`value:e0:3`)', 21: 'decided:e0(`value:e0:3`)', 22: '__decided:e0(`value:e0:2`)', 23: 'decided:e0(`value:e0:2`)', 24: '__decided:e0(`value:e0:1`)', 25: 'decided:e0(`value:e0:1`)', 26: '__decided:e0(`value:e0:0`)', 27: 'decided:e0(`value:e0:0`)', 28: '(__voting_quorum:e0 = `quorum:e0:0`)', 29: '(__voting_quorum:e0 = `quorum:e0:1`)', 30: '(V__fml:n:e0 = `node:e0:0`)', 31: 'en_noop:e0', 32: 'en_ext:cast_vote:e0', 33: 'en_ext:decide:e0'}
+.i 11
 .o 1
-.ilb __vote:e0(`node:e0:0`, `value:e0:3`) __vote:e0(`node:e0:0`, `value:e0:2`) __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:0`) __decided:e0(`value:e0:3`) __decided:e0(`value:e0:2`) __decided:e0(`value:e0:1`) __decided:e0(`value:e0:0`)
+.ilb __vote:e0(`node:e0:0`, `value:e0:3`) __vote:e0(`node:e0:0`, `value:e0:2`) __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:0`) member:e0(`node:e0:0`, `quorum:e0:0`) member:e0(`node:e0:0`, `quorum:e0:1`) __decided:e0(`value:e0:3`) __decided:e0(`value:e0:2`) __decided:e0(`value:e0:1`) __decided:e0(`value:e0:0`)
 .ob out
-000000000 1
----110001 1
-100010000 1
-1---11000 1
---1-10010 1
--10010000 1
---1010000 1
----110000 1
--1--10100 1
+00101110010 1
+10001110000 1
+00011110000 1
+00011110001 1
+10001111000 1
+00101110000 1
+01001110000 1
+00000110000 1
+01001110100 1

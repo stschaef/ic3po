@@ -1,3 +1,4 @@
+{0: 'table:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 1: '__table:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 2: '__pending:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`, `node:e0:0`)', 3: '(V__fml:ps:e0 = `node:e0:0`)', 4: '(V__fml:pd:e0 = `node:e0:0`)', 5: 'pending:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`, `node:e0:0`)', 6: '(V__fml:sw1:e0 = `node:e0:0`)', 7: '(V__fml:sw0:e0 = `node:e0:0`)', 8: '__ts0_a:e0', 9: '__m_pending:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`, `node:e0:0`)', 10: '(V__fml:nondet:e0 = `node:e0:0`)', 11: 'en_noop:e0', 12: 'en_ext:forward:e0', 13: 'en_ext:new_packet:e0'}
 .i 4
 .o 1
 .ilb __table:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __pending:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`, `node:e0:0`) __ts0_a:e0 __m_pending:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`, `node:e0:0`)

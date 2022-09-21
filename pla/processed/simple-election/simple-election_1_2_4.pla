@@ -3,12 +3,12 @@
 .o 1
 .ilb __start:e0(`proposer:e0:3`) __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:3`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) __leader:e0(`proposer:e0:3`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
--1--0100110000 1
 --1-0010110000 1
--1--0100110100 1
 --1-0010110010 1
 1---1000110000 1
----10001110001 1
+-1--0100110100 1
 ----0000110000 1
+-1--0100110000 1
 1---1000111000 1
 ---10001110000 1
+---10001110001 1

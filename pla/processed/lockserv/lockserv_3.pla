@@ -1,14 +1,15 @@
+{0: 'server_holds_lock:e0', 1: '__server_holds_lock:e0', 2: 'lock_msg:e0(`node:e0:2`)', 3: '__lock_msg:e0(`node:e0:2`)', 4: 'lock_msg:e0(`node:e0:1`)', 5: '__lock_msg:e0(`node:e0:1`)', 6: 'lock_msg:e0(`node:e0:0`)', 7: '__lock_msg:e0(`node:e0:0`)', 8: 'unlock_msg:e0(`node:e0:2`)', 9: '__unlock_msg:e0(`node:e0:2`)', 10: 'unlock_msg:e0(`node:e0:1`)', 11: '__unlock_msg:e0(`node:e0:1`)', 12: 'unlock_msg:e0(`node:e0:0`)', 13: '__unlock_msg:e0(`node:e0:0`)', 14: '(V__fml:n:e0 = `node:e0:0`)', 15: '(V__fml:n:e0 = `node:e0:1`)', 16: '(V__fml:n:e0 = `node:e0:2`)', 17: '__grant_msg:e0(`node:e0:0`)', 18: '__grant_msg:e0(`node:e0:1`)', 19: '__grant_msg:e0(`node:e0:2`)', 20: '__holds_lock:e0(`node:e0:2`)', 21: 'holds_lock:e0(`node:e0:2`)', 22: '__holds_lock:e0(`node:e0:1`)', 23: 'holds_lock:e0(`node:e0:1`)', 24: '__holds_lock:e0(`node:e0:0`)', 25: 'holds_lock:e0(`node:e0:0`)', 26: 'grant_msg:e0(`node:e0:2`)', 27: 'grant_msg:e0(`node:e0:1`)', 28: 'grant_msg:e0(`node:e0:0`)', 29: 'en_noop:e0', 30: 'en_ext:recv_lock:e0', 31: 'en_ext:recv_unlock:e0', 32: 'en_ext:unlock:e0', 33: 'en_ext:send_lock:e0', 34: 'en_ext:recv_grant:e0'}
 .i 13
 .o 1
 .ilb __server_holds_lock:e0 __lock_msg:e0(`node:e0:2`) __lock_msg:e0(`node:e0:1`) __lock_msg:e0(`node:e0:0`) __unlock_msg:e0(`node:e0:2`) __unlock_msg:e0(`node:e0:1`) __unlock_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:0`) __grant_msg:e0(`node:e0:1`) __grant_msg:e0(`node:e0:2`) __holds_lock:e0(`node:e0:2`) __holds_lock:e0(`node:e0:1`) __holds_lock:e0(`node:e0:0`)
 .ob out
-0---000000001 1
-0---000100000 1
-0---000010000 1
-1---000000000 1
-0---100000000 1
+0---010000000 1
 0---000001000 1
 0---000000100 1
 0---001000000 1
-0---010000000 1
+0---100000000 1
+0---000010000 1
+0---000100000 1
+0---000000001 1
 0---000000010 1
+1---000000000 1

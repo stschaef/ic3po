@@ -1,5 +1,7 @@
-.i 8
+{0: 'leader:e0(`node:e0:0`)', 1: '__leader:e0(`node:e0:0`)', 2: '(V__fml:next:e0 = `node:e0:0`)', 3: '(V__fml:n:e0 = `node:e0:0`)', 4: 'btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 5: '__pending:e0(`id:e0:1`, `node:e0:0`)', 6: '(idn:e0(`node:e0:0`) = `id:e0:0`)', 7: '(idn:e0(`node:e0:0`) = `id:e0:1`)', 8: '(idn:e0(V__fml:n:e0) = `id:e0:1`)', 9: 'pending:e0(`id:e0:1`, `node:e0:0`)', 10: '__pending:e0(`id:e0:0`, `node:e0:0`)', 11: '(idn:e0(V__fml:n:e0) = `id:e0:0`)', 12: 'pending:e0(`id:e0:0`, `node:e0:0`)', 13: '(V__fml:v:e0 = `id:e0:0`)', 14: '(V__fml:v:e0 = `id:e0:1`)', 15: '__ts0_b:e0', 16: '__m_pending:e0(`id:e0:1`, `node:e0:0`)', 17: '__ts0__ts0_a_a:e0', 18: '__m_pending:e0(`id:e0:0`, `node:e0:0`)', 19: 'le:e0(`id:e0:0`, `id:e0:0`)', 20: 'le:e0(`id:e0:0`, `id:e0:1`)', 21: 'le:e0(`id:e0:1`, `id:e0:0`)', 22: 'le:e0(`id:e0:1`, `id:e0:1`)', 23: '__fml:nondet:e0', 24: 'en_noop:e0', 25: 'en_ext:recv:e0', 26: 'en_ext:send:e0'}
+.i 13
 .o 1
-.ilb __leader:e0(`node:e0:0`) __pending:e0(`id:e0:1`, `node:e0:0`) __pending:e0(`id:e0:0`, `node:e0:0`) __ts0_b:e0 __m_pending:e0(`id:e0:1`, `node:e0:0`) __ts0__ts0_a_a:e0 __m_pending:e0(`id:e0:0`, `node:e0:0`) __fml:nondet:e0
+.ilb __leader:e0(`node:e0:0`) btw:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __pending:e0(`id:e0:1`, `node:e0:0`) __pending:e0(`id:e0:0`, `node:e0:0`) __ts0_b:e0 __m_pending:e0(`id:e0:1`, `node:e0:0`) __ts0__ts0_a_a:e0 __m_pending:e0(`id:e0:0`, `node:e0:0`) le:e0(`id:e0:0`, `id:e0:0`) le:e0(`id:e0:0`, `id:e0:1`) le:e0(`id:e0:1`, `id:e0:0`) le:e0(`id:e0:1`, `id:e0:1`) __fml:nondet:e0
 .ob out
--------- 1
+-0------1101- 1
+-0------1011- 1

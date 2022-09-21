@@ -3,6 +3,6 @@
 .o 1
 .ilb __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) member:e0(`acceptor:e0:0`, `quorum:e0:3`) __leader:e0(`proposer:e0:0`)
 .ob out
--011110 1
 1111110 1
+-011110 1
 1111111 1

@@ -1,14 +1,15 @@
+{0: '__chosen:e0(`value:e0:9`)', 1: '__chosen:e0(`value:e0:8`)', 2: '__chosen:e0(`value:e0:7`)', 3: '__chosen:e0(`value:e0:6`)', 4: '__chosen:e0(`value:e0:5`)', 5: '__chosen:e0(`value:e0:4`)', 6: '__chosen:e0(`value:e0:3`)', 7: '__chosen:e0(`value:e0:2`)', 8: '__chosen:e0(`value:e0:1`)', 9: '__chosen:e0(`value:e0:0`)', 10: '(V__fml:v:e0 = `value:e0:0`)', 11: '(V__fml:v:e0 = `value:e0:1`)', 12: '(V__fml:v:e0 = `value:e0:2`)', 13: '(V__fml:v:e0 = `value:e0:3`)', 14: '(V__fml:v:e0 = `value:e0:4`)', 15: '(V__fml:v:e0 = `value:e0:5`)', 16: '(V__fml:v:e0 = `value:e0:6`)', 17: '(V__fml:v:e0 = `value:e0:7`)', 18: '(V__fml:v:e0 = `value:e0:8`)', 19: '(V__fml:v:e0 = `value:e0:9`)', 20: 'chosen:e0(`value:e0:9`)', 21: 'chosen:e0(`value:e0:8`)', 22: 'chosen:e0(`value:e0:7`)', 23: 'chosen:e0(`value:e0:6`)', 24: 'chosen:e0(`value:e0:5`)', 25: 'chosen:e0(`value:e0:4`)', 26: 'chosen:e0(`value:e0:3`)', 27: 'chosen:e0(`value:e0:2`)', 28: 'chosen:e0(`value:e0:1`)', 29: 'chosen:e0(`value:e0:0`)', 30: 'en_noop:e0', 31: 'en_ext:choose:e0'}
 .i 10
 .o 1
 .ilb __chosen:e0(`value:e0:9`) __chosen:e0(`value:e0:8`) __chosen:e0(`value:e0:7`) __chosen:e0(`value:e0:6`) __chosen:e0(`value:e0:5`) __chosen:e0(`value:e0:4`) __chosen:e0(`value:e0:3`) __chosen:e0(`value:e0:2`) __chosen:e0(`value:e0:1`) __chosen:e0(`value:e0:0`)
 .ob out
 0000001000 1
-0100000000 1
-0000010000 1
-0000000100 1
--000000000 1
-0010000000 1
-0000000001 1
-0000000010 1
-0001000000 1
 0000100000 1
+-000000000 1
+0000000100 1
+0000000001 1
+0010000000 1
+0100000000 1
+0001000000 1
+0000010000 1
+0000000010 1

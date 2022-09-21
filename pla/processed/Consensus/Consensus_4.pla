@@ -1,8 +1,9 @@
+{0: '__chosen:e0(`value:e0:3`)', 1: '__chosen:e0(`value:e0:2`)', 2: '__chosen:e0(`value:e0:1`)', 3: '__chosen:e0(`value:e0:0`)', 4: '(V__fml:v:e0 = `value:e0:0`)', 5: '(V__fml:v:e0 = `value:e0:1`)', 6: '(V__fml:v:e0 = `value:e0:2`)', 7: '(V__fml:v:e0 = `value:e0:3`)', 8: 'chosen:e0(`value:e0:3`)', 9: 'chosen:e0(`value:e0:2`)', 10: 'chosen:e0(`value:e0:1`)', 11: 'chosen:e0(`value:e0:0`)', 12: 'en_noop:e0', 13: 'en_ext:choose:e0'}
 .i 4
 .o 1
 .ilb __chosen:e0(`value:e0:3`) __chosen:e0(`value:e0:2`) __chosen:e0(`value:e0:1`) __chosen:e0(`value:e0:0`)
 .ob out
 -000 1
 0010 1
-0001 1
 0100 1
+0001 1

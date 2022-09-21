@@ -1,7 +1,9 @@
-.i 4
+{0: 'vote:e0(`node:e0:0`, `value:e0:1`)', 1: '__vote:e0(`node:e0:0`, `value:e0:1`)', 2: 'vote:e0(`node:e0:0`, `value:e0:0`)', 3: '__vote:e0(`node:e0:0`, `value:e0:0`)', 4: '(V__fml:v:e0 = `value:e0:0`)', 5: '(V__fml:v:e0 = `value:e0:1`)', 6: '(V__fml:q:e0 = `quorum:e0:0`)', 7: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 8: '__decision:e0(`value:e0:1`)', 9: 'decision:e0(`value:e0:1`)', 10: '__decision:e0(`value:e0:0`)', 11: 'decision:e0(`value:e0:0`)', 12: '(V__fml:n:e0 = `node:e0:0`)', 13: 'en_noop:e0', 14: 'en_ext:cast_vote:e0', 15: 'en_ext:decide:e0'}
+.i 5
 .o 1
-.ilb __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) __decision:e0(`value:e0:1`) __decision:e0(`value:e0:0`)
+.ilb __vote:e0(`node:e0:0`, `value:e0:1`) __vote:e0(`node:e0:0`, `value:e0:0`) member:e0(`node:e0:0`, `quorum:e0:0`) __decision:e0(`value:e0:1`) __decision:e0(`value:e0:0`)
 .ob out
-1-10 1
---00 1
--101 1
+01101 1
+01100 1
+-0100 1
+10110 1

@@ -1,8 +1,26 @@
-.i 5
+{0: 'vote:e0(`node:e0:1`, `value:e0:0`)', 1: '__vote:e0(`node:e0:1`, `value:e0:0`)', 2: 'vote:e0(`node:e0:0`, `value:e0:0`)', 3: '__vote:e0(`node:e0:0`, `value:e0:0`)', 4: 'voted:e0(`node:e0:1`)', 5: '__voted:e0(`node:e0:1`)', 6: 'voted:e0(`node:e0:0`)', 7: '__voted:e0(`node:e0:0`)', 8: '(V__fml:v:e0 = `value:e0:0`)', 9: '(V__fml:q:e0 = `quorum:e0:0`)', 10: '(V__fml:q:e0 = `quorum:e0:1`)', 11: 'member:e0(`node:e0:1`, `quorum:e0:0`)', 12: 'member:e0(`node:e0:1`, `quorum:e0:1`)', 13: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 14: 'member:e0(`node:e0:0`, `quorum:e0:1`)', 15: '__decided:e0(`value:e0:0`)', 16: 'decided:e0(`value:e0:0`)', 17: '(V__fml:n:e0 = `node:e0:0`)', 18: '(V__fml:n:e0 = `node:e0:1`)', 19: 'en_noop:e0', 20: 'en_ext:cast_vote:e0', 21: 'en_ext:decide:e0'}
+.i 9
 .o 1
-.ilb __vote:e0(`node:e0:1`, `value:e0:0`) __vote:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:1`) __voted:e0(`node:e0:0`) __decided:e0(`value:e0:0`)
+.ilb __vote:e0(`node:e0:1`, `value:e0:0`) __vote:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:1`) __voted:e0(`node:e0:0`) member:e0(`node:e0:1`, `quorum:e0:0`) member:e0(`node:e0:1`, `quorum:e0:1`) member:e0(`node:e0:0`, `quorum:e0:0`) member:e0(`node:e0:0`, `quorum:e0:1`) __decided:e0(`value:e0:0`)
 .ob out
-1010- 1
-1111- 1
-0000- 1
-0101- 1
+111111011 1
+111111-01 1
+111111-00 1
+111111010 1
+101011011 1
+0101-0111 1
+0000--110 1
+111101111 1
+101011010 1
+101011-01 1
+000011010 1
+0101--110 1
+010101111 1
+000011-00 1
+1111--110 1
+1111-0111 1
+111111111 1
+010111-00 1
+010111010 1
+101011-00 1
+1010--110 1

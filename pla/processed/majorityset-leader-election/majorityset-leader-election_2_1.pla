@@ -1,6 +1,12 @@
-.i 8
+{0: 'leader:e0(`node:e0:1`)', 1: '__leader:e0(`node:e0:1`)', 2: 'leader:e0(`node:e0:0`)', 3: '__leader:e0(`node:e0:0`)', 4: 'vote:e0(`node:e0:1`, `node:e0:1`)', 5: '__vote:e0(`node:e0:1`, `node:e0:1`)', 6: 'vote:e0(`node:e0:1`, `node:e0:0`)', 7: '__vote:e0(`node:e0:1`, `node:e0:0`)', 8: 'vote:e0(`node:e0:0`, `node:e0:1`)', 9: '__vote:e0(`node:e0:0`, `node:e0:1`)', 10: 'vote:e0(`node:e0:0`, `node:e0:0`)', 11: '__vote:e0(`node:e0:0`, `node:e0:0`)', 12: '(V__fml:s2:e0 = `nodeset:e0:0`)', 13: 'majority:e0(`nodeset:e0:0`)', 14: '(V__new_fml:s1:e0 = `nodeset:e0:0`)', 15: '(V__new_fml:n:e0 = `node:e0:0`)', 16: '(V__new_fml:n:e0 = `node:e0:1`)', 17: 'member:e0(`node:e0:1`, `nodeset:e0:0`)', 18: 'member:e0(`node:e0:0`, `nodeset:e0:0`)', 19: '(V__fml:vs:e0 = `nodeset:e0:0`)', 20: '(V__fml:voter:e0 = `node:e0:0`)', 21: '(V__fml:voter:e0 = `node:e0:1`)', 22: '(V__fml:n:e0 = `node:e0:0`)', 23: '(V__fml:n:e0 = `node:e0:1`)', 24: '__voters:e0(`node:e0:0`, `nodeset:e0:0`)', 25: '__voters:e0(`node:e0:1`, `nodeset:e0:0`)', 26: '(V__new_fml:vs:e0 = `nodeset:e0:0`)', 27: 'voters:e0(`node:e0:1`, `nodeset:e0:0`)', 28: 'voters:e0(`node:e0:0`, `nodeset:e0:0`)', 29: '(V__fml:s1:e0 = `nodeset:e0:0`)', 30: '(V__fml:n1:e0 = `node:e0:0`)', 31: '(V__fml:n1:e0 = `node:e0:1`)', 32: '(V__fml:n2:e0 = `node:e0:0`)', 33: '(V__fml:n2:e0 = `node:e0:1`)', 34: '(emptyset:e0 = `nodeset:e0:0`)', 35: 'en_noop:e0', 36: 'en_ext:voting:e0', 37: 'en_ext:become_leader:e0', 38: 'en_ns.add:e0', 39: 'en_ext:receive_vote:e0'}
+.i 11
 .o 1
-.ilb __leader:e0(`node:e0:1`) __leader:e0(`node:e0:0`) __vote:e0(`node:e0:1`, `node:e0:1`) __vote:e0(`node:e0:1`, `node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:1`) __vote:e0(`node:e0:0`, `node:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:1`, `nodeset:e0:0`)
+.ilb __leader:e0(`node:e0:1`) __leader:e0(`node:e0:0`) __vote:e0(`node:e0:1`, `node:e0:1`) __vote:e0(`node:e0:1`, `node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:1`) __vote:e0(`node:e0:0`, `node:e0:0`) majority:e0(`nodeset:e0:0`) member:e0(`node:e0:1`, `nodeset:e0:0`) member:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:1`, `nodeset:e0:0`)
 .ob out
-00000000 1
-00----11 1
+00010100011 1
+00-00100011 1
+0001-000011 1
+000000-1000 1
+00000000000 1
+00-0-000011 1
+000000--100 1

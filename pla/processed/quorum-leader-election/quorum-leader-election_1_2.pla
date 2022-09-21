@@ -1,11 +1,27 @@
-.i 6
+{0: 'voted:e0(`node:e0:1`, `node:e0:1`)', 1: '__voted:e0(`node:e0:1`, `node:e0:1`)', 2: 'voted:e0(`node:e0:1`, `node:e0:0`)', 3: '__voted:e0(`node:e0:1`, `node:e0:0`)', 4: 'voted:e0(`node:e0:0`, `node:e0:1`)', 5: '__voted:e0(`node:e0:0`, `node:e0:1`)', 6: 'voted:e0(`node:e0:0`, `node:e0:0`)', 7: '__voted:e0(`node:e0:0`, `node:e0:0`)', 8: '(V__fml:n:e0 = `node:e0:0`)', 9: '(V__fml:n:e0 = `node:e0:1`)', 10: '(V__fml:s:e0 = `nset:e0:0`)', 11: 'member:e0(`node:e0:1`, `nset:e0:0`)', 12: 'member:e0(`node:e0:0`, `nset:e0:0`)', 13: 'majority:e0(`nset:e0:0`)', 14: '(quorum:e0 = `nset:e0:0`)', 15: '__isleader:e0(`node:e0:1`)', 16: 'isleader:e0(`node:e0:1`)', 17: '__isleader:e0(`node:e0:0`)', 18: 'isleader:e0(`node:e0:0`)', 19: '(__quorum:e0 = `nset:e0:0`)', 20: '(V__fml:v:e0 = `node:e0:0`)', 21: '(V__fml:v:e0 = `node:e0:1`)', 22: 'en_noop:e0', 23: 'en_ext:vote:e0', 24: 'en_ext:become_leader:e0'}
+.i 9
 .o 1
-.ilb __voted:e0(`node:e0:1`, `node:e0:1`) __voted:e0(`node:e0:1`, `node:e0:0`) __voted:e0(`node:e0:0`, `node:e0:1`) __voted:e0(`node:e0:0`, `node:e0:0`) __isleader:e0(`node:e0:1`) __isleader:e0(`node:e0:0`)
+.ilb __voted:e0(`node:e0:1`, `node:e0:1`) __voted:e0(`node:e0:1`, `node:e0:0`) __voted:e0(`node:e0:0`, `node:e0:1`) __voted:e0(`node:e0:0`, `node:e0:0`) member:e0(`node:e0:1`, `nset:e0:0`) member:e0(`node:e0:0`, `nset:e0:0`) majority:e0(`nset:e0:0`) __isleader:e0(`node:e0:1`) __isleader:e0(`node:e0:0`)
 .ob out
----101 1
--1--01 1
-1---10 1
--1-101 1
---1-10 1
-1-1-10 1
-----00 1
+010110100 1
+101011110 1
+100110110 1
+010110101 1
+011001110 1
+-001-1100 1
+0101-1100 1
+-001--000 1
+-00110100 1
+01-010101 1
+10-010110 1
+-00101101 1
+01-0--000 1
+-0-0--000 1
+01-010100 1
+-0-0-1100 1
+0101--000 1
+-01001110 1
+01-0-1100 1
+010111101 1
+-0-010100 1
+010101101 1

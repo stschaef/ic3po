@@ -3,8 +3,8 @@
 .o 1
 .ilb __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
--10111101 1
---0011100 1
 1-1011110 1
--10111100 1
 1-1011100 1
+-10111100 1
+--0011100 1
+-10111101 1

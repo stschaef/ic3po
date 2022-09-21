@@ -1,8 +1,9 @@
-.i 6
+{0: 'decided:e0(`node:e0:0`, `value:e0:0`)', 1: '__decided:e0(`node:e0:0`, `value:e0:0`)', 2: 'voted:e0(`node:e0:0`)', 3: '__voted:e0(`node:e0:0`)', 4: 'leader:e0(`node:e0:0`)', 5: '__leader:e0(`node:e0:0`)', 6: 'vote_msg:e0(`node:e0:0`, `node:e0:0`)', 7: '__vote_msg:e0(`node:e0:0`, `node:e0:0`)', 8: 'votes:e0(`node:e0:0`, `node:e0:0`)', 9: '__votes:e0(`node:e0:0`, `node:e0:0`)', 10: '__vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 11: '(V__fml:dst:e0 = `node:e0:0`)', 12: '(V__fml:src:e0 = `node:e0:0`)', 13: 'vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 14: '(V__fml:n:e0 = `node:e0:0`)', 15: '(V__fml:v:e0 = `value:e0:0`)', 16: '(V__fml:sender:e0 = `node:e0:0`)', 17: '(V__fml:q:e0 = `quorum:e0:0`)', 18: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 19: 'en_noop:e0', 20: 'en_ext:become_leader:e0', 21: 'en_ext:send_vote:e0', 22: 'en_ext:recv_vote:e0', 23: 'en_ext:decide:e0', 24: 'en_ext:send_request_vote:e0'}
+.i 7
 .o 1
-.ilb __decided:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:0`) __leader:e0(`node:e0:0`) __vote_msg:e0(`node:e0:0`, `node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`)
+.ilb __decided:e0(`node:e0:0`, `value:e0:0`) __voted:e0(`node:e0:0`) __leader:e0(`node:e0:0`) __vote_msg:e0(`node:e0:0`, `node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) member:e0(`node:e0:0`, `quorum:e0:0`)
 .ob out
-00000- 1
-01011- 1
-01010- 1
--1111- 1
+01011-1 1
+00000-1 1
+-1111-1 1
+01010-1 1

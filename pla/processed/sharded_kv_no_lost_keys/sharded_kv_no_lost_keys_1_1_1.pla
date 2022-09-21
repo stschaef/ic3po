@@ -1,6 +1,7 @@
+{0: '(V__fml:v:e0 = `value:e0:0`)', 1: '(V__fml:k:e0 = `key:e0:0`)', 2: '(V__fml:n_old:e0 = `node:e0:0`)', 3: '__table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 4: '__transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 5: '(V__fml:n_new:e0 = `node:e0:0`)', 6: 'transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 7: '__owner:e0(`node:e0:0`, `key:e0:0`)', 8: 'owner:e0(`node:e0:0`, `key:e0:0`)', 9: 'table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`)', 10: '(V__fml:n:e0 = `node:e0:0`)', 11: 'en_noop:e0', 12: 'en_ext:put:e0', 13: 'en_ext:recv_transfer_msg:e0', 14: 'en_ext:reshard:e0'}
 .i 3
 .o 1
 .ilb __table:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __transfer_msg:e0(`node:e0:0`, `key:e0:0`, `value:e0:0`) __owner:e0(`node:e0:0`, `key:e0:0`)
 .ob out
-010 1
 -01 1
+010 1

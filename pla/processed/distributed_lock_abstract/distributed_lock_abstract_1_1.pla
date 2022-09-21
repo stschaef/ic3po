@@ -1,6 +1,7 @@
-.i 5
+{0: 'transfer_msg:e0(`epoch:e0:0`, `node:e0:0`)', 1: '__transfer_msg:e0(`epoch:e0:0`, `node:e0:0`)', 2: '(V__fml:dst:e0 = `node:e0:0`)', 3: '(V__fml:e:e0 = `epoch:e0:0`)', 4: '__gt:e0(`epoch:e0:0`, `node:e0:0`)', 5: '__ts0_a:e0', 6: 'le:e0(`epoch:e0:0`, `epoch:e0:0`)', 7: 'gt:e0(`epoch:e0:0`, `node:e0:0`)', 8: '__locked:e0(`epoch:e0:0`, `node:e0:0`)', 9: 'locked:e0(`epoch:e0:0`, `node:e0:0`)', 10: '__held:e0(`node:e0:0`)', 11: 'held:e0(`node:e0:0`)', 12: '(V__fml:src:e0 = `node:e0:0`)', 13: '(zero:e0 = `epoch:e0:0`)', 14: '(first:e0 = `node:e0:0`)', 15: 'en_noop:e0', 16: 'en_ext:grant:e0', 17: 'en_ext:accept:e0'}
+.i 6
 .o 1
-.ilb __transfer_msg:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0 __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`)
+.ilb __transfer_msg:e0(`epoch:e0:0`, `node:e0:0`) __gt:e0(`epoch:e0:0`, `node:e0:0`) __ts0_a:e0 le:e0(`epoch:e0:0`, `epoch:e0:0`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:0`)
 .ob out
-00-01 1
-00-00 1
+00-101 1
+00-100 1

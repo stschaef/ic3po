@@ -1275,6 +1275,7 @@ class TransitionSystem(SmtLibParser):
 
         for f, amap in ann.items():
             for a, lst in amap.items():
+                print(a)
                 if a == "sort":
                     for v in lst:
                         sz = raw_input("|" + str(f.symbol_type()) + "|=?\t")

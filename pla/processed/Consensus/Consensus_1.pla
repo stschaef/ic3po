@@ -1,3 +1,4 @@
+{0: '__chosen:e0(`value:e0:0`)', 1: '(V__fml:v:e0 = `value:e0:0`)', 2: 'chosen:e0(`value:e0:0`)', 3: 'en_noop:e0', 4: 'en_ext:choose:e0'}
 .i 1
 .o 1
 .ilb __chosen:e0(`value:e0:0`)

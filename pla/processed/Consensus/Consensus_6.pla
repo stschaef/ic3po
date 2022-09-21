@@ -1,10 +1,11 @@
+{0: '__chosen:e0(`value:e0:5`)', 1: '__chosen:e0(`value:e0:4`)', 2: '__chosen:e0(`value:e0:3`)', 3: '__chosen:e0(`value:e0:2`)', 4: '__chosen:e0(`value:e0:1`)', 5: '__chosen:e0(`value:e0:0`)', 6: '(V__fml:v:e0 = `value:e0:0`)', 7: '(V__fml:v:e0 = `value:e0:1`)', 8: '(V__fml:v:e0 = `value:e0:2`)', 9: '(V__fml:v:e0 = `value:e0:3`)', 10: '(V__fml:v:e0 = `value:e0:4`)', 11: '(V__fml:v:e0 = `value:e0:5`)', 12: 'chosen:e0(`value:e0:5`)', 13: 'chosen:e0(`value:e0:4`)', 14: 'chosen:e0(`value:e0:3`)', 15: 'chosen:e0(`value:e0:2`)', 16: 'chosen:e0(`value:e0:1`)', 17: 'chosen:e0(`value:e0:0`)', 18: 'en_noop:e0', 19: 'en_ext:choose:e0'}
 .i 6
 .o 1
 .ilb __chosen:e0(`value:e0:5`) __chosen:e0(`value:e0:4`) __chosen:e0(`value:e0:3`) __chosen:e0(`value:e0:2`) __chosen:e0(`value:e0:1`) __chosen:e0(`value:e0:0`)
 .ob out
+000100 1
+000001 1
+-00000 1
 000010 1
 001000 1
--00000 1
-000100 1
 010000 1
-000001 1

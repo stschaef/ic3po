@@ -1,6 +1,8 @@
-.i 3
+{0: 'leader:e0(`node:e0:0`)', 1: '__leader:e0(`node:e0:0`)', 2: 'vote:e0(`node:e0:0`, `node:e0:0`)', 3: '__vote:e0(`node:e0:0`, `node:e0:0`)', 4: '(V__fml:s2:e0 = `nodeset:e0:0`)', 5: 'majority:e0(`nodeset:e0:0`)', 6: '(V__new_fml:s1:e0 = `nodeset:e0:0`)', 7: '(V__new_fml:n:e0 = `node:e0:0`)', 8: 'member:e0(`node:e0:0`, `nodeset:e0:0`)', 9: '(V__fml:vs:e0 = `nodeset:e0:0`)', 10: '(V__fml:voter:e0 = `node:e0:0`)', 11: '(V__fml:n:e0 = `node:e0:0`)', 12: '__voters:e0(`node:e0:0`, `nodeset:e0:0`)', 13: '(V__new_fml:vs:e0 = `nodeset:e0:0`)', 14: 'voters:e0(`node:e0:0`, `nodeset:e0:0`)', 15: '(V__fml:s1:e0 = `nodeset:e0:0`)', 16: '(V__fml:n1:e0 = `node:e0:0`)', 17: '(V__fml:n2:e0 = `node:e0:0`)', 18: '(emptyset:e0 = `nodeset:e0:0`)', 19: 'en_noop:e0', 20: 'en_ext:voting:e0', 21: 'en_ext:become_leader:e0', 22: 'en_ns.add:e0', 23: 'en_ext:receive_vote:e0'}
+.i 5
 .o 1
-.ilb __leader:e0(`node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`)
+.ilb __leader:e0(`node:e0:0`) __vote:e0(`node:e0:0`, `node:e0:0`) majority:e0(`nodeset:e0:0`) member:e0(`node:e0:0`, `nodeset:e0:0`) __voters:e0(`node:e0:0`, `nodeset:e0:0`)
 .ob out
-0-1 1
-000 1
+00-10 1
+0-001 1
+00000 1

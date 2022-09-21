@@ -4,9 +4,9 @@
 .ilb __start:e0(`proposer:e0:2`) __start:e0(`proposer:e0:1`) __start:e0(`proposer:e0:0`) __promise:e0(`acceptor:e0:0`, `proposer:e0:2`) __promise:e0(`acceptor:e0:0`, `proposer:e0:1`) __promise:e0(`acceptor:e0:0`, `proposer:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:0`) member:e0(`acceptor:e0:0`, `quorum:e0:1`) member:e0(`acceptor:e0:0`, `quorum:e0:2`) member:e0(`acceptor:e0:0`, `quorum:e0:3`) __leader:e0(`proposer:e0:2`) __leader:e0(`proposer:e0:1`) __leader:e0(`proposer:e0:0`)
 .ob out
 -1-0101111000 1
-1--1001111000 1
--1-0101111010 1
----0001111000 1
---10011111001 1
---10011111000 1
 1--1001111100 1
+--10011111001 1
+1--1001111000 1
+---0001111000 1
+--10011111000 1
+-1-0101111010 1

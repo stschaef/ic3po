@@ -56,7 +56,7 @@
             ],
         },
         {
-            "name": "firewall",
+            "name": "toy_lock",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/ic3po/top.py",
@@ -65,7 +65,7 @@
             "args": [
                 "-m",
                 "frpo",
-                "${workspaceFolder}/ivybench/mypyv/vmt/firewall.vmt",
+                "${workspaceFolder}/toy_lock/toy_lock.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],

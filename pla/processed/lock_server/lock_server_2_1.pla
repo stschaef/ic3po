@@ -1,8 +1,9 @@
+{0: '(V__fml:s:e0 = `server:e0:0`)', 1: '(V__fml:s:e0 = `server:e0:1`)', 2: '(V__fml:c:e0 = `client:e0:0`)', 3: '__link:e0(`client:e0:0`, `server:e0:0`)', 4: '__link:e0(`client:e0:0`, `server:e0:1`)', 5: '__semaphore:e0(`server:e0:1`)', 6: 'semaphore:e0(`server:e0:1`)', 7: '__semaphore:e0(`server:e0:0`)', 8: 'semaphore:e0(`server:e0:0`)', 9: 'link:e0(`client:e0:0`, `server:e0:1`)', 10: 'link:e0(`client:e0:0`, `server:e0:0`)', 11: 'en_noop:e0', 12: 'en_ext:connect:e0', 13: 'en_ext:disconnect:e0'}
 .i 4
 .o 1
 .ilb __link:e0(`client:e0:0`, `server:e0:0`) __link:e0(`client:e0:0`, `server:e0:1`) __semaphore:e0(`server:e0:1`) __semaphore:e0(`server:e0:0`)
 .ob out
-0011 1
-0101 1
 1100 1
+0101 1
+0011 1
 1010 1

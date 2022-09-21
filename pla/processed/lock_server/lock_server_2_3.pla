@@ -1,20 +1,21 @@
+{0: '(V__fml:s:e0 = `server:e0:0`)', 1: '(V__fml:s:e0 = `server:e0:1`)', 2: '(V__fml:c:e0 = `client:e0:0`)', 3: '(V__fml:c:e0 = `client:e0:1`)', 4: '(V__fml:c:e0 = `client:e0:2`)', 5: '__link:e0(`client:e0:0`, `server:e0:0`)', 6: '__link:e0(`client:e0:0`, `server:e0:1`)', 7: '__link:e0(`client:e0:1`, `server:e0:0`)', 8: '__link:e0(`client:e0:1`, `server:e0:1`)', 9: '__link:e0(`client:e0:2`, `server:e0:0`)', 10: '__link:e0(`client:e0:2`, `server:e0:1`)', 11: '__semaphore:e0(`server:e0:1`)', 12: 'semaphore:e0(`server:e0:1`)', 13: '__semaphore:e0(`server:e0:0`)', 14: 'semaphore:e0(`server:e0:0`)', 15: 'link:e0(`client:e0:2`, `server:e0:1`)', 16: 'link:e0(`client:e0:1`, `server:e0:1`)', 17: 'link:e0(`client:e0:0`, `server:e0:1`)', 18: 'link:e0(`client:e0:2`, `server:e0:0`)', 19: 'link:e0(`client:e0:1`, `server:e0:0`)', 20: 'link:e0(`client:e0:0`, `server:e0:0`)', 21: 'en_noop:e0', 22: 'en_ext:connect:e0', 23: 'en_ext:disconnect:e0'}
 .i 8
 .o 1
 .ilb __link:e0(`client:e0:0`, `server:e0:0`) __link:e0(`client:e0:0`, `server:e0:1`) __link:e0(`client:e0:1`, `server:e0:0`) __link:e0(`client:e0:1`, `server:e0:1`) __link:e0(`client:e0:2`, `server:e0:0`) __link:e0(`client:e0:2`, `server:e0:1`) __semaphore:e0(`server:e0:1`) __semaphore:e0(`server:e0:0`)
 .ob out
 00011000 1
+00100100 1
+00100010 1
+00010001 1
+10010000 1
+00001100 1
+10000010 1
 11000000 1
 01100000 1
-10010000 1
-10000010 1
-01001000 1
-00010001 1
-00100100 1
 00000101 1
-00000011 1
-00100010 1
-00001010 1
-10000100 1
 00110000 1
 01000001 1
-00001100 1
+00000011 1
+01001000 1
+00001010 1
+10000100 1

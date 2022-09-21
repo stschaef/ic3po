@@ -1,7 +1,9 @@
-.i 5
+{0: 'rcv_msg:e0(`node:e0:0`, `node:e0:0`)', 1: '__rcv_msg:e0(`node:e0:0`, `node:e0:0`)', 2: 'accept:e0(`node:e0:0`)', 3: '__accept:e0(`node:e0:0`)', 4: '(V__fml:n:e0 = `node:e0:0`)', 5: 'member_fa:e0(`node:e0:0`)', 6: '__sent_msg:e0(`node:e0:0`, `node:e0:0`)', 7: '__fml:nondet:e0', 8: 'sent_msg:e0(`node:e0:0`, `node:e0:0`)', 9: '__sent_msg_proj:e0(`node:e0:0`)', 10: 'sent_msg_proj:e0(`node:e0:0`)', 11: 'rcv_init:e0(`node:e0:0`)', 12: 'member_fi:e0(`node:e0:0`)', 13: '(V__fml:s:e0 = `node:e0:0`)', 14: 'member_fc:e0(`node:e0:0`)', 15: 'member_a:e0(`node:e0:0`, `quorum_a:e0:0`)', 16: 'member_b:e0(`node:e0:0`, `quorum_b:e0:1`)', 17: 'member_b:e0(`node:e0:0`, `quorum_b:e0:0`)', 18: 'member_fs:e0(`node:e0:0`)', 19: 'en_noop:e0', 20: 'en_ext:receive_msg:e0', 21: 'en_ext:receive_msg_i:e0', 22: 'en_ext:faulty_state_sa:e0', 23: 'en_ext:faulty_send_s:e0', 24: 'en_ext:receive_msg_c:e0', 25: 'en_ext:receive_init_i:e0', 26: 'en_ext:receive_init:e0', 27: 'en_ext:faulty_send_a:e0'}
+.i 13
 .o 1
-.ilb __rcv_msg:e0(`node:e0:0`, `node:e0:0`) __accept:e0(`node:e0:0`) __sent_msg:e0(`node:e0:0`, `node:e0:0`) __fml:nondet:e0 __sent_msg_proj:e0(`node:e0:0`)
+.ilb __rcv_msg:e0(`node:e0:0`, `node:e0:0`) __accept:e0(`node:e0:0`) member_fa:e0(`node:e0:0`) __sent_msg:e0(`node:e0:0`, `node:e0:0`) __fml:nondet:e0 __sent_msg_proj:e0(`node:e0:0`) rcv_init:e0(`node:e0:0`) member_fi:e0(`node:e0:0`) member_fc:e0(`node:e0:0`) member_a:e0(`node:e0:0`, `quorum_a:e0:0`) member_b:e0(`node:e0:0`, `quorum_b:e0:1`) member_b:e0(`node:e0:0`, `quorum_b:e0:0`) member_fs:e0(`node:e0:0`)
 .ob out
-111-1 1
-001-1 1
-000-0 1
+0000-00001110 1
+0001-11001110 1
+0000-01001110 1
+1101-11001110 1

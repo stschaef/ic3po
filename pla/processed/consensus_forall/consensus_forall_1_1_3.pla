@@ -1,10 +1,11 @@
-.i 9
+{0: '(voting_quorum:e0 = `quorum:e0:0`)', 1: '(__voting_quorum:e0 = `quorum:e0:0`)', 2: 'voted:e0(`node:e0:0`)', 3: '__voted:e0(`node:e0:0`)', 4: 'leader:e0(`node:e0:0`)', 5: '__leader:e0(`node:e0:0`)', 6: 'vote_msg:e0(`node:e0:0`, `node:e0:0`)', 7: '__vote_msg:e0(`node:e0:0`, `node:e0:0`)', 8: 'vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 9: '__vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 10: 'votes:e0(`node:e0:0`, `node:e0:0`)', 11: '__votes:e0(`node:e0:0`, `node:e0:0`)', 12: '(V__fml:n:e0 = `node:e0:0`)', 13: '__decided:e0(`node:e0:0`, `value:e0:2`)', 14: '__decided:e0(`node:e0:0`, `value:e0:1`)', 15: '__decided:e0(`node:e0:0`, `value:e0:0`)', 16: '(V__fml:v:e0 = `value:e0:0`)', 17: '(V__fml:v:e0 = `value:e0:1`)', 18: '(V__fml:v:e0 = `value:e0:2`)', 19: 'decided:e0(`node:e0:0`, `value:e0:2`)', 20: 'decided:e0(`node:e0:0`, `value:e0:1`)', 21: 'decided:e0(`node:e0:0`, `value:e0:0`)', 22: '(V__fml:dst:e0 = `node:e0:0`)', 23: '(V__fml:src:e0 = `node:e0:0`)', 24: '__fml:nondet:e0', 25: '(V__fml:sn:e0 = `node:e0:0`)', 26: '(V__fml:q:e0 = `quorum:e0:0`)', 27: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 28: '(V__fml:sender:e0 = `node:e0:0`)', 29: 'en_noop:e0', 30: 'en_ext:recv_vote:e0', 31: 'en_ext:become_leader:e0', 32: 'en_ext:choose_voting_quorum:e0', 33: 'en_ext:send_vote:e0', 34: 'en_ext:send_request_vote:e0', 35: 'en_ext:decide:e0'}
+.i 10
 .o 1
-.ilb __voted:e0(`node:e0:0`) __leader:e0(`node:e0:0`) __vote_msg:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __decided:e0(`node:e0:0`, `value:e0:2`) __decided:e0(`node:e0:0`, `value:e0:1`) __decided:e0(`node:e0:0`, `value:e0:0`) __fml:nondet:e0
+.ilb __voted:e0(`node:e0:0`) __leader:e0(`node:e0:0`) __vote_msg:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __decided:e0(`node:e0:0`, `value:e0:2`) __decided:e0(`node:e0:0`, `value:e0:1`) __decided:e0(`node:e0:0`, `value:e0:0`) __fml:nondet:e0 member:e0(`node:e0:0`, `quorum:e0:0`)
 .ob out
-1-1-1000- 1
-000-0000- 1
-101-0000- 1
-111-1010- 1
-111-1001- 1
-111-1100- 1
+101-0000-1 1
+111-1001-1 1
+1-1-1000-1 1
+111-1100-1 1
+111-1010-1 1
+000-0000-1 1

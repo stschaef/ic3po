@@ -1,8 +1,9 @@
-.i 3
+{0: 'response_sent:e0(`node:e0:0`, `response:e0:0`)', 1: '__response_sent:e0(`node:e0:0`, `response:e0:0`)', 2: 'response_received:e0(`node:e0:0`, `response:e0:0`)', 3: '__response_received:e0(`node:e0:0`, `response:e0:0`)', 4: '__request_sent:e0(`node:e0:0`, `request:e0:0`)', 5: '(V__fml:r:e0 = `request:e0:0`)', 6: '(V__fml:n:e0 = `node:e0:0`)', 7: 'request_sent:e0(`node:e0:0`, `request:e0:0`)', 8: '(V__fml:p:e0 = `response:e0:0`)', 9: 'match:e0(`request:e0:0`, `response:e0:0`)', 10: 'en_noop:e0', 11: 'en_ext:receive_response:e0', 12: 'en_ext:respond:e0', 13: 'en_ext:new_request:e0'}
+.i 4
 .o 1
-.ilb __response_sent:e0(`node:e0:0`, `response:e0:0`) __response_received:e0(`node:e0:0`, `response:e0:0`) __request_sent:e0(`node:e0:0`, `request:e0:0`)
+.ilb __response_sent:e0(`node:e0:0`, `response:e0:0`) __response_received:e0(`node:e0:0`, `response:e0:0`) __request_sent:e0(`node:e0:0`, `request:e0:0`) match:e0(`request:e0:0`, `response:e0:0`)
 .ob out
-00- 1
--01 1
-000 1
-111 1
+1111 1
+-011 1
+00-0 1
+0001 1

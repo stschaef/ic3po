@@ -1,7 +1,8 @@
-.i 6
+{0: '(voting_quorum:e0 = `quorum:e0:0`)', 1: '(voting_quorum:e0 = `quorum:e0:1`)', 2: '(__voting_quorum:e0 = `quorum:e0:0`)', 3: '(__voting_quorum:e0 = `quorum:e0:1`)', 4: 'leader:e0(`node:e0:0`)', 5: '__leader:e0(`node:e0:0`)', 6: 'votes:e0(`node:e0:0`, `node:e0:0`)', 7: '__votes:e0(`node:e0:0`, `node:e0:0`)', 8: '(V__fml:src:e0 = `node:e0:0`)', 9: '(V__fml:dst:e0 = `node:e0:0`)', 10: '__vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 11: '__voted:e0(`node:e0:0`)', 12: '__fml:nondet:e0', 13: 'vote_request_msg:e0(`node:e0:0`, `node:e0:0`)', 14: 'voted:e0(`node:e0:0`)', 15: '__vote_msg:e0(`node:e0:0`, `node:e0:0`)', 16: 'vote_msg:e0(`node:e0:0`, `node:e0:0`)', 17: '(V__fml:n:e0 = `node:e0:0`)', 18: 'member:e0(`node:e0:0`, `quorum:e0:0`)', 19: 'member:e0(`node:e0:0`, `quorum:e0:1`)', 20: '(V__fml:sn:e0 = `node:e0:0`)', 21: '(V__fml:q:e0 = `quorum:e0:0`)', 22: '(V__fml:q:e0 = `quorum:e0:1`)', 23: '(V__fml:sender:e0 = `node:e0:0`)', 24: 'en_noop:e0', 25: 'en_ext:recv_vote:e0', 26: 'en_ext:choose_voting_quorum:e0', 27: 'en_ext:become_leader:e0', 28: 'en_ext:send_request_vote:e0', 29: 'en_ext:send_vote:e0'}
+.i 8
 .o 1
-.ilb __leader:e0(`node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __voted:e0(`node:e0:0`) __fml:nondet:e0 __vote_msg:e0(`node:e0:0`, `node:e0:0`)
+.ilb __leader:e0(`node:e0:0`) __votes:e0(`node:e0:0`, `node:e0:0`) __vote_request_msg:e0(`node:e0:0`, `node:e0:0`) __voted:e0(`node:e0:0`) __fml:nondet:e0 __vote_msg:e0(`node:e0:0`, `node:e0:0`) member:e0(`node:e0:0`, `quorum:e0:0`) member:e0(`node:e0:0`, `quorum:e0:1`)
 .ob out
-00-0-0 1
--1-1-1 1
-00-1-1 1
+00-0-011 1
+-1-1-111 1
+00-1-111 1

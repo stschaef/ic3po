@@ -1,5 +1,6 @@
-.i 5
+{0: 'route_tc:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 1: '__route_tc:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`)', 2: 'route_dom:e0(`node:e0:0`, `node:e0:0`)', 3: '__route_dom:e0(`node:e0:0`, `node:e0:0`)', 4: '__pending:e0(`packet:e0:0`, `node:e0:0`, `node:e0:0`)', 5: '(V__fml:p:e0 = `packet:e0:0`)', 6: '(src:e0(`packet:e0:0`) = `node:e0:0`)', 7: '(src:e0(V__fml:p:e0) = `node:e0:0`)', 8: 'pending:e0(`packet:e0:0`, `node:e0:0`, `node:e0:0`)', 9: '(V__fml:sw1:e0 = `node:e0:0`)', 10: '(dst:e0(`packet:e0:0`) = `node:e0:0`)', 11: '(dst:e0(V__fml:p:e0) = `node:e0:0`)', 12: '(V__fml:sw0:e0 = `node:e0:0`)', 13: '__ts0_a_a:e0', 14: 'link:e0(`node:e0:0`, `node:e0:0`)', 15: '__ts0_a:e0', 16: '(V__fml:sw2:e0 = `node:e0:0`)', 17: 'en_noop:e0', 18: 'en_ext:route:e0', 19: 'en_ext:flood:e0', 20: 'en_ext:new_packet:e0'}
+.i 6
 .o 1
-.ilb __route_tc:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __route_dom:e0(`node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:0`, `node:e0:0`, `node:e0:0`) __ts0_a_a:e0 __ts0_a:e0
+.ilb __route_tc:e0(`node:e0:0`, `node:e0:0`, `node:e0:0`) __route_dom:e0(`node:e0:0`, `node:e0:0`) __pending:e0(`packet:e0:0`, `node:e0:0`, `node:e0:0`) __ts0_a_a:e0 link:e0(`node:e0:0`, `node:e0:0`) __ts0_a:e0
 .ob out
-10--- 1
+10--0- 1
