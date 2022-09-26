@@ -1,5 +1,20 @@
 import sys
 
+def dont_care_assignments(in_set, out_set):
+    new_in_set = set()
+    change = False
+    for string in in_set:
+        if string.count("-") == 0:
+            out_set.add(string)
+            continue
+        change = True
+        new_in_set.add(string.replace('-', '0', 1))
+        new_in_set.add(string.replace('-', '1', 1))
+    if not change:
+        return
+    dont_care_assignments(new_in_set, out_set)
+
+
 with open(sys.argv[1], "r") as f:
     content = f.read()
     if len(content.split("\n")) < 4:
@@ -46,6 +61,11 @@ with open(sys.argv[1], "r") as f:
                 s += line[i]
         # print(s)
         R.add(s)
+        # minterms = set()
+        # dont_care_assignments(set([s]), minterms)
+        # R.update(minterms)
+        # print("R", R)
+
 
 print(f".i {len(used_labels)}")
 print(f".o 1")

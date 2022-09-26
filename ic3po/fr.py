@@ -1107,6 +1107,7 @@ class FR(object):
 
         
         self.ddmanager.PrintMinterm(totalR)
+        # https://stackoverflow.com/questions/24277488/in-python-how-to-capture-the-stdout-from-a-c-shared-library-to-a-variable
 
         # eprint("\t(found total #%d paths)" % totalPathCount)
         # print("\t(found total #%d paths)" % totalPathCount)

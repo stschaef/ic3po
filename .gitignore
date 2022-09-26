@@ -27,6 +27,7 @@ repycudd/
 *.o
 *.so
 yices2/
+*/raw/
 
 # But not these files
 !.gitignore

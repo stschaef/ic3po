@@ -1,0 +1,4 @@
+@     0s  Reading from file toy_lock/normal/toy_lock.vmt
+sort
+|epoch|=?	sort
+|node|=?	
