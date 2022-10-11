@@ -41,7 +41,7 @@
             ],
         },
         {
-            "name": "ring",
+            "name": "tc",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/ic3po/top.py",
@@ -49,8 +49,8 @@
             "subProcess": true,
             "args": [
                 "-m",
-                "frpo",
-                "${workspaceFolder}/ivybench/ex/vmt/ring.vmt",
+                "satfr",
+                "${workspaceFolder}/ivybench/tla/vmt/TCommit.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],
@@ -64,8 +64,8 @@
             "subProcess": true,
             "args": [
                 "-m",
-                "frpo",
-                "${workspaceFolder}/toy_lock/toy_lock.vmt",
+                "satfr",
+                "${workspaceFolder}/toy_lock/normal/toy_lock.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],

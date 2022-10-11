@@ -49,6 +49,7 @@ class System():
         self._infers = dict()
         self._definitions = dict()
         self._definitionMap = dict()
+        self._symbols = set()
     
     def copy(self, rhs):
         self._init = rhs._init
@@ -116,6 +117,7 @@ class System():
         self._nexstates.add(nex)
         self._pre2nex[pre] = nex
         self._nex2pre[nex] = pre
+        self._symbols.add(formula)
 
     def add_global_state(self, formula):
         if formula.is_function_application():

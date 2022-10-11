@@ -104,6 +104,9 @@ def main():
     if common.gopts.mode == "frpo":
         from fr import forwardReach
         system = forwardReach(common.gopts.file)
+    elif common.gopts.mode == "satfr":
+        from fr import sat_forwardReach
+        system = sat_forwardReach(common.gopts.file)
         # backwardReach(common.gopts.file, system)
     else:
         backwardReach(common.gopts.file, None)

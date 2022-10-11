@@ -26,6 +26,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 def print_stat(key, val):
+    return
     common.gopts.statsF.write("%s:\t%s\n" % (key, val))
 
 def print_stat_stdout(key, val, prefix="\t"):

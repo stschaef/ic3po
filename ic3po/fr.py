@@ -44,11 +44,14 @@ class FR(object):
         self.time_stat = dict()
         self.query_stat = dict()
         self.init_stats()
+        self.qf_fallback_timeout = 0
         self.reset()
         self.debug = False
         self.ordered = "none"
         self.quorums = "none"
+        self.random = common.gopts.random
         self.qf = common.gopts.qf
+        self.verbose = common.gopts.verbosity
         self.cache_qf = dict()
         self.cache_qu = dict()
         self.eval_wires = False
@@ -60,6 +63,7 @@ class FR(object):
         self._trel_formula = TRUE()
         self.boost_ordered_en = False
         self.boost_quorums_en = False
+        self.globalEnum = set()
         self.framesolver = []
         self.exp = False
     
@@ -67,8 +71,8 @@ class FR(object):
         self.stat[name] = value
 
     def init_solver(self):
-        solver = Solver(name="bdd", logic=BOOL)
-        return solver
+        self.solver = Solver(name="z3")
+        # return solver
 
     def reset(self):
         # self.qesolver = QuantifierEliminator(name='z3')
@@ -314,29 +318,320 @@ class FR(object):
                 cubeEq = Exists(qvarsNew, cubeEq)
         return cubeEq
     
+    def print_query(self, solver, fname, prefix, formulae, force):
+        if force or (self.verbose > 9):
+            if not isinstance(solver, pysmt.solvers.z3.Z3Solver):
+                return
+            fname = "%s/%s.smt2" % (common.gopts.out, fname)
+            f = open(fname, "w+")
+            if prefix != "":
+                f.write(prefix)
+    #         solver.print_query(f, formulae)
+            solver.print_query(f)
+            f.close()
+    
     def check_query(self, solver, formulae=None, timeout=None):
-        # print("Formulae #%d:" % len(formulae))
-        # for f in formulae:
-        #     print("\t%s" % f.serialize())
-        # print()
-        
-        res = solver.solve() if formulae == None else solver.solve(formulae)
+        self.print_query(solver, "last", "", formulae, False)
+        if timeout == None:
+            timeout = self.qf_fallback_timeout
+        solver.set_timeout(timeout)
+        try:
+            res = solver.solve() if formulae == None else solver.solve(formulae)
+            self.last_solver = solver
+        except SolverReturnedUnknownResultError:
+            if self.qf_fallback_timeout == 0:
+                self.print_query(solver, "last", "", formulae, True)
+                print("Error in solver result.")
+                print("Z3 reason for unknown: %s" % solver.reason_unknown())
+#                 assert(0)
+            bp, assertions, n = solver.export_assertions()
+#             print("backtrack points #%d:\n%s" % (len(bp), bp))
+#             print("assertions #%d:\n%s" % (len(assertions), assertions))
+#             print("named assertions #%d:" % (len(n)))
+#             for i in n:
+#                 print("\t", i, " of type %s" % type(i))
+
+#             new_solver = Solver(name="z3", logic="UF", random_seed=self.solver_seed())
+            new_solver = self.init_solver(1)
+            for i in assertions:
+                if isinstance(i, tuple):
+                    new_solver.add_assertion(i[2], i[1])
+                else:
+                    new_solver.add_assertion(i)
+            
+            if len(self.system._fin2sort) != 0:
+                timeout = 0
+                print("\t(trying fresh solver)")
+            else:
+                print("\t(trying qf)")
+            new_solver.set_timeout(timeout)
+            try:
+                res = new_solver.solve() if formulae == None else new_solver.solve(formulae)
+                self.last_solver = new_solver
+                print("\t(faster)")
+            except SolverReturnedUnknownResultError:
+                if self.qf_fallback_timeout == 0:
+                    self.print_query(new_solver, "last2", "", formulae, True)
+                    print("Error in solver result (attempt #2).")
+                    print("Z3 reason for unknown (attempt #2): %s" % new_solver.reason_unknown())
+                    assert(0)
+                print("\t(failed with timeout: %ds)" % (timeout/1000))
+                timeout = 3*timeout
+                return self.check_query(solver, formulae, timeout)
+
+#                 solver.set_timeout(0)
+#                 res = solver.solve() if formulae == None else solver.solve(formulae)
+#                 self.last_solver = solver
+
+#         if (len(n) > 0) and not res:
+#            print("core: %s" % self.last_solver.get_unsat_core())
+#            assert(0)
+#         assert(0)
         return res
+
+    def update_max_query(self, solver, name, value, infinite, core):
+        name = "time-q-max" + name
+        name += "-core" if core else ""
+        name += "-infinite" if infinite else "-finite"
+        value *= 1000
+        modified = self.update_query_stat(name, value)
+        if modified:
+            prefix = "(set-info :time %.0fms)\n\n" % value
+#             print(prefix)
+            self.print_query(solver, name, prefix, None, False)
 
     def solve_formula(self, solver, formula, quiet=False):
         """Check whether formula is satisfiable or not"""
 #         print("Formula: %s" % formula.serialize())
-        formulae = self.get_formulae(formula)
+        self.update_stat("scalls")
+        if len(self.system._sort2fin) > 0:
+            self.update_stat("scalls-finite")
+            if len(self.system._sort2fin) == len(self.system._sorts):
+                self.update_stat("scalls-finite-full")
+        else:
+            self.update_stat("scalls-infinite")
+        
+        formulae = None
+        if formula != TRUE():
+            formulae = self.get_formulae(formula)
         push_time()
         res = self.check_query(solver, formulae)
         if res:
             if (not quiet):
                 print("-> SAT")
+            self.update_max_query(solver, "", pop_time(), len(self.system._sort2fin) == 0, False)
             return True
         else:
             if (not quiet):
                 print("-> UNSAT")
+            self.update_max_query(solver, "", pop_time(), len(self.system._sort2fin) == 0, False)
             return False
+
+    def solve_with_model(self, solver, formula, dest, quiet=False):
+        """Provides a satisfiable assignment to the state variables that are consistent with the input formula"""
+        result = self.solve_formula(solver, formula, quiet)
+        if result:
+            model = self.last_solver.get_model()
+#             model.print_model()
+            sorts = dict()
+            isorts = dict()
+            if len(self.system._sort2fin) != len(self.system._sorts):
+                isorts = model.get_diagram_sorts()       
+#             model.get_diagram_funcs()   
+            for k, v in isorts.items():
+                sorts[k] = v
+            for k, v in self.system._enumsorts.items():
+                sorts[k] = v
+#             print("\tmodel isorts: %s" % isorts)
+#             print("\tmodel sorts: %s" % sorts)
+            
+            conditions = []
+            
+            for lhs, rhs in self.system.curr._predicates.items():
+                assert(lhs.is_function_application())
+                s = lhs.function_name()
+                a = lhs.args()
+                s_type = s.symbol_type()
+                assert(len(s_type.param_types) <= 4)
+
+                subs = dict()
+                if (len(s_type.param_types) <= 0):
+                    rhsNew = rhs.simple_substitute(subs)
+                    conditions.append(self.get_predicate_value(rhsNew, model))
+                else:
+                    subs = {}
+                    self.get_predicate_values(s, s_type, model, sorts, conditions, rhs, a, subs, 0)
+#                     i_values = sorts[s_type.param_types[0]]
+#                     for i in i_values:
+#                         subs[a[0]] = i
+#                         if (len(s_type.param_types) <= 1):
+#                             rhsNew = rhs.simple_substitute(subs)
+#                             conditions.append(self.get_predicate_value(rhsNew, model))
+#                             continue
+#                         j_values = sorts[s_type.param_types[1]]
+#                         for j in j_values:
+#                             subs[a[1]] = j
+#                             if (len(s_type.param_types) <= 2):
+#                                 rhsNew = rhs.simple_substitute(subs)
+#                                 conditions.append(self.get_predicate_value(rhsNew, model))
+#                                 continue
+#                             k_values = sorts[s_type.param_types[2]]
+#                             for k in k_values:
+#                                 subs[a[2]] = k
+#                                 if (len(s_type.param_types) <= 3):
+#                                     rhsNew = rhs.simple_substitute(subs)
+#                                     conditions.append(self.get_predicate_value(rhsNew, model))
+#                                     continue
+#                                 l_values = sorts[s_type.param_types[3]]
+#                                 for l in l_values:
+#                                     subs[a[3]] = l
+#                                     rhsNew = rhs.simple_substitute(subs)
+#                                     conditions.append(self.get_predicate_value(rhsNew, model))
+#                                     if (len(s_type.param_types) > 3):
+#                                         print("Found a case with more than 5 arguments to a symbol.")
+#                                         assert(0)
+#             print(conditions)
+#             assert(0)
+
+            for s in self.system.curr._states:
+                if self.eval_wires:
+                    if s in self.system.curr._definitionMap:
+                        continue
+                
+#                 print("Symbol: ", s)
+                s_type = s.symbol_type()
+
+                if s_type.is_function_type():
+                    args = []
+                    self.get_state_values(s, s_type, model, sorts, conditions, args, 0)
+#                     i_values = sorts[s_type.param_types[0]]
+#                     for i in i_values:
+#                         if (len(s_type.param_types) == 1):
+#                             args = [i]
+#                             conditions.append(self.get_relation_value(s, args, model))
+#                         elif (len(s_type.param_types) == 2):
+#                             j_values = sorts[s_type.param_types[1]]
+#                             for j in j_values:
+#                                 args = [i, j]
+#                                 conditions.append(self.get_relation_value(s, args, model))
+#                         elif (len(s_type.param_types) == 3):
+#                             j_values = sorts[s_type.param_types[1]]
+#                             for j in j_values:
+#                                 k_values = sorts[s_type.param_types[2]]
+#                                 for k in k_values:
+#                                     args = [i, j, k]
+#                                     conditions.append(self.get_relation_value(s, args, model))
+#                         elif (len(s_type.param_types) == 4):
+#                             j_values = sorts[s_type.param_types[1]]
+#                             for j in j_values:
+#                                 k_values = sorts[s_type.param_types[2]]
+#                                 for k in k_values:
+#                                     l_values = sorts[s_type.param_types[3]]
+#                                     for l in l_values:
+#                                         args = [i, j, k, l]
+#                                         conditions.append(self.get_relation_value(s, args, model))
+#                         elif (len(s_type.param_types) == 5):
+#                             j_values = sorts[s_type.param_types[1]]
+#                             for j in j_values:
+#                                 k_values = sorts[s_type.param_types[2]]
+#                                 for k in k_values:
+#                                     l_values = sorts[s_type.param_types[3]]
+#                                     for l in l_values:
+#                                         m_values = sorts[s_type.param_types[4]]
+#                                         for m in m_values:
+#                                             args = [i, j, k, l, m]
+#                                             conditions.append(self.get_relation_value(s, args, model))
+#                         else:
+#                             print("Found a case with more than 5 arguments to a symbol.")
+#                             assert(0)
+                else:
+                    f = Function(s, [])
+                    if f.is_symbol() and f in self.system.curr._globals:
+                        rhs = self.get_state_value(f, model)
+                        if rhs.is_enum_constant() and str(rhs.constant_type()).startswith("epoch"):
+                            self.globalEnum.add(rhs)
+#                             print("adding global enum: %s" % pretty_print_str(rhs))
+
+                    eq = self.get_predicate_value(f, model)
+                    if self.ordered == "zero":
+                        fstr = pretty_print_str(f)
+                        if fstr != "zero" and fstr != "firste":
+                            conditions.append(eq)
+                    else:
+                        conditions.append(eq)
+#             for c in conditions:
+#                 print("%s" % pretty_serialize(c))
+#             assert(0)
+
+            ivars = []
+            ivarMap = {}
+            for s, values in isorts.items():
+                for i in range(len(values)):
+                    v = values[i]
+                    name = "Q:" + str(s) + str(len(ivarMap))
+                    qv = Symbol(name, s)
+                    ivarMap[v] = qv
+                    ivars.append(qv)
+#                     ivars.append(v)
+                    for j in range(i+1, len(values)):
+                        if i != j:
+                            neq = Not(EqualsOrIff(v, values[j]))
+                            conditions.append(neq)
+#                             print("adding to cube: %s" % str(neq))
+
+            if len(dest) != 0:
+                print("(action info)")
+                inputConditions = []
+                actionIdx = -1
+                for idx, f in enumerate(self.system.curr._actions):
+                    en = f[2]
+                    enValue = self.get_state_value(en, model)
+                    if (enValue == TRUE()):
+                        actionIdx = idx
+                        actionName = f[1]
+                        print("\taction: %s" % actionName)
+    #                     print("\ten: " + str(en) + " with value " + str(enValue))
+                        
+                        print("\tinputs:")
+                        if actionName in self.system.syntax.action2inputs:
+                            actionInputs = self.system.syntax.action2inputs[actionName]
+                            for inp in actionInputs:
+                                inpValueEnum = self.get_state_value(inp, model)
+                                if self.allow_inputs_in_cube:
+                                    conditions.append(EqualsOrIff(inp, inpValueEnum))
+                                inpValue = inpValueEnum.simple_substitute(ivarMap)
+                                print("\t\t" + pretty_print_str(inp) + " -> " + pretty_print_str(inpValue))
+                                if inpValue.is_enum_constant() and str(inpValue.constant_type()).startswith("epoch"):
+                                    self.globalEnum.add(inpValue)
+                                
+#                                 name = "Q:" + str(inp)
+#                                 qv = Symbol(name, inp.symbol_type())
+#                                 ivarMap[inpValueEnum] = qv
+#                                 ivars.append(qv)
+    
+#                         self.print_global_enum()
+                        conditions = self.filter_state(conditions)
+                        break
+
+            if self.random > 3:
+                random.shuffle(conditions)
+            cube = And(conditions)        
+            
+            if len(ivars) != 0:
+                cube = cube.simple_substitute(ivarMap)
+                cube = Exists(ivars, cube)
+                
+#             print("cube: %s" % cube)
+#             print("cube:")
+#             for c in flatten_cube(cube):
+#                 print("\t%s" % pretty_serialize(c))
+#             assert(0)
+            
+            self.update_stat("cubes")
+            self.update_stat("sz-cube-sum", len(conditions))
+            return cube
+        else:
+            return None
 
     def init_stats(self):
         self.set_stat("scalls", 0)
@@ -466,6 +761,159 @@ class FR(object):
                 cubesOutNew.add((cubeSymNew, complex))
             cubesOut = cubesOutNew
         return cubesOut
+
+    def get_state_value(self, f, model):
+#         print("val: %s" % (f))
+        return model.get_value(f)
+
+    def get_predicate_value(self, f, model):
+        value = self.get_state_value(f, model)
+#         print("%s -> %s" % (f, value))
+        eq = EqualsOrIff(f, value)
+        return eq
+    
+    def get_relation_value(self, s, args, model):
+        f = Function(s, args)
+        value = self.get_state_value(f, model)
+        if self.quorums == "symmetric" and self.system.is_quorum_symbol(s):
+            assert(value == TRUE() or value == FALSE())
+            return TRUE()
+        if self.ordered == "partial" and self.system.curr.is_ordered_state(s):
+            assert(value == TRUE() or value == FALSE())
+            return TRUE()
+        if self.ordered == "zero" and self.system.curr.is_ordered_state(s):
+            assert(value == TRUE() or value == FALSE())
+            ev = f.get_enum_constants()
+            allSet = True
+            for v in ev:
+                vstr = pretty_print_str(v)
+                if vstr != "e0" and vstr != "e1":
+                    allSet = False
+                    break
+            if allSet:
+                return TRUE()
+#             if (value == TRUE()):
+#                 return TRUE()
+#         if str(s).startswith("member:"):
+#             assert(value == TRUE() or value == FALSE())
+#             if (value == FALSE()):
+#                 return TRUE()
+#         return self.get_predicate_value(f, model)
+#         print("%s -> %s" % (f, value))
+        eq = EqualsOrIff(f, value)
+        return eq
+
+    def get_state_values(self, s, s_type, model, sorts, conditions, args, idx):
+        if (idx == len(s_type.param_types)):
+            conditions.append(self.get_relation_value(s, args, model))
+        else:
+            i_values = sorts[s_type.param_types[idx]]
+            for i in i_values:
+                args.append(i)
+                self.get_state_values(s, s_type, model, sorts, conditions, args, idx+1)
+                args.pop()
+    
+    def get_predicate_values(self, s, s_type, model, sorts, conditions, rhs, a, subs, idx):
+        if (idx == len(s_type.param_types)):
+            rhsNew = rhs.simple_substitute(subs)
+            conditions.append(self.get_predicate_value(rhsNew, model))
+        else:
+            i_values = sorts[s_type.param_types[idx]]
+            for i in i_values:
+                subs[a[idx]] = i
+                self.get_predicate_values(s, s_type, model, sorts, conditions, rhs, a, subs, idx+1)
+                del subs[a[idx]]
+    
+    def get_formula_qu(self, formula):
+        if self.qf >= 2:
+            if (len(self.system._fin2sort) == 0 
+#                 and len(self.system._sort2fin) == len(self.system._sorts)
+                ):
+#                 if formula.has_quantifier_variables():
+#                     print("Formula has quantifiers: %s" % formula)
+#                     assert(0)
+                if formula in self.cache_qu:
+                    return self.cache_qu[formula]
+                else:
+                    not_formula = Not(formula)
+                    if not_formula in self.cache_qu:
+                        return Not(self.cache_qu[not_formula])
+#                     else:
+#                         print("Formula not found: %s" % formula)
+#                         assert(0)
+#         else:
+#             if formula in self.cache_qu:
+#                 return self.cache_qu[formula]
+#             else:
+#                 not_formula = Not(formula)
+#                 if not_formula in self.cache_qu:
+#                     return Not(self.cache_qu[not_formula])          
+        return formula
+    
+    def get_formula_qf(self, formula):
+        if self.qf >= 2:
+            if (len(self.system._fin2sort) == 0 
+#                 and len(self.system._sort2fin) == len(self.system._sorts)
+                ):
+                if formula in self.cache_qf:
+                    return self.cache_qf[formula]
+
+                qvars = formula.get_quantifier_variables()
+                if len(qvars) == 0:
+                    return formula
+                
+                noScalarVar = True
+                for v in qvars:
+                    if v.symbol_type().is_enum_type():
+                        noScalarVar = False
+                        break
+                if noScalarVar:
+                    return formula
+                
+#                 print("QE: %s" % formula.serialize())
+                
+                push_time()
+                q_formula = And(formula)
+                qf_formula = self.get_qf_form(q_formula)
+                self.update_time_stat("time-qf", pop_time())
+                
+#                 for f in flatten(qf_formula):
+#                     print("--- %s" % f.serialize())
+#                 assert(0)
+
+#                 print("Adding QF entry: ", end='')
+#                 pretty_print(formula)
+#                 pretty_print(qf_formula)
+        
+                self.cache_qf[formula] = qf_formula
+                self.cache_qu[qf_formula] = formula
+                return qf_formula
+#         else:
+#             formula_flat = self.system.replaceDefinitions(formula)
+#             self.cache_qu[formula_flat] = formula
+#             return formula_flat
+        return formula
+    
+    def get_formulae_qf(self, formula):
+        formulae = formula
+        if self.qf >= 2:
+            if len(self.system._fin2sort) == 0:
+                push_time()
+                print("qf for query type: %s" % self.qtype)
+                q_formula = And(formulae)
+                qf_formula = self.get_qf_form(q_formula)
+                qf_formulae = flatten_cube(qf_formula)
+                self.update_time_stat("time-qf", pop_time())
+                return qf_formulae
+#             formulae.append(axiom_formula(self))
+#                 fformulae = []
+#                 for f in formulae:
+#                     fformulae.append(f)
+#                     if self._print:
+#                         print("--- %s" % f.serialize())
+#                         print("------ vars: %s" % f.get_free_variables())
+#                 formulae = fformulae
+        return formulae
         
     def build_actions(self):
         self.actions = {}
@@ -1001,12 +1449,37 @@ class FR(object):
 #             assert(0)
         # else:
         #     print("-- Finite check: safe --")
+    def label_is_usable(self, label):
+        return not(("__" + label) in self.varlabels or label[:3] == "en_" or label[0] == "(")
+
+    # def get_state_vars(self, bdd):
+
+
 
     def print_bdd(self, bdd):
         print("----------------------- BDD -----------------------")
         self.ddmanager.PrintMinterm(bdd)
         print("----------------------- END BDD -----------------------")
-    
+
+    def forward_reach_sat(self):
+        # SAT based forward reachability
+        symbols = set()
+        for var in self.system.curr._states:
+            for abst, conc_list in self.system._enumsorts.items():
+                for sort_inst in conc_list:
+                    symbols.add(var(sort_inst))
+        x = []
+        self.init_solver()
+        cube = self.solve_with_model(self.solver, FALSE(), x)
+        if cube is None:
+            return
+        for sym in symbols:
+            is_sat = self.solve_formula(self.solver, And(cube, sym), x)
+            if is_sat:
+                print("1")
+            else:
+                print("0")
+
     def print_pla(self):
         """Forward Reachability using BDDs."""
         prop = prop_formula(self)
@@ -1024,6 +1497,7 @@ class FR(object):
         bddP = self.formula2bdd(prop_formula(self))
         self.bddnotP = self.ddmanager.Not(bddP)
 
+
         if axiom_formula(self) != TRUE():
             bddT = self.ddmanager.And(bddT, bddA)
   
@@ -1040,10 +1514,13 @@ class FR(object):
         iteration = 0
 
         print("BEGIN_VARLABELS")
-        varlabels = [self.converter.var2atom[self.converter.idx2var[i]] for i in range(self.converter.numvars)]
-        for i, label in enumerate(varlabels):
+        self.varlabels = [str(self.converter.var2atom[self.converter.idx2var[i]]) for i in range(self.converter.numvars)]
+        for i, label in enumerate(self.varlabels):
             print("%d\t%s" % (i, label))
         print("END_VARLABELS")
+
+        self.print_bdd(bddI)
+        return
 
         equality_constraints = TRUE()
         # ensure that distinguished constants are assigned 
@@ -1109,60 +1586,34 @@ class FR(object):
         self.ddmanager.PrintMinterm(totalR)
         # https://stackoverflow.com/questions/24277488/in-python-how-to-capture-the-stdout-from-a-c-shared-library-to-a-variable
 
-        # eprint("\t(found total #%d paths)" % totalPathCount)
-        # print("\t(found total #%d paths)" % totalPathCount)
-
-#         # print("Reachable states:")
-
-#         totalR = self.ddmanager.ExistAbstract(totalR, self.projPre)
-        
-#         if self.converter.zero != None:
-#             proj_vars = set(self.converter.var2node.keys())
-#             proj_vars = proj_vars.difference(self.pvars)
-#             for atom in self.gatoms.keys():
-#                 enumc = atom.get_enum_constants()
-#                 if self.converter.zero in enumc:
-#                     var = self.converter.atom2var[atom]
-#                     proj_vars.add(var)
-#                     self.patoms.pop(atom)
-#             projCustom = self.converter.cube_from_var_list(proj_vars)
-#             totalR = self.ddmanager.ExistAbstract(totalR, projCustom)
-        
-#         # self.dump_dot(totalR)
-        
-# #         self.experiment(totalR)
-        
-# #         assert(0)
-#         # eprint("\t(forward reachability done)")
-#         # print("\t(forward reachability done)")
-#         self.check_safe(totalR)
-        
-#         notCubes_fast = self.execute_espresso(totalR, self.patoms, "fast")
-#         notCubes = notCubes_fast
-# #         notCubes_primes = self.execute_espresso(totalR, self.patoms, "primes")
-# #         notCubes = notCubes_primes
-# #         notCubes_exact = self.execute_espresso(totalR, self.patoms, "exact")
-# #         notCubes = notCubes_exact
-#         symCubes = set()
-#         eprint("\t(invoking symmetry on #%d)" % len(notCubes))
-#         print("\t(invoking symmetry on #%d)" % len(notCubes))
-#         for cube, cubeMap, l in notCubes:
-#             print("%s i.e. " % l, end='')
-#             pretty_print(cube)
-#             cubesOut = symmetry_cube(self, cube, 0, False)
-#             assert(len(cubesOut) == 1)
-#             for cubeSym, _ in cubesOut:
-#                 symCubes.add(cubeSym)
-#                 print("\t", end="")
-#                 pretty_print(Not(cubeSym))
-# #         print("Symmetric notR: #%d" % len(symCubes))
-#         for idx, cubeSym in enumerate(symCubes):
-#             label = "frpo %s" % str(len(self.inferences)+1)
-#             clause = Not(cubeSym)
-#             self.inferences.append((label, clause))
-#         pretty_print_inv(self.inferences, "Forward inferences")
-#         return self.inferences
+def sat_forwardReach(fname):
+    global start_time
+    utils.start_time = time.time()
+    system = TransitionSystem()
+    p = FR(system)
+    # TODO: this is a bad way to do this but works for now. It reads |epoch|=1 from mock.txt 
+    # but this should always be 1
+    read_problem(p, fname)
     
+    set_axiom_formula(p, False)
+    set_prop_formula(p, False)
+    set_init_formula(p, False)
+    set_trel_formula(p, False)
+
+    if len(p.system.curr._infers) != 0:
+        print()
+        syntax_infers = []
+        for cl, label in p.system.curr._infers.items():
+            syntax_infers.append((label, cl))
+        pretty_print_inv(syntax_infers, "Syntax-guided inferences")
+    
+    if not p.system.is_finite():
+        print("System has unbounded sorts")
+        print("All sorts should be finite for BDD-based forward reachability")
+        assert(0)
+
+    p.forward_reach_sat()
+
 def forwardReach(fname):
     global start_time
     utils.start_time = time.time()
@@ -1218,4 +1669,3 @@ if __name__ == "__main__":
         exit(1)
     fname = args[1]
     forwardReach(fname)
-    
