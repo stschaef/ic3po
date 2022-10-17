@@ -1461,6 +1461,42 @@ class FR(object):
         self.ddmanager.PrintMinterm(bdd)
         print("----------------------- END BDD -----------------------")
 
+    def cube_to_minterm(self, cube, symbols):
+        s = ""
+        for sym in symbols:
+            is_sat = self.solve_formula(self.solver, And(cube, sym), quiet=True)
+            if is_sat:
+                s += "1"
+            else:
+                s += "0"
+        return s
+
+    def get_all_satisfying_assignments(self, f, symbols):
+        sat_assignments = []
+        x = []
+        cube = self.solve_with_model(self.solver, f, x, quiet=True)
+        i = 0
+        while cube is not None:
+            sat_assignments.append(self.cube_to_minterm(cube, symbols))
+            self.solver.push()
+            self.solver.add_assertion(Not(cube))
+            i += 1
+            cube = self.solve_with_model(self.solver, f, x, quiet=True)
+        while i > 0:
+            self.solver.pop()
+            i -= 1
+        return sat_assignments
+
+    def cube_to_formula(self, cube, symbols):
+        f = TRUE()
+        for sym in symbols:
+            is_sat = self.solve_formula(self.solver, And(cube, sym), quiet=True)
+            if is_sat:
+                f = And(f, sym)
+            else:
+                f = And(f, Not(sym))
+        return f
+
     def forward_reach_sat(self):
         # SAT based forward reachability
         symbols = set()
@@ -1470,15 +1506,31 @@ class FR(object):
                     symbols.add(var(sort_inst))
         x = []
         self.init_solver()
-        cube = self.solve_with_model(self.solver, FALSE(), x)
+
+        seen = set()
+        reachable = set()
+
+        seen.add(self.cube_to_minterm(init_formula(self), symbols))
+        reachable.add(self.cube_to_minterm(init_formula(self), symbols))
+        queue = [init_formula(self)]
+        while len(queue) > 0:
+            cube = queue.pop(0)
+            for action in self.system.curr._actions:
+                if self.solve_formula(self.solver, And(cube, action[0]), quiet=True):
+                    cube2 = self.solve_with_model(self.solver, And(cube, action[0]), x, quiet=True)
+        
+
+
+
+        print(self.get_all_satisfying_assignments(init_formula(self), symbols))
+
+        cube = self.solve_with_model(self.solver, init_formula(self), x, quiet=True)
         if cube is None:
             return
-        for sym in symbols:
-            is_sat = self.solve_formula(self.solver, And(cube, sym), x)
-            if is_sat:
-                print("1")
-            else:
-                print("0")
+        symbols = list(symbols)
+        print(symbols)
+        print(self.cube_to_minterm(cube, symbols))
+        
 
     def print_pla(self):
         """Forward Reachability using BDDs."""
