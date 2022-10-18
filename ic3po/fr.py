@@ -427,7 +427,7 @@ class FR(object):
             self.update_max_query(solver, "", pop_time(), len(self.system._sort2fin) == 0, False)
             return False
 
-    def solve_with_model(self, solver, formula, dest, quiet=False):
+    def solve_with_model(self, solver, formula, dest, quiet=False, transition=False):
         """Provides a satisfiable assignment to the state variables that are consistent with the input formula"""
         result = self.solve_formula(solver, formula, quiet)
         if result:
@@ -493,7 +493,11 @@ class FR(object):
 #             print(conditions)
 #             assert(0)
 
-            for s in self.system.curr._states:
+            curr_and_next_states = self.system.curr._states
+            if transition:
+                curr_and_next_states.update(self.system.curr._nexstates)
+
+            for s in curr_and_next_states:
                 if self.eval_wires:
                     if s in self.system.curr._definitionMap:
                         continue
@@ -1452,10 +1456,6 @@ class FR(object):
     def label_is_usable(self, label):
         return not(("__" + label) in self.varlabels or label[:3] == "en_" or label[0] == "(")
 
-    # def get_state_vars(self, bdd):
-
-
-
     def print_bdd(self, bdd):
         print("----------------------- BDD -----------------------")
         self.ddmanager.PrintMinterm(bdd)
@@ -1465,27 +1465,41 @@ class FR(object):
         s = ""
         for sym in symbols:
             is_sat = self.solve_formula(self.solver, And(cube, sym), quiet=True)
-            if is_sat:
+            negate_is_sat = self.solve_formula(self.solver, And(cube, Not(sym)), quiet=True)
+            if is_sat and negate_is_sat:
+                s += "-"
+            elif is_sat:
                 s += "1"
             else:
                 s += "0"
         return s
 
-    def get_all_satisfying_assignments(self, f, symbols):
+    def get_all_satisfying_assignments(self, f, symbols, transition=False):
         sat_assignments = []
         x = []
-        cube = self.solve_with_model(self.solver, f, x, quiet=True)
+        cube = self.solve_with_model(self.solver, f, x, quiet=True, transition=transition)
+        # minterm = self.cube_to_minterm(cube, symbols)
+        # assert("-" not in minterm)
         i = 0
         while cube is not None:
-            sat_assignments.append(self.cube_to_minterm(cube, symbols))
+            sat_assignments.append(cube)
             self.solver.push()
             self.solver.add_assertion(Not(cube))
             i += 1
-            cube = self.solve_with_model(self.solver, f, x, quiet=True)
+            cube = self.solve_with_model(self.solver, f, x, quiet=True, transition=transition)
         while i > 0:
             self.solver.pop()
             i -= 1
         return sat_assignments
+
+    def minterm_to_formula(self, minterm, symbols):
+        f = TRUE()
+        for i, sym in enumerate(symbols):
+            if minterm[i] == "1":
+                f = And(f, sym)
+            elif minterm[i] == "0":
+                f = And(f, Not(sym))
+        return f
 
     def cube_to_formula(self, cube, symbols):
         f = TRUE()
@@ -1497,39 +1511,91 @@ class FR(object):
                 f = And(f, Not(sym))
         return f
 
+    def minterm_nex_to_curr(self, minterm, symbols):
+        f = TRUE()
+        for sym in symbols:
+            if sym in self.nex_to_pre.keys():
+                pre = self.nex_to_pre[sym]
+                i = self.pre_idx[pre]
+                if minterm[i] == "1":
+                    f = And(f, pre)
+                elif minterm[i] == "0":
+                    f = And(f, Not(pre))
+        return f
+
+    def minterm_curr(self, minterm, symbols):
+        s = ""
+        for i in self.nex_idxs:
+            s += minterm[i]
+        return s
+
     def forward_reach_sat(self):
         # SAT based forward reachability
-        symbols = set()
-        for var in self.system.curr._states:
-            for abst, conc_list in self.system._enumsorts.items():
-                for sort_inst in conc_list:
-                    symbols.add(var(sort_inst))
+        self.ddmanager = repycudd.DdManager()
+        self.converter = BddConverter(environment=get_env(),
+                                      ddmanager=self.ddmanager)
+        self.build_actions()
+        self.build_axioms()
+                                    
+        symbols = [(self.converter.var2atom[self.converter.idx2var[i]]) for i in range(self.converter.numvars)]
+        for i, sym in enumerate(symbols):
+            print(i, sym)
+        self.pre_to_nex = {}
+        self.nex_to_pre = {}
+        self.pre_idx = {}
+        self.nex_idx = {}
+        for i, sym in enumerate(symbols):
+            for j, sym2 in enumerate(symbols):
+                if str(sym) in str(sym2) and i != j:
+                    self.pre_to_nex[sym2] = sym
+                    self.nex_to_pre[sym] = sym2
+                    self.pre_idx[sym2] = i
+                    self.nex_idx[sym] = j
+        self.pre_idxs = list(self.pre_idx.values())
+        self.nex_idxs = list(self.nex_idx.values())
+        self.pre_idxs.sort()
+        self.nex_idxs.sort()
         x = []
         self.init_solver()
 
         seen = set()
         reachable = set()
+        queue = []
 
-        seen.add(self.cube_to_minterm(init_formula(self), symbols))
-        reachable.add(self.cube_to_minterm(init_formula(self), symbols))
-        queue = [init_formula(self)]
-        while len(queue) > 0:
-            cube = queue.pop(0)
-            for action in self.system.curr._actions:
-                if self.solve_formula(self.solver, And(cube, action[0]), quiet=True):
-                    cube2 = self.solve_with_model(self.solver, And(cube, action[0]), x, quiet=True)
+        init_cubes = self.get_all_satisfying_assignments(And(init_formula(self), axiom_formula(self)), symbols)
         
+        
+        # print("INIT")
+        for cube in init_cubes:
+            # print(self.cube_to_minterm(cube, symbols))
+            seen.add(cube)
+            reachable.add(cube)
+            queue.append(cube)
+        # print("END INIT")
 
+        a = init_cubes[0]
 
+        while len(queue) > 0:
+            src = queue.pop(0)
+            for _,_,action in self.system.curr._actions:
+                if "noop" in str(action): continue
+                new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action), symbols, transition=True)
+                # print("ACTION", action)
+                for cube in new_cubes:
+                    if cube in seen: continue
+                    mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
+                    seen.add(mint)
+                    reachable.add(mint)
+                    queue.append(mint)
+                    # print(self.cube_to_minterm(cube, symbols))
+                # print("END ACTION", action)
 
-        print(self.get_all_satisfying_assignments(init_formula(self), symbols))
-
-        cube = self.solve_with_model(self.solver, init_formula(self), x, quiet=True)
-        if cube is None:
-            return
-        symbols = list(symbols)
-        print(symbols)
-        print(self.cube_to_minterm(cube, symbols))
+        for i, idx in enumerate(self.nex_idxs):
+            print(i, symbols[idx])
+        print("REACHABLE")
+        for cube in reachable:
+            mint = self.cube_to_minterm(cube, symbols)
+            print(self.minterm_curr(mint, symbols))
         
 
     def print_pla(self):
