@@ -1573,7 +1573,11 @@ class FR(object):
             queue.append(cube)
         # print("END INIT")
 
-        a = init_cubes[0]
+        import networkx as nx
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        G = nx.DiGraph()
 
         while len(queue) > 0:
             src = queue.pop(0)
@@ -1584,6 +1588,10 @@ class FR(object):
                 for cube in new_cubes:
                     if cube in seen: continue
                     mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
+                    dest = self.minterm_curr(self.cube_to_minterm(mint, symbols), symbols)
+                    G.add_node(int(dest, 2))
+                    src_short_mint = self.minterm_curr(self.cube_to_minterm(src, symbols), symbols)
+                    G.add_edge(int(src_short_mint, 2), int(dest, 2))
                     seen.add(mint)
                     reachable.add(mint)
                     queue.append(mint)
@@ -1596,6 +1604,19 @@ class FR(object):
         for cube in reachable:
             mint = self.cube_to_minterm(cube, symbols)
             print(self.minterm_curr(mint, symbols))
+
+
+
+        print(G.nodes())
+        print(G.edges())
+
+        pos = nx.spring_layout(G, 2)
+
+        nx.draw_networkx_nodes(G, pos)
+        nx.draw_networkx_labels(G, pos)
+        nx.draw_networkx_edges(G, pos, edge_color='r', arrows = True)
+
+        plt.show()
         
 
     def print_pla(self):
