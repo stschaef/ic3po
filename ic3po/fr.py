@@ -1529,6 +1529,17 @@ class FR(object):
             s += minterm[i]
         return s
 
+    def minterm_short_to_long(self, curr_minterm, symbols):
+        s = ""
+        j = 0
+        for i, _ in enumerate(symbols):
+            if i in self.nex_idxs:
+                s += curr_minterm[j]
+                j += 1
+            else:
+                s += "-"
+        return s
+
     def forward_reach_sat(self):
         # SAT based forward reachability
         self.ddmanager = repycudd.DdManager()
@@ -1567,10 +1578,11 @@ class FR(object):
         
         # print("INIT")
         for cube in init_cubes:
+            minterm = self.minterm_curr(self.cube_to_minterm(cube, symbols), symbols)
             # print(self.cube_to_minterm(cube, symbols))
-            seen.add(cube)
-            reachable.add(cube)
-            queue.append(cube)
+            seen.add(minterm)
+            reachable.add(minterm)
+            queue.append(minterm)
         # print("END INIT")
 
         import networkx as nx
@@ -1578,23 +1590,26 @@ class FR(object):
         import numpy as np
 
         G = nx.DiGraph()
-
+        i = 0
         while len(queue) > 0:
-            src = queue.pop(0)
+            src_minterm = queue.pop(0)
+            src = self.minterm_to_formula(
+                self.minterm_short_to_long(src_minterm, symbols), 
+                symbols)
             for _,_,action in self.system.curr._actions:
                 if "noop" in str(action): continue
                 new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action), symbols, transition=True)
                 # print("ACTION", action)
+                i+=1
                 for cube in new_cubes:
-                    if cube in seen: continue
                     mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
                     dest = self.minterm_curr(self.cube_to_minterm(mint, symbols), symbols)
+                    if dest in seen: continue
                     G.add_node(int(dest, 2))
-                    src_short_mint = self.minterm_curr(self.cube_to_minterm(src, symbols), symbols)
-                    G.add_edge(int(src_short_mint, 2), int(dest, 2))
-                    seen.add(mint)
-                    reachable.add(mint)
-                    queue.append(mint)
+                    G.add_edge(int(src_minterm, 2), int(dest, 2))
+                    seen.add(dest)
+                    reachable.add(dest)
+                    queue.append(dest)
                     # print(self.cube_to_minterm(cube, symbols))
                 # print("END ACTION", action)
 
@@ -1602,8 +1617,7 @@ class FR(object):
             print(i, symbols[idx])
         print("REACHABLE")
         for cube in reachable:
-            mint = self.cube_to_minterm(cube, symbols)
-            print(self.minterm_curr(mint, symbols))
+            print(cube)
 
 
 
