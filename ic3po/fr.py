@@ -15,6 +15,9 @@ import os
 import subprocess
 import pysmt
 import utils
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
 
 import repycudd
 
@@ -1540,8 +1543,34 @@ class FR(object):
                 s += "-"
         return s
 
-    def forward_reach_sat(self):
-        # SAT based forward reachability
+    def save_graph(self, G, name):
+        pos = nx.get_node_attributes(G, 'pos')
+
+        nx.draw_networkx_nodes(G, pos)
+        nx.draw_networkx_labels(G, pos)
+        nx.draw_networkx_edges(G, pos, edge_color='r', arrows = True)
+        nx.draw_networkx_edge_labels(G,pos,edge_labels=nx.get_edge_attributes(G,'label'), font_size=5)
+
+        plt.title(name)
+        plt.savefig("graphs/" + name + ".png")
+
+    def show_graph(self, G, name):
+        pos = nx.get_node_attributes(G, 'pos')
+
+        nx.draw_networkx_nodes(G, pos)
+        nx.draw_networkx_labels(G, pos)
+        nx.draw_networkx_edges(G, pos, edge_color='r', arrows = True)
+        nx.draw_networkx_edge_labels(G,pos,edge_labels=nx.get_edge_attributes(G,'label'), font_size=5)
+
+        plt.title(name)
+        plt.show()
+
+    def forward_reach_sat(self, fname):
+        """
+        SAT based forward reachability.
+        returns graph of reachable states, and a set of all reachable states
+        """
+        self.fname = fname
         self.ddmanager = repycudd.DdManager()
         self.converter = BddConverter(environment=get_env(),
                                       ddmanager=self.ddmanager)
@@ -1549,15 +1578,14 @@ class FR(object):
         self.build_axioms()
                                     
         symbols = [(self.converter.var2atom[self.converter.idx2var[i]]) for i in range(self.converter.numvars)]
-        for i, sym in enumerate(symbols):
-            print(i, sym)
+        self.symbols = symbols
         self.pre_to_nex = {}
         self.nex_to_pre = {}
         self.pre_idx = {}
         self.nex_idx = {}
         for i, sym in enumerate(symbols):
             for j, sym2 in enumerate(symbols):
-                if str(sym) in str(sym2) and i != j:
+                if str(sym).replace('(','').replace(')','') in str(sym2).replace('(','').replace(')','') and i != j:
                     self.pre_to_nex[sym2] = sym
                     self.nex_to_pre[sym] = sym2
                     self.pre_idx[sym2] = i
@@ -1569,68 +1597,84 @@ class FR(object):
         x = []
         self.init_solver()
 
+
+        global_equality_constraints = TRUE()
+        # TODO: This is a hack to get the equality constraints to work
+        for glob in self.system.curr._globals:
+            glob_refs = []
+            for sym in symbols:
+                if str(glob) in str(sym) and "=" in str(sym):
+                    glob_refs.append(sym)
+            if len(glob_refs) == 0:
+                continue
+            global_equality_constraints = And(global_equality_constraints, glob_refs[0])
+
+        # global_leq_constraints = TRUE()
+        # # TODO: This is a hack to get the equality constraints to work
+        # for glob in self.system.curr._globals:
+        #     glob_refs = []
+        #     for sym in symbols:
+        #         if str(glob) in str(sym) and "le" in str(sym):
+        #             glob_refs.append(sym)
+        #     if len(glob_refs) == 0:
+        #         continue
+        #     for i, leq_constraint in enumerate(glob_refs):
+        #         if i == 0:
+        #             continue
+        #         global_leq_constraints = And(global_leq_constraints, leq_constraint)
+        #     global_leq_constraints = And(global_leq_constraints, glob_refs[0])
+        
+
+
         seen = set()
         reachable = set()
         queue = []
 
-        init_cubes = self.get_all_satisfying_assignments(And(init_formula(self), axiom_formula(self)), symbols)
-        
-        
-        # print("INIT")
-        for cube in init_cubes:
-            minterm = self.minterm_curr(self.cube_to_minterm(cube, symbols), symbols)
-            # print(self.cube_to_minterm(cube, symbols))
-            seen.add(minterm)
-            reachable.add(minterm)
-            queue.append(minterm)
-        # print("END INIT")
+        init_cubes = self.get_all_satisfying_assignments(And(init_formula(self), axiom_formula(self), global_equality_constraints), symbols)
 
-        import networkx as nx
-        import matplotlib.pyplot as plt
-        import numpy as np
-
-        G = nx.DiGraph()
-        i = 0
-        while len(queue) > 0:
-            src_minterm = queue.pop(0)
-            src = self.minterm_to_formula(
-                self.minterm_short_to_long(src_minterm, symbols), 
-                symbols)
-            for _,_,action in self.system.curr._actions:
-                if "noop" in str(action): continue
-                new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action), symbols, transition=True)
-                # print("ACTION", action)
-                i+=1
-                for cube in new_cubes:
-                    mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
-                    dest = self.minterm_curr(self.cube_to_minterm(mint, symbols), symbols)
-                    if dest in seen: continue
-                    G.add_node(int(dest, 2))
-                    G.add_edge(int(src_minterm, 2), int(dest, 2))
-                    seen.add(dest)
-                    reachable.add(dest)
-                    queue.append(dest)
-                    # print(self.cube_to_minterm(cube, symbols))
-                # print("END ACTION", action)
+        levels = {}
+        SPACING = 50
 
         for i, idx in enumerate(self.nex_idxs):
             print(i, symbols[idx])
-        print("REACHABLE")
-        for cube in reachable:
-            print(cube)
 
+        G = nx.DiGraph()
+        for cube in init_cubes:
+            if 0 not in levels.keys():
+                levels[0] = 0
+            minterm = self.minterm_curr(self.cube_to_minterm(cube, symbols), symbols)
+            seen.add(minterm)
+            queue.append((minterm, 0))
+            G.add_node(int(minterm, 2), pos=(levels[0]*SPACING, 0))
+            levels[0] += 1
+            
+        while len(queue) > 0:
+            print(len(queue))
+            src_minterm, level = queue.pop(0)
 
-
-        print(G.nodes())
-        print(G.edges())
-
-        pos = nx.spring_layout(G, 2)
-
-        nx.draw_networkx_nodes(G, pos)
-        nx.draw_networkx_labels(G, pos)
-        nx.draw_networkx_edges(G, pos, edge_color='r', arrows = True)
-
-        plt.show()
+            src = self.minterm_to_formula(
+                self.minterm_short_to_long(src_minterm, symbols), 
+                symbols)
+            j = 0
+            for _, action_name ,action in self.system.curr._actions:
+                if "noop" in action_name: continue
+                new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action, global_equality_constraints), symbols, transition=True)
+                for i, cube in enumerate(new_cubes):
+                    mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
+                    dest = self.minterm_curr(self.cube_to_minterm(mint, symbols), symbols)
+                    if dest not in seen: 
+                        if level + 1 not in levels.keys():
+                            levels[level + 1] = 0
+                        G.add_node(int(dest, 2), pos=(SPACING*levels[level + 1], SPACING*(level + 1) + (levels[level + 1] % 2)*SPACING/5))
+                        queue.append((dest, level + 1))
+                        seen.add(dest)
+                        levels[level + 1] += 1
+                    if not G.has_edge(int(src_minterm, 2), int(dest, 2)):
+                        G.add_edge(int(src_minterm, 2), int(dest, 2), label=action_name)
+        for i, symbol in enumerate(symbols):
+            print(i, symbol)
+        return G, seen
+        
         
 
     def print_pla(self):
@@ -1753,19 +1797,9 @@ def sat_forwardReach(fname):
     set_init_formula(p, False)
     set_trel_formula(p, False)
 
-    if len(p.system.curr._infers) != 0:
-        print()
-        syntax_infers = []
-        for cl, label in p.system.curr._infers.items():
-            syntax_infers.append((label, cl))
-        pretty_print_inv(syntax_infers, "Syntax-guided inferences")
-    
-    if not p.system.is_finite():
-        print("System has unbounded sorts")
-        print("All sorts should be finite for BDD-based forward reachability")
-        assert(0)
-
-    p.forward_reach_sat()
+    G, reachable = p.forward_reach_sat(fname)
+    p.show_graph(G, "TCommit")
+    print(reachable)
 
 def forwardReach(fname):
     global start_time
