@@ -1553,6 +1553,13 @@ class FR(object):
 
         plt.title(name)
         plt.savefig("graphs/" + name + ".png")
+        with open("toy_lock/changed/raw/" + name + ".txt", "w") as f:
+            f.write(".i " + str(len(self.nex_idxs)) + "\n.o 1\n.ilb")
+            for i, idx in enumerate(self.nex_idxs):
+                f.write(" " + str(self.symbols[idx]))
+            f.write("\n.ob out\n")
+            for minterm in self.reachable:
+                f.write(minterm + " 1\n")
 
     def show_graph(self, G, name):
         pos = nx.get_node_attributes(G, 'pos')
@@ -1598,8 +1605,8 @@ class FR(object):
         self.init_solver()
 
 
-        global_equality_constraints = TRUE()
-        # TODO: This is a hack to get the equality constraints to work
+        global_constraints = TRUE()
+        # TODO: This is a hack to get the equality constraints to work for toy lock
         for glob in self.system.curr._globals:
             glob_refs = []
             for sym in symbols:
@@ -1607,34 +1614,20 @@ class FR(object):
                     glob_refs.append(sym)
             if len(glob_refs) == 0:
                 continue
-            global_equality_constraints = And(global_equality_constraints, glob_refs[0])
+            global_constraints = And(global_constraints, glob_refs[0])
 
-        # global_leq_constraints = TRUE()
-        # # TODO: This is a hack to get the equality constraints to work
-        # for glob in self.system.curr._globals:
-        #     glob_refs = []
-        #     for sym in symbols:
-        #         if str(glob) in str(sym) and "le" in str(sym):
-        #             glob_refs.append(sym)
-        #     if len(glob_refs) == 0:
-        #         continue
-        #     for i, leq_constraint in enumerate(glob_refs):
-        #         if i == 0:
-        #             continue
-        #         global_leq_constraints = And(global_leq_constraints, leq_constraint)
-        #     global_leq_constraints = And(global_leq_constraints, glob_refs[0])
-        
+        global_constraints = And(global_constraints, self.system.get_ordered_le())
 
 
         seen = set()
         reachable = set()
         queue = []
 
-        init_cubes = self.get_all_satisfying_assignments(And(init_formula(self), axiom_formula(self), global_equality_constraints), symbols)
+        init_cubes = self.get_all_satisfying_assignments(And(init_formula(self), axiom_formula(self), global_constraints), symbols)
 
         levels = {}
         SPACING = 50
-
+        # TODO: this may be a mixup of pre and nex
         for i, idx in enumerate(self.nex_idxs):
             print(i, symbols[idx])
 
@@ -1658,7 +1651,7 @@ class FR(object):
             j = 0
             for _, action_name ,action in self.system.curr._actions:
                 if "noop" in action_name: continue
-                new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action, global_equality_constraints), symbols, transition=True)
+                new_cubes = self.get_all_satisfying_assignments(And(trel_formula(self), src, axiom_formula(self), action, global_constraints), symbols, transition=True)
                 for i, cube in enumerate(new_cubes):
                     mint = self.minterm_nex_to_curr(self.cube_to_minterm(cube, symbols), symbols)
                     dest = self.minterm_curr(self.cube_to_minterm(mint, symbols), symbols)
@@ -1673,6 +1666,7 @@ class FR(object):
                         G.add_edge(int(src_minterm, 2), int(dest, 2), label=action_name)
         for i, symbol in enumerate(symbols):
             print(i, symbol)
+        self.reachable = seen
         return G, seen
         
         
@@ -1798,8 +1792,9 @@ def sat_forwardReach(fname):
     set_trel_formula(p, False)
 
     G, reachable = p.forward_reach_sat(fname)
-    p.show_graph(G, "TCommit")
-    print(reachable)
+    p.show_graph(G, "R")
+    # p.save_graph(G, "toy_lock_n3_e3")
+
 
 def forwardReach(fname):
     global start_time

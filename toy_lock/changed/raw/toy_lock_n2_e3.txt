@@ -1,0 +1,16 @@
+.i 20
+.o 1
+.ilb __transfer:e0(`epoch:e0:2`, `node:e0:1`) __transfer:e0(`epoch:e0:2`, `node:e0:0`) __transfer:e0(`epoch:e0:1`, `node:e0:1`) __transfer:e0(`epoch:e0:1`, `node:e0:0`) __transfer:e0(`epoch:e0:0`, `node:e0:1`) __transfer:e0(`epoch:e0:0`, `node:e0:0`) (__ep:e0(`node:e0:0`) = `epoch:e0:0`) (__ep:e0(`node:e0:0`) = `epoch:e0:1`) (__ep:e0(`node:e0:0`) = `epoch:e0:2`) (__ep:e0(`node:e0:1`) = `epoch:e0:0`) (__ep:e0(`node:e0:1`) = `epoch:e0:1`) (__ep:e0(`node:e0:1`) = `epoch:e0:2`) __locked:e0(`epoch:e0:2`, `node:e0:1`) __locked:e0(`epoch:e0:1`, `node:e0:1`) __locked:e0(`epoch:e0:0`, `node:e0:1`) __locked:e0(`epoch:e0:2`, `node:e0:0`) __locked:e0(`epoch:e0:1`, `node:e0:0`) __locked:e0(`epoch:e0:0`, `node:e0:0`) __held:e0(`node:e0:1`) __held:e0(`node:e0:0`)
+.ob out
+00000010000100000010 1
+00000000110000000001 1
+10000001010000000000 1
+01000010001000000000 1
+00000010001000000010 1
+01000000110000010001 1
+01000000101000010001 1
+01000001010000000000 1
+10000001000110000010 1
+10000010000110000010 1
+00000001010000000001 1
+10000010001000000000 1

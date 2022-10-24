@@ -65,7 +65,7 @@
             "args": [
                 "-m",
                 "satfr",
-                "${workspaceFolder}/toy_lock/changed/toy_lock.vmt",
+                "${workspaceFolder}/toy_lock/abstract/toy_lock.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],
