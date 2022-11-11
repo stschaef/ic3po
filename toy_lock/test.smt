@@ -26,7 +26,6 @@
 (declare-fun R7 () Bool)
 (declare-fun P () Bool)
 (declare-fun concrete_R () Bool)
-(declare-fun E () Epoch)
 
 (assert
     (and
@@ -86,82 +85,173 @@
     )
 )
 
-(assert
-    (forall ((e Epoch))
-        (or 
-            (lt e E)
-            (= e E)
-        )
-    )
-)
+;(assert
+;    (forall ((N Node) (e Epoch))
+;        (=>
+;            (and
+;                (exists ((m Node))
+;                    (= e (ep m))
+;                )
+;                (forall ((n Node))
+;                    (not (lt e (ep n)))
+;                )
+;            )
+;        )
+;        (or 
+;            (lt (ep N) E)
+;            (= (ep N) E)
+;        )
+;    )
+;)
 
 (assert
     (and
         (= 
             R1
-            (forall ((n Node))
+            (forall ((n Node) (e Epoch))
                 (=>
-                    (locked E n)
-                    (held n)
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (=>
+                        (locked e n)
+                        (held n)
+                    )
                 )
             )
         )
         (= 
             R2
-            (forall ((n Node) (m Node))
+            (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (held n)
-                    (not (transfer E m))
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (=>
+                        (held n)
+                        (not (transfer e m))
+                    )
                 )
             )
         )
         (= 
             R3
-            (forall ((n Node))
+            (forall ((n Node) (e Epoch))
                 (=>
-                    (held n)
-                    (= (ep n) E)
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (=>
+                        (held n)
+                        (= (ep n) e)
+                    )
                 )
             )
         )
         (= 
             R4
-            (forall ((n Node))
+            (forall ((n Node) (e Epoch))
                 (=>
-                    (not (held n))
-                    (lt (ep n) E)
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (=>
+                        (not (held n))
+                        (lt (ep n) e)
+                    )
                 )
             )
         )
         (= 
             R5
-            (forall ((n Node) (m Node))
+            ;(forall ((n Node) (m Node))
+            ;    (=>
+            ;        (and
+            ;            (held n)
+            ;            (= (ep m) E)
+            ;        )
+            ;        (= n m)
+            ;    )
+            ;)
+            (forall ((n Node) (m Node) (e Epoch))
                 (=>
                     (and
-                        (held n)
-                        (= (ep m) E)
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
                     )
-                    (= n m)
+                    (=>
+                        (held n)
+                        (=>
+                            (not (= n m))
+                            (lt (ep m) e)
+                        )
+                    )
                 )
             )
         )
         (= 
             R6
-            (exists ((n Node))
-                (not (transfer E n))
-            ) 
+            (forall ((e Epoch))
+                (=>
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (exists ((n Node))
+                        (not (transfer e n))
+                    ) 
+                )
+            )
         )
         (= 
             R7
-            (forall ((n Node) (m Node))
+            (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (not (= n m))
-                    (or
-                        (held n)
-                        (exists ((s Node))
-                            (or
-                            (= (ep m) E)
-                            (transfer E s)
+                    (and
+                        (exists ((m1 Node))
+                            (= e (ep m1))
+                        )
+                        (forall ((n1 Node))
+                            (not (lt e (ep n1)))
+                        )
+                    )
+                    (=>
+                        (not (= n m))
+                        (or
+                            (held n)
+                            (exists ((s Node))
+                                (or
+                                (= (ep m) e)
+                                (transfer e s)
+                                )
                             )
                         )
                     )
@@ -243,83 +333,83 @@
 ;    )
 ;)
 
-(assert
-    (=
-        concrete_R
-        (or
-            (and
-                (held node0)
-                (not (held node1))
-                (not (transfer E node0))
-                (not (transfer E node1))
-                (not (locked E node0))
-                (not (locked E node1))
-            )
-            (and
-                (not (held node0))
-                (held node1)
-                (not (transfer E node0))
-                (not (transfer E node1))
-                (not (locked E node0))
-                (not (locked E node1))
-            )
-            (and
-                (not (held node0))
-                (not (held node1))
-                (transfer E node0)
-                (not (transfer E node1))
-                (not (locked E node0))
-                (not (locked E node1))
-            )
-            (and
-                (not (held node0))
-                (not (held node1))
-                (not (transfer E node0))
-                (transfer E node1)
-                (not (locked E node0))
-                (not (locked E node1))
-            )
-            (and
-                (held node0)
-                (not (held node1))
-                (not (transfer E node0))
-                (not (transfer E node1))
-                (locked E node0)
-                (not (locked E node1))
-            )
-            (and
-                (not (held node0))
-                (held node1)
-                (not (transfer E node0))
-                (not (transfer E node1))
-                (not (locked E node0))
-                (locked E node1)
-            )
-        )
-    )
-)
-
+;(assert
+;    (=
+;        concrete_R
+;        (or
+;            (and
+;                (held node0)
+;                (not (held node1))
+;                (not (transfer E node0))
+;                (not (transfer E node1))
+;                (not (locked E node0))
+;                (not (locked E node1))
+;            )
+;            (and
+;                (not (held node0))
+;                (held node1)
+;                (not (transfer E node0))
+;                (not (transfer E node1))
+;                (not (locked E node0))
+;                (not (locked E node1))
+;            )
+;            (and
+;                (not (held node0))
+;                (not (held node1))
+;                (transfer E node0)
+;                (not (transfer E node1))
+;                (not (locked E node0))
+;                (not (locked E node1))
+;            )
+;            (and
+;                (not (held node0))
+;                (not (held node1))
+;                (not (transfer E node0))
+;                (transfer E node1)
+;                (not (locked E node0))
+;                (not (locked E node1))
+;            )
+;            (and
+;                (held node0)
+;                (not (held node1))
+;                (not (transfer E node0))
+;                (not (transfer E node1))
+;                (locked E node0)
+;                (not (locked E node1))
+;            )
+;            (and
+;                (not (held node0))
+;                (held node1)
+;                (not (transfer E node0))
+;                (not (transfer E node1))
+;                (not (locked E node0))
+;                (locked E node1)
+;            )
+;        )
+;    )
+;)
+;
 (assert
     (=
         P
-        (forall ((n Node) (m Node))
+        (forall ((n Node) (m Node) (e Epoch))
             (=> 
-                (and (locked E n) (locked E m))
+                (and (locked e n) (locked e m))
                 (= n m)
             )
         )
     )
 )
+;(assert R)
+(assert
+(not
+    (=> R P)
+)
+)
 
 ;(assert
-;(not
-;    (=> R P)
+;    (not (=> concrete_R R))
 ;)
-;)
-
-(assert
-    (not (=> concrete_R R))
-)
 
 (check-sat)
 (get-model)
