@@ -48,9 +48,28 @@
             "console": "integratedTerminal",
             "subProcess": true,
             "args": [
-                "-m",
-                "satfr",
+                "-o",
+                "foo",
+                "-n",
+                "bar",
                 "${workspaceFolder}/ivybench/tla/vmt/TCommit.vmt",
+                "<",
+                "${workspaceFolder}/mock.txt"
+            ],
+        },
+        {
+            "name": "tl",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ic3po/top.py",
+            "console": "integratedTerminal",
+            "subProcess": true,
+            "args": [
+                "-o",
+                "foo",
+                "-n",
+                "bar",
+                "${workspaceFolder}/toy_lock/normal/toy_lock.vmt",
                 "<",
                 "${workspaceFolder}/mock.txt"
             ],

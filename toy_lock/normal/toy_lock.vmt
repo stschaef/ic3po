@@ -31,7 +31,7 @@
 (declare-fun __ts0_a () Bool)
 
 (define-fun .prop () Bool (! 
- (let (($v true
+ (let (($v (forall ((E epoch) (I node) (J node)) (=> (and (__locked E I) (__locked E J)) (= I J)))
  ))
  (and $v))
  :invar-property 0))

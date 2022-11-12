@@ -109,6 +109,7 @@ def formula_key(f):
     return (len(fstr), str(frels2), fstr)
 
 def label_key(label):
+    label=str(label)
     prefix = label.rstrip('1234567890')
     suffix = label[len(prefix):]
     if suffix.isdigit():
@@ -118,7 +119,7 @@ def label_key(label):
 
 def pretty_print_inv(inv_list, comment, suffix=""):
     print("### %s: #%d" % (comment, len(inv_list)))
-    for label, cl in sorted(inv_list, key=lambda v: label_key(v[0])):
+    for label,cl in sorted(inv_list, key=lambda v: label_key(v[0])):
         print("invariant [ic3po_%s%s]\t" % (label, suffix), end='')
         pretty_print(cl, 1)
     print("###\n")

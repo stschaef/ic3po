@@ -1,4 +1,5 @@
 #lang ivy1.7
+
 #
 # An Ivy model of the toy lock example from https://github.com/Microsoft/Ironclad/blob/master/ironfleet/src/Dafny/Distributed/Protocol/Lock/Node.i.dfy
 #
@@ -36,6 +37,7 @@ individual zero:epoch
 axiom le(zero, X)
 function ep(N:node) : epoch # ep(n) is the current epoch of node n
 relation held(N:node) # held(n) is true iff the lock is currently held by node n
+
 
 # transfer messages
 relation transfer(E:epoch, N:node)  # the node is the message destination
@@ -86,7 +88,7 @@ export accept
 # Specification of the safety property
 #
 ####################################################################################
-# invariant [p] forall I:node, J:node, E:epoch. locked(E, I) & locked(E, J) -> I = J
+invariant [p] forall I:node, J:node, E:epoch. locked(E, I) & locked(E, J) -> I = J
 
 # ####################################################################################
 # #

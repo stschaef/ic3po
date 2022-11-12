@@ -84,7 +84,7 @@ export accept
 # Specification of the safety property
 #
 ####################################################################################
-# invariant [p] forall I:node, J:node, E:epoch. locked(E, I) & locked(E, J) -> I = J
+invariant [p] forall I:node, J:node, E:epoch. locked(E, I) & locked(E, J) -> I = J
 
 # ####################################################################################
 # #

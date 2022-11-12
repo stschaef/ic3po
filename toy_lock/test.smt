@@ -26,6 +26,7 @@
 (declare-fun R7 () Bool)
 (declare-fun P () Bool)
 (declare-fun concrete_R () Bool)
+(declare-fun is_max (Epoch) Bool)
 
 (assert
     (and
@@ -85,24 +86,33 @@
     )
 )
 
-;(assert
-;    (forall ((N Node) (e Epoch))
-;        (=>
-;            (and
-;                (exists ((m Node))
-;                    (= e (ep m))
-;                )
-;                (forall ((n Node))
-;                    (not (lt e (ep n)))
-;                )
-;            )
-;        )
-;        (or 
-;            (lt (ep N) E)
-;            (= (ep N) E)
-;        )
-;    )
-;)
+(assert
+    (forall ((e Epoch))
+        (=
+            (is_max e)
+            (and
+                (exists ((m1 Node))
+                    (= e (ep m1))
+                )
+                (forall ((n1 Node))
+                    (not (lt e (ep n1)))
+                )
+            )
+        )
+    )
+)
+
+(assert 
+    (forall ((n Node) (e Epoch))
+        (=>
+            (or
+                (transfer e n)
+                (locked e n)
+            )
+            (is_max e)
+        )
+    )
+)
 
 (assert
     (and
@@ -110,14 +120,7 @@
             R1
             (forall ((n Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (locked e n)
                         (held n)
@@ -129,14 +132,7 @@
             R2
             (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (held n)
                         (not (transfer e m))
@@ -148,14 +144,7 @@
             R3
             (forall ((n Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (held n)
                         (= (ep n) e)
@@ -167,14 +156,7 @@
             R4
             (forall ((n Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (not (held n))
                         (lt (ep n) e)
@@ -184,7 +166,7 @@
         )
         (= 
             R5
-            ;(forall ((n Node) (m Node))
+            ; (forall ((n Node) (m Node))
             ;    (=>
             ;        (and
             ;            (held n)
@@ -195,14 +177,7 @@
             ;)
             (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (held n)
                         (=>
@@ -217,14 +192,7 @@
             R6
             (forall ((e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (exists ((n Node))
                         (not (transfer e n))
                     ) 
@@ -235,14 +203,7 @@
             R7
             (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (and
-                        (exists ((m1 Node))
-                            (= e (ep m1))
-                        )
-                        (forall ((n1 Node))
-                            (not (lt e (ep n1)))
-                        )
-                    )
+                    (is_max e)
                     (=>
                         (not (= n m))
                         (or
@@ -333,61 +294,65 @@
 ;    )
 ;)
 
-;(assert
-;    (=
-;        concrete_R
-;        (or
-;            (and
-;                (held node0)
-;                (not (held node1))
-;                (not (transfer E node0))
-;                (not (transfer E node1))
-;                (not (locked E node0))
-;                (not (locked E node1))
-;            )
-;            (and
-;                (not (held node0))
-;                (held node1)
-;                (not (transfer E node0))
-;                (not (transfer E node1))
-;                (not (locked E node0))
-;                (not (locked E node1))
-;            )
-;            (and
-;                (not (held node0))
-;                (not (held node1))
-;                (transfer E node0)
-;                (not (transfer E node1))
-;                (not (locked E node0))
-;                (not (locked E node1))
-;            )
-;            (and
-;                (not (held node0))
-;                (not (held node1))
-;                (not (transfer E node0))
-;                (transfer E node1)
-;                (not (locked E node0))
-;                (not (locked E node1))
-;            )
-;            (and
-;                (held node0)
-;                (not (held node1))
-;                (not (transfer E node0))
-;                (not (transfer E node1))
-;                (locked E node0)
-;                (not (locked E node1))
-;            )
-;            (and
-;                (not (held node0))
-;                (held node1)
-;                (not (transfer E node0))
-;                (not (transfer E node1))
-;                (not (locked E node0))
-;                (locked E node1)
-;            )
-;        )
-;    )
-;)
+(assert
+   (=
+       concrete_R
+       (exists ((E Epoch))
+        (=> (is_max E)
+       (or
+           (and
+               (held node0)
+               (not (held node1))
+               (not (transfer E node0))
+               (not (transfer E node1))
+               (not (locked E node0))
+               (not (locked E node1))
+           )
+           (and
+               (not (held node0))
+               (held node1)
+               (not (transfer E node0))
+               (not (transfer E node1))
+               (not (locked E node0))
+               (not (locked E node1))
+           )
+           (and
+               (not (held node0))
+               (not (held node1))
+               (transfer E node0)
+               (not (transfer E node1))
+               (not (locked E node0))
+               (not (locked E node1))
+           )
+           (and
+               (not (held node0))
+               (not (held node1))
+               (not (transfer E node0))
+               (transfer E node1)
+               (not (locked E node0))
+               (not (locked E node1))
+           )
+           (and
+               (held node0)
+               (not (held node1))
+               (not (transfer E node0))
+               (not (transfer E node1))
+               (locked E node0)
+               (not (locked E node1))
+           )
+           (and
+               (not (held node0))
+               (held node1)
+               (not (transfer E node0))
+               (not (transfer E node1))
+               (not (locked E node0))
+               (locked E node1)
+           )
+       )
+        )
+        )
+   )
+)
 ;
 (assert
     (=
@@ -400,16 +365,16 @@
         )
     )
 )
-;(assert R)
+(assert R)
 (assert
 (not
     (=> R P)
 )
 )
 
-;(assert
-;    (not (=> concrete_R R))
-;)
+; (assert
+;    (not (= R concrete_R))
+; )
 
 (check-sat)
 (get-model)
