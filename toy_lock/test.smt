@@ -86,38 +86,42 @@
     )
 )
 
-(assert
-    (forall ((e Epoch))
-        (=
-            (is_max e)
-            (and
-                (exists ((m1 Node))
-                    (= e (ep m1))
-                )
-                (forall ((n1 Node))
-                    (not (lt e (ep n1)))
-                )
-            )
-        )
-    )
-)
+; (assert
+;     (forall ((e Epoch))
+;         (=
+;             (is_max e)
+;             (and
+;                 (exists ((m1 Node))
+;                     (= e (ep m1))
+;                 )
+;                 (forall ((n1 Node))
+;                     (not (lt e (ep n1)))
+;                 )
+;             )
+;         )
+;     )
+; )
 
-(assert 
-    (forall ((n Node) (e Epoch))
-        (=>
-            (or
-                (transfer e n)
-                (locked e n)
-            )
-            (is_max e)
-        )
-    )
-)
+; (assert 
+;     (forall ((n Node) (e Epoch))
+;         (=>
+;             (or
+;                 (transfer e n)
+;                 (locked e n)
+;             )
+;             (is_max e)
+;         )
+;     )
+; )
 
 (assert
     (and
         (= 
             R1
+            ; is_max(e) = \forall e1 . (e_1 < e) | (e1 = e)
+            ; \forall n \forall e . (~is_max e) | (~ locked e n) | (held n)
+
+            ; \forall n \forall e .  | (locked e n) | (held n)
             (forall ((n Node) (e Epoch))
                 (=>
                     (is_max e)
