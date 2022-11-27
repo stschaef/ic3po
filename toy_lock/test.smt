@@ -376,6 +376,8 @@
 )
 )
 
+(assert I)
+
 ; (assert
 ;    (not (= R concrete_R))
 ; )

@@ -1792,8 +1792,11 @@ def sat_forwardReach(fname):
     set_trel_formula(p, False)
 
     G, reachable = p.forward_reach_sat(fname)
+    print("Reachable states: %d" % len(reachable))
+    for r in reachable:
+        print(r)
     p.show_graph(G, "R")
-    # p.save_graph(G, "toy_lock_n3_e3")
+    p.save_graph(G, "toy_lock_n1_e4")
 
 
 def forwardReach(fname):

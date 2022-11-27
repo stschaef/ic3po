@@ -6,7 +6,7 @@
 ; (declare-sort Node 0)
 (declare-sort Epoch 0)
 ;bounded
-(declare-datatypes ((Node 0)) (((node0) (node1) (node2))))
+(declare-datatypes ((Node 0)) (((Node0) (Node1) (Node2))))
 
 ;state predicates
 (declare-fun transfer (Epoch Node) Bool)
@@ -22,6 +22,7 @@
 (declare-fun R5 () Bool)
 (declare-fun R6 () Bool)
 (declare-fun R7 () Bool)
+(declare-fun R8 () Bool)
 (declare-fun P () Bool)
 
 (declare-fun __transfer (Epoch Node) Bool)
@@ -37,13 +38,42 @@
 (declare-fun __R5 () Bool)
 (declare-fun __R6 () Bool)
 (declare-fun __R7 () Bool)
+(declare-fun __R8 () Bool)
 (declare-fun __P () Bool)
 (declare-fun zero () Epoch)
 (declare-fun T () Bool)
 (declare-fun I () Bool)
 
-(declare-fun concrete_R () Bool)
-(declare-fun __concrete_R () Bool)
+(declare-fun is_max (Node) Bool)
+(declare-fun __is_max (Node) Bool)
+
+(assert 
+    (forall ((n Node))
+        (=
+            (is_max n)
+            (forall ((m Node))
+                (=>
+                    (not (= m n))
+                    (lt (ep m) (ep n))
+                )
+            )
+        )
+    )
+)
+
+(assert 
+    (forall ((n Node))
+        (=
+            (__is_max n)
+            (forall ((m Node))
+                (=>
+                    (not (= m n))
+                    (lt (__ep m) (__ep n))
+                )
+            )
+        )
+    )
+)
 
 (assert
     (and
@@ -72,48 +102,12 @@
                 )
             )
         )
-
-        ;antisymmetry of lt
-        ;(forall ((e1 Epoch) (e2 Epoch))
-        ;    (=>
-        ;        (and
-        ;            (lt e1 e2)
-        ;            (lt e2 e1)
-        ;        )
-        ;        (= e1 e2)
-        ;    )
-        ;)
-        ;;lt is total
-        ;(forall ((e1 Epoch) (e2 Epoch))
-        ;    (or
-        ;        (lt e1 e2)
-        ;        (lt e2 e1)
-        ;        (= e1 e2)
-        ;    )
-        ;)
     )
 )
 
-; (assert
-;     ;at least two epochs
-;     (exists ((e1 Epoch) (e2 Epoch))
-;         (and
-;             (not (= e1 e2))
-;         )
-;     )
-; )
-
-; (assert
-;     (forall ((N Node) (e Epoch))
-;         (or 
-;             (lt (ep N) e)
-;             (= (ep N) e)
-;         )
-;     )
-; )
-
 (assert
     (and
+        ; held mutual exlcusion
         (= 
             R1
             (forall ((n Node) (m Node))
@@ -132,11 +126,12 @@
                 )
             )
         )
+        ; if holding, then there is no transfer at current time
         (= 
             R2
             (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (held n)
+                    (and (held n) (lt (ep n) e))
                     (not (transfer e m))
                 )
             )
@@ -145,11 +140,12 @@
             __R2
             (forall ((n Node) (m Node) (e Epoch))
                 (=>
-                    (__held n)
+                    (and (__held n) (lt (__ep n) e))
                     (not (__transfer e m))
                 )
             )
         )
+        ;mutual exclusion on transfer
         (= 
             R3
             (forall ((n Node) (m Node) (e Epoch))
@@ -168,46 +164,57 @@
                 )
             )
         )
+        ; if locked in present, then holding, 
         (= 
             R4
-            (forall ((n Node) (e Epoch))
+            (forall ((n Node))
                 (=>
-                    (locked e n)
+                    (locked (ep n) n)
                     (held n)
                 )
             )
         )
         (= 
             __R4
-            (forall ((n Node) (e Epoch))
+            (forall ((n Node))
                 (=>
-                    (__locked e n)
+                    (__locked (ep n) n)
                     (__held n)
                 )
             )
         )
+
+        ; if no holder in the present, then there is a transfer message at time 
+        ; larger than all local timestamps
         (= 
             R5
-            (forall ((e Epoch))
-                (exists ((n Node))
-                    (or 
-                        (held n)
-                        (transfer e n)
+            (=>
+                (forall ((n Node)) (not (held n)))
+                (exists ((e Epoch) (m1 Node))
+                    (and
+                        (transfer e m1)
+                        (forall ((m2 Node))
+                            (lt (ep m2) e)
+                        )
                     )
                 )
             )
         )
         (= 
             __R5
-            (forall ((e Epoch))
-                (exists ((n Node))
-                    (or 
-                        (__held n)
-                        (__transfer e n)
+            (=>
+                (forall ((n Node)) (not (__held n)))
+                (exists ((e Epoch) (m1 Node))
+                    (and
+                        (__transfer e m1)
+                        (forall ((m2 Node))
+                            (__lt (__ep m2) e)
+                        )
                     )
                 )
             )
         )
+        ; the holding node has the largest local timestamp
         (= 
             R6
             (forall ((n Node))
@@ -219,7 +226,6 @@
                             (lt (ep m) (ep n))
                         )
                     )
-
                 )
             )
         )
@@ -238,23 +244,43 @@
                 )
             )
         )
-        (= 
+        ;no locks in future
+        (=
             R7
             (forall ((n Node) (e Epoch))
                 (=>
-                    (transfer e n)
                     (lt (ep n) e)
+                    (not (locked e n))
                 )
-            ) 
+            )
         )
-        (= 
+        (=
             __R7
             (forall ((n Node) (e Epoch))
                 (=>
-                    (__transfer e n)
                     (__lt (__ep n) e)
+                    (not (__locked e n))
                 )
-            ) 
+            )
+        )
+        ; eps unique
+        (=
+            R8
+            (forall ((n Node) (m Node))
+                (=>
+                    (= (ep n) (ep m))
+                    (= m n)
+                )
+            )
+        )
+        (=
+            __R8
+            (forall ((n Node) (m Node))
+                (=>
+                    (= (__ep n) (__ep m))
+                    (= m n)
+                )
+            )
         )
     )
 )
@@ -262,13 +288,13 @@
 (assert 
     (=
         R
-        (and R1 R2 R3 R4 R5 R6 R7)
+        (and R1 R2 R3 R4 R5 R6 R7 R8)
     )
 )
 (assert 
     (=
         __R
-        (and __R1 __R2 __R3 __R4 __R5 __R6 __R7)
+        (and __R1 __R2 __R3 __R4 __R5 __R6 __R7 __R8)
     )
 )
 
@@ -327,7 +353,7 @@
                     (held n1)
                     (lt (ep n1) e)
                     (__transfer e n2)
-                    (not (held n1))
+                    (not (__held n1))
                     (forall ((m1 Node) (m2 Node) (e_ Epoch))
                         (and
                             (=>
@@ -354,6 +380,7 @@
             (exists ((n Node) (e Epoch))
                 (and
                     (transfer e n)
+                    (not (__transfer e n))
                     (lt (ep n) e)
                     (__held n)
                     (= (__ep n) e)
@@ -395,150 +422,33 @@
         )
     )
 )
-
-(assert 
+(assert
     (=
-        concrete_R
-        (and
-            (exists ((e Epoch))
-                (and
-                    (forall ((n Node))
-                        (not (lt e (ep n)))
-                    )
-                    (exists ((m Node))
-                        (= e (ep m))
-                    )
-                    (or
-                        ; init
-                        (and
-                            (held node0) (not (held node1)) (not (held node2))
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (held node1) (not (held node2))
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (not (held node1)) (held node2)
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        ; transfer
-                        (and
-                            (not (held node0)) (not (held node1)) (not (held node2))
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (transfer e node0) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (not (held node1)) (not (held node2))
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (transfer e node1) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (not (held node1)) (not (held node2))
-                            (not (locked e node0)) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (transfer e node2)
-                        )
-                        ; locked
-                        (and
-                            (held node0) (not (held node1)) (not (held node2))
-                            (locked e node0) (not (locked e node1)) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (held node1) (not (held node2))
-                            (not (locked e node0)) (locked e node1) (not (locked e node2))
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                        (and
-                            (not (held node0)) (not (held node1)) (held node2)
-                            (not (locked e node0)) (not (locked e node1)) (locked e node2)
-                            (not (transfer e node0)) (not (transfer e node1)) (not (transfer e node2))
-                        )
-                    )
-                )
-            )
-        )
-    )
-)
-(assert 
-    (=
-        __concrete_R
-        (and
-            (forall ((e Epoch))
-                (and
-                    (or
-                        ; init
-                        (and
-                            (__held node0) (not (__held node1)) (not (__held node2))
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (__held node1) (not (__held node2))
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (not (__held node1)) (__held node2)
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        ; __transfer
-                        (and
-                            (not (__held node0)) (not (__held node1)) (not (__held node2))
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (__transfer e node0) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (not (__held node1)) (not (__held node2))
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (__transfer e node1) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (not (__held node1)) (not (__held node2))
-                            (not (__locked e node0)) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (__transfer e node2)
-                        )
-                        ; __locked
-                        (and
-                            (__held node0) (not (__held node1)) (not (__held node2))
-                            (__locked e node0) (not (__locked e node1)) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (__held node1) (not (__held node2))
-                            (not (__locked e node0)) (__locked e node1) (not (__locked e node2))
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                        (and
-                            (not (__held node0)) (not (__held node1)) (__held node2)
-                            (not (__locked e node0)) (not (__locked e node1)) (__locked e node2)
-                            (not (__transfer e node0)) (not (__transfer e node1)) (not (__transfer e node2))
-                        )
-                    )
-                )
+        __P
+        (forall ((n Node) (m Node) (e Epoch))
+            (=> 
+                (and (__locked e n) (__locked e m))
+                (= n m)
             )
         )
     )
 )
 
-; (assert
-; (not
-;    (=> R P)
-; )
-; )
+;(assert
+;(not
+;   (=> __R __P)
+;)
+;)
 
-; (assert 
-;     (not 
-;         (=> (and R T) __R)
-;     )
-; )
+(assert 
+    (not 
+        (=> (and R T) __R)
+    )
+)
 
-(assert (and I T))
+;(assert (not (=> I R)))
 
+;(assert (and I T))
 
 
 (check-sat)

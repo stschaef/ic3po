@@ -1,0 +1,48 @@
+0 __transfer:e0(`epoch:e0:3`, `node:e0:0`)
+1 __transfer:e0(`epoch:e0:2`, `node:e0:0`)
+2 __transfer:e0(`epoch:e0:1`, `node:e0:0`)
+3 __transfer:e0(`epoch:e0:0`, `node:e0:0`)
+4 (__ep:e0(`node:e0:0`) = `epoch:e0:0`)
+5 (__ep:e0(`node:e0:0`) = `epoch:e0:1`)
+6 (__ep:e0(`node:e0:0`) = `epoch:e0:2`)
+7 (__ep:e0(`node:e0:0`) = `epoch:e0:3`)
+8 __locked:e0(`epoch:e0:3`, `node:e0:0`)
+9 __locked:e0(`epoch:e0:2`, `node:e0:0`)
+10 __locked:e0(`epoch:e0:1`, `node:e0:0`)
+11 __locked:e0(`epoch:e0:0`, `node:e0:0`)
+12 __held:e0(`node:e0:0`)
+
+e_0 < e_1 < e_2 < e_3
+
+# t(e_2, n_0), ep(n_0) = e_2, locked(e_2, n_0), held(n_0)
+0100 0010 0100 1
+# ep(n_0) = e_3, locked(e_2, n_0), held(n_0)
+0000 0010 0100 1
+# t(e_3, n_0), ep(n_0) = e_2
+1000 0010 0000 0
+# ep(n_0) = e_3, locked(e_3, n_0), locked(e_2, n_0), held(n_0)
+0000 0001 1100 1
+# t(e_3, n_0), ep(n_0) = e_3, locked(e_3, n_0), locked(e_2, n_0), held(n_0)
+1000 0001 1100 1
+# t(e_3, n_0), t(e_2, n_0), ep(n_0) = e_2, locked(e_2, n_0)
+1100 0010 0100 0
+# t(e_3, n_0), t(e_2, n_0), ep(n_0) = e_3, locked(e_3, n_0), locked(e_2, n_0), held(n_0)
+1100 0001 1100 1
+# t(e_2, n_0), ep(n_0) = e_1
+0100 0100 0000 0
+# t(e_3, n_0), ep(n_0) = e_2, locked(e_2, n_0),
+1000 0010 0100 0
+# ep(n_0) = e_3, held(n_0)
+0000 0001 0000 1
+# t(e_2, n_0), ep(n_0_ = e_3, locked(e_3, n_0), locked(e_2, n_0), held(n_0)
+0100 0001 1100 1
+# t(e_3, n_0), ep(n_0) = e_3, locked(e_3, n_0), held(n_0)
+1000 0001 1000 1
+# ep(n_0) = e_1, held(n_0)
+0000 0100 0000 1
+# t(e_3, n_0), ep(n_0) = e_1
+1000 0100 0000 0
+# ep(n_0) = e_3, locked(e_3, n_0), held(n_0)
+0000 0001 1000 1
+# ep(n_0) = e_2, held(n_0)
+0000 0010 0000 1

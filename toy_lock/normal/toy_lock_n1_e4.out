@@ -1,0 +1,146 @@
+@     0s  Reading from file /home/stschaef/ic3po/toy_lock/normal/toy_lock.vmt
+sort
+|epoch|=?	sort
+|node|=?	invar-property
+action
+next
+next
+action
+next
+init
+next
+global
+global
+axiom
+	function arc: node -> epoch
+@     0s  (building bdds for ext:accept)
+adding varbool: __ts0_a:e0 := __ts0_a:e0 <-> 37
+@     0s  (building bdds for ext:grant)
+zero
+
+Ordering axiom: 
+	le(e0, e0)
+	le(e0, e1)
+	~le(e1, e0)
+	le(e0, e2)
+	~le(e2, e0)
+	le(e0, e3)
+	~le(e3, e0)
+	le(e1, e1)
+	le(e1, e2)
+	~le(e2, e1)
+	le(e1, e3)
+	~le(e3, e1)
+	le(e2, e2)
+	le(e2, e3)
+	~le(e3, e2)
+	le(e3, e3)
+	(zero = e0)
+0 __transfer:e0(`epoch:e0:3`, `node:e0:0`)
+1 __transfer:e0(`epoch:e0:2`, `node:e0:0`)
+2 __transfer:e0(`epoch:e0:1`, `node:e0:0`)
+3 __transfer:e0(`epoch:e0:0`, `node:e0:0`)
+4 (__ep:e0(`node:e0:0`) = `epoch:e0:0`)
+5 (__ep:e0(`node:e0:0`) = `epoch:e0:1`)
+6 (__ep:e0(`node:e0:0`) = `epoch:e0:2`)
+7 (__ep:e0(`node:e0:0`) = `epoch:e0:3`)
+8 __locked:e0(`epoch:e0:3`, `node:e0:0`)
+9 __locked:e0(`epoch:e0:2`, `node:e0:0`)
+10 __locked:e0(`epoch:e0:1`, `node:e0:0`)
+11 __locked:e0(`epoch:e0:0`, `node:e0:0`)
+12 __held:e0(`node:e0:0`)
+3
+4
+4
+3
+4
+5
+4
+3
+2
+2
+2
+3
+4
+3
+2
+1
+0 (V__fml:n:e0 = `node:e0:0`)
+1 __transfer:e0(`epoch:e0:3`, `node:e0:0`)
+2 transfer:e0(`epoch:e0:3`, `node:e0:0`)
+3 __transfer:e0(`epoch:e0:2`, `node:e0:0`)
+4 transfer:e0(`epoch:e0:2`, `node:e0:0`)
+5 __transfer:e0(`epoch:e0:1`, `node:e0:0`)
+6 transfer:e0(`epoch:e0:1`, `node:e0:0`)
+7 __transfer:e0(`epoch:e0:0`, `node:e0:0`)
+8 transfer:e0(`epoch:e0:0`, `node:e0:0`)
+9 (V__fml:e:e0 = `epoch:e0:0`)
+10 (V__fml:e:e0 = `epoch:e0:1`)
+11 (V__fml:e:e0 = `epoch:e0:2`)
+12 (V__fml:e:e0 = `epoch:e0:3`)
+13 (__ep:e0(`node:e0:0`) = `epoch:e0:0`)
+14 (__ep:e0(`node:e0:0`) = `epoch:e0:1`)
+15 (__ep:e0(`node:e0:0`) = `epoch:e0:2`)
+16 (__ep:e0(`node:e0:0`) = `epoch:e0:3`)
+17 (__ep:e0(V__fml:n:e0) = `epoch:e0:0`)
+18 le:e0(`epoch:e0:0`, `epoch:e0:0`)
+19 (__ep:e0(V__fml:n:e0) = `epoch:e0:1`)
+20 le:e0(`epoch:e0:0`, `epoch:e0:1`)
+21 (__ep:e0(V__fml:n:e0) = `epoch:e0:2`)
+22 le:e0(`epoch:e0:0`, `epoch:e0:2`)
+23 (__ep:e0(V__fml:n:e0) = `epoch:e0:3`)
+24 le:e0(`epoch:e0:0`, `epoch:e0:3`)
+25 le:e0(`epoch:e0:1`, `epoch:e0:0`)
+26 le:e0(`epoch:e0:1`, `epoch:e0:1`)
+27 le:e0(`epoch:e0:1`, `epoch:e0:2`)
+28 le:e0(`epoch:e0:1`, `epoch:e0:3`)
+29 le:e0(`epoch:e0:2`, `epoch:e0:0`)
+30 le:e0(`epoch:e0:2`, `epoch:e0:1`)
+31 le:e0(`epoch:e0:2`, `epoch:e0:2`)
+32 le:e0(`epoch:e0:2`, `epoch:e0:3`)
+33 le:e0(`epoch:e0:3`, `epoch:e0:0`)
+34 le:e0(`epoch:e0:3`, `epoch:e0:1`)
+35 le:e0(`epoch:e0:3`, `epoch:e0:2`)
+36 le:e0(`epoch:e0:3`, `epoch:e0:3`)
+37 __ts0_a:e0
+38 (ep:e0(`node:e0:0`) = `epoch:e0:0`)
+39 (ep:e0(`node:e0:0`) = `epoch:e0:1`)
+40 (ep:e0(`node:e0:0`) = `epoch:e0:2`)
+41 (ep:e0(`node:e0:0`) = `epoch:e0:3`)
+42 __locked:e0(`epoch:e0:3`, `node:e0:0`)
+43 locked:e0(`epoch:e0:3`, `node:e0:0`)
+44 __locked:e0(`epoch:e0:2`, `node:e0:0`)
+45 locked:e0(`epoch:e0:2`, `node:e0:0`)
+46 __locked:e0(`epoch:e0:1`, `node:e0:0`)
+47 locked:e0(`epoch:e0:1`, `node:e0:0`)
+48 __locked:e0(`epoch:e0:0`, `node:e0:0`)
+49 locked:e0(`epoch:e0:0`, `node:e0:0`)
+50 __held:e0(`node:e0:0`)
+51 held:e0(`node:e0:0`)
+52 (V__fml:n1:e0 = `node:e0:0`)
+53 (__ep:e0(V__fml:n1:e0) = `epoch:e0:0`)
+54 (__ep:e0(V__fml:n1:e0) = `epoch:e0:1`)
+55 (__ep:e0(V__fml:n1:e0) = `epoch:e0:2`)
+56 (__ep:e0(V__fml:n1:e0) = `epoch:e0:3`)
+57 (V__fml:n2:e0 = `node:e0:0`)
+58 (zero:e0 = `epoch:e0:0`)
+59 (zero:e0 = `epoch:e0:1`)
+60 (zero:e0 = `epoch:e0:2`)
+61 (zero:e0 = `epoch:e0:3`)
+Reachable states: 16
+0100001001001
+0000001001001
+1000001000000
+0000000111001
+1000000111001
+1100001001000
+1100000111001
+0100010000000
+1000001001000
+0000000100001
+0100000111001
+1000000110001
+0000010000001
+1000010000000
+0000000110001
+0000001000001
